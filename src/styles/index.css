@@ -1,5 +1,6 @@
 @import './resets.css';
 @import './theme.css';
+@import './font.css';
 
 body {
   overflow: hidden;

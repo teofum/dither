@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Mx437 HP 100LX 6x8';
+  src: url('../assets/font/Mx437_HP_100LX_6x8.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 HP 100LX 10x11';
+  src: url('../assets/font/Mx437_HP_100LX_10x11.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 Siemens PC-D';
+  src: url('../assets/font/Mx437_Siemens_PC-D.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 ApricotXenC';
+  src: url('../assets/font/Mx437_ApricotXenC.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 Philips :YES G';
+  src: url('../assets/font/Mx437_Philips_YES_G.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 Ti Pro';
+  src: url('../assets/font/Mx437_Ti_Pro.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 DOS/V re. JPN12';
+  src: url('../assets/font/Mx437_DOS-V_re_JPN12.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 DOS/V re. JPN16';
+  src: url('../assets/font/Mx437_DOS-V_re_JPN16.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 DOS/V re. ANK16';
+  src: url('../assets/font/Mx437_DOS-V_re_ANK16.ttf');
+}
+
+@font-face {
+  font-family: 'Mx437 CL Stingray 8x16';
+  src: url('../assets/font/Mx437_CL_Stingray_8x16.ttf');
+}
