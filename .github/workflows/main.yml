@@ -24,7 +24,7 @@ jobs:
       - name: Build
         run: |
           npm ci
-          npm run build
+          npm run build -- --base=/dither/
           
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.3
