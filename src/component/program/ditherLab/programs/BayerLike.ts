@@ -154,7 +154,7 @@ const bayerLike: DitherLabProgram = {
       max: 8,
       step: 0.2,
       default: 2.2,
-      showValue: true
+      showValue: val => val.toFixed(1)
     }
   },
   run: runBayerLike

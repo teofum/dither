@@ -25,7 +25,7 @@ export interface DitherLabProgramSetting {
   step?: number;
   options?: ComboBoxOption<number>[];
   default?: number;
-  showValue?: boolean;
+  showValue?: (val: number) => string;
 }
 
 interface DitherLabProgram {

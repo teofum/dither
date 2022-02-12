@@ -95,9 +95,7 @@ function DitherLabProcessOptions(props: OptionsProps<ProcessOptions>) {
                     parseFloat((e.target as HTMLInputElement).value)
                   )} />
                 {settings[key].showValue &&
-                  <span>{valOrDefault?.toPrecision(
-                    Math.floor(Math.log10(valOrDefault)) + 2
-                  )}</span>}
+                  <span>{settings[key].showValue?.call(undefined, valOrDefault || 0)}</span>}
               </div>
             );
             break;

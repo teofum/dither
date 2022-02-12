@@ -45,7 +45,7 @@ function processErrorDiffusion(
     for (let j = 0; j < 3; j++)
       dataIn.data[i + j] = linear2srgb(mapped, gamma)[j];
 
-    const error = color.map((ch, i) => ch - mapped[i]);
+    const error = color.map((ch, i) => (ch - mapped[i]) * (settings.error_mult || 1));
     for (let k = 0; k < matrix.length; k++) {
       const index = i + matrix[k].x * 4 + matrix[k].y * line;
 

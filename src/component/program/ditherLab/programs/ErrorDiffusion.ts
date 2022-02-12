@@ -6,13 +6,22 @@ const errorDiffusion: DitherLabProgram = {
   name: 'Error Diffusion',
   settings: {
     matrix: {
-      name: 'Matrix',
+      name: 'Model',
       type: DitherLabProgramSettingType.Combo,
       options: [
         { name: 'Floyd-Steinberg', value: 0 },
         { name: 'JJ&N', value: 1 },
         { name: 'Stucki', value: 2 }
       ]
+    },
+    error_mult: {
+      name: 'Diffuse',
+      type: DitherLabProgramSettingType.Range,
+      min: 0.5,
+      max: 1,
+      step: 0.1,
+      default: 1,
+      showValue: val => val.toFixed(1)
     },
     gamma: {
       name: 'Gamma',
@@ -21,7 +30,7 @@ const errorDiffusion: DitherLabProgram = {
       max: 4,
       step: 0.2,
       default: 2.2,
-      showValue: true
+      showValue: val => val.toFixed(1)
     }
   },
   run: renderOnWorkers

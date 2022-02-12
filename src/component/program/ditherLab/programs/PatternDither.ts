@@ -170,7 +170,8 @@ const patternDither: DitherLabProgram = {
       type: DitherLabProgramSettingType.Range,
       max: 9,
       step: 1,
-      default: 5
+      default: 5,
+      showValue: val => mapAmount(val).toFixed(2)
     },
     gamma: {
       name: 'Gamma',
@@ -179,7 +180,7 @@ const patternDither: DitherLabProgram = {
       max: 8,
       step: 0.2,
       default: 2.2,
-      showValue: true
+      showValue: val => val.toFixed(1)
     }
   },
   run: runPatternDither
