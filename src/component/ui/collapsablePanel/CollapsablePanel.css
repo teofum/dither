@@ -1,0 +1,29 @@
+.pane-titlebar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  color: var(--ct-title);
+
+  padding: 0.0625rem 0.25rem;
+}
+
+.pane-titlebar-spacer {
+  flex-grow: 1;
+  height: 0.375rem;
+  margin: 0 0.5rem;
+
+  border-top: 0.0625rem solid var(--ct-text-light);
+  border-bottom: 0.0625rem solid var(--ct-text-light);
+}
+
+.pane-titlebar img {
+  width: 0.75rem;
+  height: 0.75rem;
+  filter: invert(var(--ct-is-dark-theme));
+}
+
+.pane-content {
+  padding: 0.625rem;
+}

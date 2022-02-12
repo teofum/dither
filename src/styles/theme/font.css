@@ -1,0 +1,182 @@
+/* === BASE FONT ======================================= */
+.font-base__siemens {
+  --ft-base: 'Mx437 Siemens PC-D';
+  --ft-size-base: 1rem;
+  --ft-lh-base: 1.25rem;
+}
+
+.font-base__ank16 {
+  --ft-base: 'Mx437 DOS/V re. ANK16';
+  --ft-size-base: 1rem;
+  --ft-lh-base: 1.25rem;
+}
+
+.font-base__jpn16 {
+  --ft-base: 'Mx437 DOS/V re. JPN16';
+  --ft-size-base: 1rem;
+  --ft-lh-base: 1.25rem;
+}
+
+.font-base__jpn12 {
+  --ft-base: 'Mx437 DOS/V re. JPN12';
+  --ft-size-base: 0.75rem;
+  --ft-lh-base: 1.25rem;
+}
+
+.font-base__stingray {
+  --ft-base: 'Mx437 CL Stingray 8x16';
+  --ft-size-base: 1rem;
+  --ft-lh-base: 1.25rem;
+}
+
+.font-base__apricot {
+  --ft-base: 'Mx437 ApricotXenC';
+  --ft-size-base: 1rem;
+  --ft-lh-base: 1.25rem;
+}
+
+.font-base__philips {
+  --ft-base: 'Mx437 Philips :YES G';
+  --ft-size-base: 0.75rem;
+  --ft-lh-base: 1.25rem;
+}
+
+.font-base__ti {
+  --ft-base: 'Mx437 Ti Pro';
+  --ft-size-base: 0.75rem;
+  --ft-lh-base: 1.25rem;
+}
+
+.font-base__hp {
+  --ft-base: 'Mx437 HP 100LX 6x8';
+  --ft-size-base: 0.5rem;
+  --ft-lh-base: 1rem;
+}
+
+.font-base__hp-big {
+  --ft-base: 'Mx437 HP 100LX 10x11';
+  --ft-size-base: 0.75rem;
+  --ft-lh-base: 1rem;
+}
+
+/* === TEXT FONT ======================================= */
+.font-text__siemens {
+  --ft-text: 'Mx437 Siemens PC-D';
+  --ft-size-text: 1rem;
+  --ft-lh-text: 1.25rem;
+}
+
+.font-text__ank16 {
+  --ft-text: 'Mx437 DOS/V re. ANK16';
+  --ft-size-text: 1rem;
+  --ft-lh-text: 1.25rem;
+}
+
+.font-text__jpn16 {
+  --ft-text: 'Mx437 DOS/V re. JPN16';
+  --ft-size-text: 1rem;
+  --ft-lh-text: 1.25rem;
+}
+
+.font-text__jpn12 {
+  --ft-text: 'Mx437 DOS/V re. JPN12';
+  --ft-size-text: 0.75rem;
+  --ft-lh-text: 1.25rem;
+}
+
+.font-text__stingray {
+  --ft-text: 'Mx437 CL Stingray 8x16';
+  --ft-size-text: 1rem;
+  --ft-lh-text: 1.25rem;
+}
+
+.font-text__apricot {
+  --ft-text: 'Mx437 ApricotXenC';
+  --ft-size-text: 1rem;
+  --ft-lh-text: 1.25rem;
+}
+
+.font-text__philips {
+  --ft-text: 'Mx437 Philips :YES G';
+  --ft-size-text: 0.75rem;
+  --ft-lh-text: 1.25rem;
+}
+
+.font-text__ti {
+  --ft-text: 'Mx437 Ti Pro';
+  --ft-size-text: 0.75rem;
+  --ft-lh-text: 1.25rem;
+}
+
+.font-text__hp {
+  --ft-text: 'Mx437 HP 100LX 6x8';
+  --ft-size-text: 0.5rem;
+  --ft-lh-text: 1rem;
+}
+
+.font-text__hp-big {
+  --ft-text: 'Mx437 HP 100LX 10x11';
+  --ft-size-text: 0.75rem;
+  --ft-lh-text: 1rem;
+}
+
+/* === TITLE FONT ======================================= */
+.font-title__siemens {
+  --ft-title: 'Mx437 Siemens PC-D';
+  --ft-size-title: 1rem;
+  --ft-lh-title: 1.25rem;
+}
+
+.font-title__ank16 {
+  --ft-title: 'Mx437 DOS/V re. ANK16';
+  --ft-size-title: 1rem;
+  --ft-lh-title: 1.25rem;
+}
+
+.font-title__jpn16 {
+  --ft-title: 'Mx437 DOS/V re. JPN16';
+  --ft-size-title: 1rem;
+  --ft-lh-title: 1.25rem;
+}
+
+.font-title__jpn12 {
+  --ft-title: 'Mx437 DOS/V re. JPN12';
+  --ft-size-title: 0.75rem;
+  --ft-lh-title: 1.25rem;
+}
+
+.font-title__stingray {
+  --ft-title: 'Mx437 CL Stingray 8x16';
+  --ft-size-title: 1rem;
+  --ft-lh-title: 1.25rem;
+}
+
+.font-title__apricot {
+  --ft-title: 'Mx437 ApricotXenC';
+  --ft-size-title: 1rem;
+  --ft-lh-title: 1.25rem;
+}
+
+.font-title__philips {
+  --ft-title: 'Mx437 Philips :YES G';
+  --ft-size-title: 0.75rem;
+  --ft-lh-title: 1.25rem;
+}
+
+.font-title__ti {
+  --ft-title: 'Mx437 Ti Pro';
+  --ft-size-title: 0.75rem;
+  --ft-lh-title: 1.25rem;
+}
+
+.font-title__hp {
+  --ft-title: 'Mx437 HP 100LX 6x8';
+  --ft-size-title: 0.5rem;
+  --ft-lh-title: 1rem;
+}
+
+.font-title__hp-big {
+  --ft-title: 'Mx437 HP 100LX 10x11';
+  --ft-size-title: 0.75rem;
+  --ft-lh-title: 1rem;
+}

@@ -1,0 +1,6 @@
+@import './resets.css';
+@import './theme.css';
+
+body {
+  overflow: hidden;
+}

@@ -1,0 +1,122 @@
+.win-frame {
+  --resize-handle-size: 0.25rem;
+  --resize-handle-corner-size: 2.0; /* Corner handle size multiplier */
+
+  position: absolute;
+
+  display: grid;
+  grid-template-rows:
+    var(--resize-handle-size)
+    calc(100% - var(--resize-handle-size) * 2)
+    var(--resize-handle-size);
+  grid-template-columns:
+    var(--resize-handle-size)
+    calc(100% - var(--resize-handle-size) * 2)
+    var(--resize-handle-size);
+
+  background: var(--ct-base);
+  user-select: none;
+}
+
+.win-main {
+  grid-row: 2;
+  grid-column: 2;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.125rem;
+}
+
+.win-titlebar {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto;
+  align-items: center;
+
+  padding: 0.125rem;
+}
+
+.win-titlebar-icon {
+  width: 1rem;
+  height: 1rem;
+  margin: -0.125rem;
+}
+
+.win-title {
+  font-family: var(--ft-title);
+  font-size: var(--ft-size-title);
+  color: var(--ct-title);
+  line-height: 0.75rem;
+}
+
+.win-titlebar-spacer {
+  height: 0.375rem;
+  margin: 0 0.5rem;
+
+  border-top: 0.0625rem solid var(--ct-text-light);
+  border-bottom: 0.0625rem solid var(--ct-text-light);
+}
+
+.win-titlebar-button-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.win-titlebar-button img {
+  width: 0.75rem;
+  height: 0.625rem;
+
+  filter: invert(var(--ct-is-dark-theme));
+}
+
+.win-titlebar-button-group button.win-titlebar-button {
+  padding: 0.125rem;
+}
+
+.win-content {
+  background: var(--ct-base);
+  overflow: auto;
+}
+
+.win-resize-handle-n {
+  cursor: ns-resize;
+}
+
+.win-resize-handle-w {
+  cursor: ew-resize;
+}
+
+.win-resize-handle-e {
+  cursor: ew-resize;
+}
+
+.win-resize-handle-s {
+  cursor: ns-resize;
+}
+
+.win-resize-handle-nw {
+  cursor: nwse-resize;
+
+  transform-origin: top left;
+  transform: scale(var(--resize-handle-corner-size));
+}
+
+.win-resize-handle-ne {
+  cursor: nesw-resize;
+  
+  transform-origin: top right;
+  transform: scale(var(--resize-handle-corner-size));
+}
+
+.win-resize-handle-sw {
+  cursor: nesw-resize;
+  
+  transform-origin: bottom left;
+  transform: scale(var(--resize-handle-corner-size));
+}
+
+.win-resize-handle-se {
+  cursor: nwse-resize;
+  
+  transform-origin: bottom right;
+  transform: scale(var(--resize-handle-corner-size));
+}

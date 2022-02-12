@@ -1,0 +1,70 @@
+.theme-root {
+  min-height: 100%;
+
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 1rem;
+
+  padding: 0.5rem;
+}
+
+.theme-settings {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-content: start;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.theme-preview {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.theme-preview-bg {
+  min-height: 12.5rem;
+  height: 100%;
+  padding: 1.5rem 4rem 3rem 1rem;
+
+  background: var(--ct-background);
+  color: var(--ct-text);
+
+  font-family: var(--ft-base);
+  font-size: var(--ft-size-base);
+  line-height: var(--ft-lh-base);
+}
+
+.theme-fake-frame {
+  display: grid;
+  grid-template-rows:
+    var(--resize-handle-size)
+    calc(100% - var(--resize-handle-size) * 2)
+    var(--resize-handle-size);
+  grid-template-columns:
+    var(--resize-handle-size)
+    calc(100% - var(--resize-handle-size) * 2)
+    var(--resize-handle-size);
+
+  background: var(--ct-base);
+  pointer-events: none;
+
+  height: 10rem;
+  max-width: 18rem;
+  width: 18rem;
+  padding: 0;
+}
+
+.win-titlebar-button-group .fake-button.win-titlebar-button {
+  padding: 0.125rem;
+}
+
+.theme-fake-content {
+  background: var(--ct-content-bg);
+  text-align: left;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+
+  font-family: var(--ft-text);
+  font-size: var(--ft-size-text);
+  line-height: var(--ft-lh-text);
+}

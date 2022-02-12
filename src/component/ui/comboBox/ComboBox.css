@@ -1,0 +1,42 @@
+.cmb-root {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.cmb-input {
+  min-width: 0;
+}
+
+button.bevel.cmb-button {
+  padding: 0.125rem;
+}
+
+.cmb-button img {
+  width: 0.75rem;
+  height: 0.75rem;
+  filter: invert(var(--ct-is-dark-theme));
+}
+
+.cmb-option-list {
+  position: fixed;
+  z-index: 100;
+
+  background: var(--ct-content-bg);
+  border: 0.0625rem solid var(--ct-border);
+}
+
+.cmb-option-list:not(.show) {
+  display: none;
+}
+
+.cmb-option {
+  padding: 0.0625rem 0.125rem 0;
+  line-height: 1rem;
+}
+
+.cmb-option:hover {
+  background: var(--ct-select-bg);
+  color: var(--ct-select-text);
+}

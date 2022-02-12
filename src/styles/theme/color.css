@@ -1,0 +1,109 @@
+/* Color theme ============================================================== */
+
+.theme__default {
+  --ct-is-dark-theme: 0;
+  --ct-background: #008080;
+  --ct-content-bg: #ffffff;
+
+  --ct-base: #c0c0c0;
+  --ct-dark: #808080;
+  --ct-darker: #000000;
+  --ct-light: #dedede;
+  --ct-lighter: #ffffff;
+
+  --ct-title: var(--ct-darker);
+  --ct-text: var(--ct-darker);
+  --ct-text-light: #404040;
+  --ct-text-disabled: var(--ct-dark);
+  --ct-text-disabled-shadow: var(--ct-lighter);
+
+  --ct-accent-bg: #000080;
+  --ct-accent-text: var(--ct-lighter);
+  --ct-is-dark-accent: 1;
+
+  --ct-select-bg: var(--ct-accent-bg);
+  --ct-select-text: var(--ct-lighter);
+
+  --ct-border: var(--ct-darker);
+}
+
+.theme__dark {
+  --ct-is-dark-theme: 1;
+  --ct-background: #202020;
+  --ct-content-bg: #282828;
+
+  --ct-base: #404040;
+  --ct-dark: #282828;
+  --ct-darker: #000000;
+  --ct-light: #6f6f6f;
+  --ct-lighter: #808080;
+
+  --ct-title: #dedede;
+  --ct-text: #dedede;
+  --ct-text-light: var(--ct-lighter);
+  --ct-text-disabled: var(--ct-light);
+  --ct-text-disabled-shadow: var(--ct-darker);
+
+  --ct-accent-bg: #000080;
+  --ct-accent-text: var(--ct-text);
+  --ct-is-dark-accent: 1;
+
+  --ct-select-bg: #a0a0a0;
+  --ct-select-text: var(--ct-darker);
+
+  --ct-border: var(--ct-lighter);
+}
+
+.theme__2k {
+  --ct-is-dark-theme: 0;
+  --ct-background: #3a6ea5;
+  --ct-content-bg: #ffffff;
+
+  --ct-base: #d4d0c8;
+  --ct-dark: #808080;
+  --ct-darker: #404040;
+  --ct-light: #d4d0c8;
+  --ct-lighter: #ffffff;
+
+  --ct-title: #000000;
+  --ct-text: #000000;
+  --ct-text-light: #404040;
+  --ct-text-disabled: var(--ct-dark);
+  --ct-text-disabled-shadow: var(--ct-lighter);
+  
+  --ct-accent-bg: #000080;
+  --ct-accent-text: var(--ct-lighter);
+  --ct-is-dark-accent: 1;
+
+  --ct-select-bg: #16293f;
+  --ct-select-text: var(--ct-lighter);
+
+  --ct-border: var(--ct-darker);
+}
+
+.theme__blue {
+  --ct-is-dark-theme: 1;
+  --ct-background: #455364;
+  --ct-content-bg: #282e36;
+
+  --ct-base: #343f4d;
+  --ct-dark: #111519;
+  --ct-darker: #000000;
+  --ct-light: #4d5e73;
+  --ct-lighter: #809cbf;
+
+  --ct-title: #faf74b;
+  --ct-text: #fffda1;
+  --ct-text-light: var(--ct-lighter);
+  --ct-text-disabled: var(--ct-light);
+  --ct-text-disabled-shadow: var(--ct-darker);
+
+  --ct-accent-bg: #000080;
+  --ct-accent-text: var(--ct-text);
+  --ct-is-dark-accent: 1;
+
+  --ct-select-bg: var(--ct-title);
+  --ct-select-text: var(--ct-dark);
+
+  --ct-border: var(--ct-text);
+}
