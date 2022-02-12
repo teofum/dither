@@ -1,49 +1,49 @@
 @font-face {
-  font-family: 'Mx437 HP 100LX 6x8';
-  src: url('/src/assets/font/ttf/Mx437_HP_100LX_6x8.ttf');
+  font-family: 'HP 100LX 6x8';
+  src: url('/src/assets/font/woff/Web437_HP_100LX_6x8.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 HP 100LX 10x11';
-  src: url('/src/assets/font/ttf/Mx437_HP_100LX_10x11.ttf');
+  font-family: 'HP 100LX 10x11';
+  src: url('/src/assets/font/woff/Web437_HP_100LX_10x11.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 Siemens PC-D';
-  src: url('/src/assets/font/ttf/Mx437_Siemens_PC-D.ttf');
+  font-family: 'Siemens PC-D';
+  src: url('/src/assets/font/woff/Web437_Siemens_PC-D.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 ApricotXenC';
-  src: url('/src/assets/font/ttf/Mx437_ApricotXenC.ttf');
+  font-family: 'ApricotXenC';
+  src: url('/src/assets/font/woff/Web437_ApricotXenC.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 Philips :YES G';
-  src: url('/src/assets/font/ttf/Mx437_Philips_YES_G.ttf');
+  font-family: 'Philips :YES G';
+  src: url('/src/assets/font/woff/Web437_Philips_YES_G.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 Ti Pro';
-  src: url('/src/assets/font/ttf/Mx437_Ti_Pro.ttf');
+  font-family: 'Ti Pro';
+  src: url('/src/assets/font/woff/Web437_Ti_Pro.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 DOS/V re. JPN12';
-  src: url('/src/assets/font/ttf/Mx437_DOS-V_re_JPN12.ttf');
+  font-family: 'DOS/V re. JPN12';
+  src: url('/src/assets/font/woff/Web437_DOS-V_re_JPN12.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 DOS/V re. JPN16';
-  src: url('/src/assets/font/ttf/Mx437_DOS-V_re_JPN16.ttf');
+  font-family: 'DOS/V re. JPN16';
+  src: url('/src/assets/font/woff/Web437_DOS-V_re_JPN16.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 DOS/V re. ANK16';
-  src: url('/src/assets/font/ttf/Mx437_DOS-V_re_ANK16.ttf');
+  font-family: 'DOS/V re. ANK16';
+  src: url('/src/assets/font/woff/Web437_DOS-V_re_ANK16.woff');
 }
 
 @font-face {
-  font-family: 'Mx437 CL Stingray 8x16';
-  src: url('/src/assets/font/ttf/Mx437_CL_Stingray_8x16.ttf');
+  font-family: 'CL Stingray 8x16';
+  src: url('/src/assets/font/woff/Web437_CL_Stingray_8x16.woff');
 }
