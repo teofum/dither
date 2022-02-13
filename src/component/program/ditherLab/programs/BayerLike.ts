@@ -145,7 +145,7 @@ const runBayerLike = async (
 
 const bayerLike: DitherLabProgram = {
   device: DitherLabDevice.GL,
-  name: 'Color Pair Matrix',
+  name: 'Color Pair Ordered',
   settings: {
     gamma: {
       name: 'Gamma',

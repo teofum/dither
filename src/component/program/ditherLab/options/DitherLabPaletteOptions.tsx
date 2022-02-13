@@ -40,6 +40,7 @@ function DitherLabPaletteOptions(props: OptionsProps<PaletteOptions>) {
           ...props.options,
           palette: e.selected.value
         })} />
+
       {colors &&
         <div className={classlist('dlab-palette-preview', sizeClass)}>
           {colors.map((c, i) => (
@@ -47,6 +48,8 @@ function DitherLabPaletteOptions(props: OptionsProps<PaletteOptions>) {
               style={{ background: `rgb(${c[0]}, ${c[1]}, ${c[2]})` }} />
           ))}
         </div>}
+
+      <button className="bevel">Edit palette</button>
     </div>
   );
 }

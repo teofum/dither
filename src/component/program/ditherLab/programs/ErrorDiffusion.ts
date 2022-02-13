@@ -11,7 +11,8 @@ const errorDiffusion: DitherLabProgram = {
       options: [
         { name: 'Floyd-Steinberg', value: 0 },
         { name: 'JJ&N', value: 1 },
-        { name: 'Stucki', value: 2 }
+        { name: 'Stucki', value: 2 },
+        { name: 'Sierra', value: 3 }
       ]
     },
     error_mult: {

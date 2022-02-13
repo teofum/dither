@@ -154,7 +154,7 @@ const runPatternDither = async (
 
 const patternDither: DitherLabProgram = {
   device: DitherLabDevice.GL,
-  name: 'Pattern Dither',
+  name: 'Pattern Dithering',
   settings: {
     clist_size: {
       name: 'Mix',
