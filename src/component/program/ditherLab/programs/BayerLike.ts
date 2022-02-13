@@ -33,7 +33,7 @@ const def = (ev?: number, def?: number) => {
 
 let programCache: WebGLProgram | null = null;
 let lastContext: WebGLRenderingContext | null = null;
-let lastOptions: DitherLabOptions | null = null;
+let lastPaletteSize: number | null = null;
 // let lastSettings: { [key: string]: number } | null = null;
 
 const runBayerLike = async (
@@ -55,11 +55,13 @@ const runBayerLike = async (
 
   autosizeViewport(gl);
 
+  const paletteSize = ~~(palette.length / 3);
+
   // Invalidate cache
-  if (options.palette.palette !== lastOptions?.palette.palette  // New palette requires shader recompile
-    || gl !== lastContext) // Context changed
+  if (paletteSize !== lastPaletteSize                     // New palette requires shader recompile
+    || gl !== lastContext)                                // Context changed
     programCache = null;
-  lastOptions = options;
+  lastPaletteSize = paletteSize;
   lastContext = gl;
   // lastSettings = settings;
 
@@ -69,7 +71,7 @@ const runBayerLike = async (
     console.log('Compiling shaders...');
 
     const fragSource = shaders.bayerFrag
-      .replace(/\$/g, (~~(palette.length / 3)).toString()); // Replace '$' symbol in source with palette size
+      .replace(/\$/g, paletteSize.toString()); // Replace '$' symbol in source with palette size
 
     const vert = createShader(gl, gl.VERTEX_SHADER, shaders.imageVert);
     const frag = createShader(gl, gl.FRAGMENT_SHADER, fragSource);

@@ -37,7 +37,7 @@ const mapAmount = (amt: number) => {
 
 let programCache: WebGLProgram | null = null;
 let lastContext: WebGLRenderingContext | null = null;
-let lastOptions: DitherLabOptions | null = null;
+let lastPaletteSize: number | null = null;
 let lastSettings: { [key: string]: number } | null = null;
 
 const runPatternDither = async (
@@ -59,12 +59,14 @@ const runPatternDither = async (
 
   autosizeViewport(gl);
 
+  const paletteSize = ~~(palette.length / 3);
+
   // Invalidate cache
-  if (options.palette.palette !== lastOptions?.palette.palette  // New palette requires shader recompile
-    || settings.clist_size !== lastSettings?.clist_size         // Can't be controlled by a uniform, needs shader rebuild
-    || gl !== lastContext) // Context changed
+  if (paletteSize !== lastPaletteSize                     // New palette requires shader recompile
+    || settings.clist_size !== lastSettings?.clist_size   // Can't be controlled by a uniform, needs shader rebuild
+    || gl !== lastContext)                                // Context changed
     programCache = null;
-  lastOptions = options;
+  lastPaletteSize = paletteSize;
   lastSettings = settings;
   lastContext = gl;
 
@@ -74,7 +76,7 @@ const runPatternDither = async (
     console.log('Compiling shaders...');
 
     const fragSource = shaders.patternFrag
-      .replace(/\$/g, (~~(palette.length / 3)).toString()) // Replace '$' symbol in source with palette size
+      .replace(/\$/g, paletteSize.toString()) // Replace '$' symbol in source with palette size
       .replace(/%/g, (settings.clist_size || 64).toString());
 
     const vert = createShader(gl, gl.VERTEX_SHADER, shaders.imageVert);
