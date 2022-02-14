@@ -10,17 +10,19 @@ import palettes from '../../../../assets/palettes';
 import '../DitherLab.css';
 import classlist from '../../../../utils/etc/classlist';
 
-const pgOptions = Object.values(PaletteGroup)
-  .filter(val => !val.startsWith('__'))
-  .filter(val => palettes.filter(p => p.group === val).length > 0)
-  .map(val => ({ name: val, value: val }));
-
 function DitherLabPaletteOptions(props: OptionsProps<PaletteOptions>) {
   const update = (newState: PaletteOptions) => {
     props.onChange(newState);
   };
 
-  const palOptions = palettes
+  const allPalettes = palettes.concat(props.options.customPalettes);
+
+  const pgOptions = Object.values(PaletteGroup)
+    .filter(val => !val.startsWith('__'))
+    .filter(val => allPalettes.filter(p => p.group === val).length > 0)
+    .map(val => ({ name: val, value: val }));
+
+  const palOptions = allPalettes
     .filter(pal => pal.group === props.options.group)
     .map(pal => ({ name: pal.name, value: pal }));
 
@@ -49,7 +51,12 @@ function DitherLabPaletteOptions(props: OptionsProps<PaletteOptions>) {
           ))}
         </div>}
 
-      <button className="bevel">Edit palette</button>
+      <button className='bevel' onClick={() => update({
+        ...props.options,
+        showEditor: true
+      })}>
+        Palette Editor
+      </button>
     </div>
   );
 }

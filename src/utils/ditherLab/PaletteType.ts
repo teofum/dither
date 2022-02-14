@@ -1,9 +1,9 @@
 enum PaletteType {
-  Indexed,
-  Mono,
-  RGB,
-  Mixer,
-  Auto
+  Indexed = 'Indexed',
+  Mono = 'Monochrome',
+  RGB = 'RGB',
+  Mixer = 'Mixer',
+  Auto = 'Auto'
 }
 
 export default PaletteType;

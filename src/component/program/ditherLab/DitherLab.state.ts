@@ -31,7 +31,9 @@ export interface ResizeOptions {
 
 export interface PaletteOptions {
   group: PaletteGroup,
-  palette: Palette | null
+  palette: Palette | null,
+  customPalettes: Palette[],
+  showEditor: boolean
 }
 
 export interface ProcessOptions {
@@ -90,7 +92,9 @@ export const dlabInitialState: DitherLabState = {
     },
     palette: {
       group: PaletteGroup.RetroPC,
-      palette: null
+      palette: null,
+      customPalettes: [],
+      showEditor: false
     },
     process: {
       device: DitherLabDevice.GL,

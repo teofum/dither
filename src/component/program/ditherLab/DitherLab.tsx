@@ -12,11 +12,43 @@ import { dlabInitialState, DlabRenderStatus, DlabResizeMode } from './DitherLab.
 import icon_save from '../../../assets/icon/save.png';
 import './DitherLab.css';
 import { DitherLabDevice } from './DitherLabProgram';
+import DitherLabEditorPane from './options/DitherLabEditorPane';
+import ClosablePanel from '../../ui/closablePanel/ClosablePanel';
 
 function DitherLab() {
   let imageArea: HTMLDivElement | null = null;
 
   const [state, dispatch] = useReducer(dlabReducer, dlabInitialState);
+  
+  useEffect(() => {
+    const savedData = localStorage.getItem('__dlab_custom_palettes');
+
+    if (savedData) {
+      const saved = JSON.parse(savedData);
+
+      if (saved.length > 0 && saved[0].data) {
+        dispatch({
+          type: DitherLabActionType.Palette,
+          payload: {
+            ...state.options.palette,
+            customPalettes: saved
+          }
+        });
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    //const savedData = localStorage.getItem('__dlab_custom_palettes');
+    const custom = state.options.palette.customPalettes;
+
+    /* if (savedData)
+      for (const savedPalette of JSON.parse(savedData))
+        if (!custom.some(pal => JSON.stringify(pal) === JSON.stringify(savedPalette)))
+          custom.push(savedPalette); */
+    
+    localStorage.setItem('__dlab_custom_palettes', JSON.stringify(custom));
+  }, [state.options.palette.customPalettes]);
 
   useEffect(() => {
     const ia = imageArea;
@@ -254,6 +286,22 @@ function DitherLab() {
               })} />
           </CollapsablePanel>
         </div>
+
+        {state.options.palette.showEditor &&
+          <div className='dlab-tool-pane dlab-editor-pane'>
+            <ClosablePanel title='Palette Editor'
+              onClosed={() => dispatch({
+                type: DitherLabActionType.Palette,
+                payload: { ...state.options.palette, showEditor: false }
+              })}>
+              <DitherLabEditorPane
+                options={state.options.palette}
+                onChange={(val) => dispatch({
+                  type: DitherLabActionType.Palette,
+                  payload: val
+                })} />
+            </ClosablePanel>
+          </div>}
       </div>
 
       <div className='dlab-status-bar'>

@@ -47,7 +47,7 @@ export const Mono16: Palette = {
 export const PipBoy: Palette = {
   name: 'Pip-Boy 3000 (2-bit MC)',
   type: PaletteType.Mono,
-  group: PaletteGroup.Mono,
+  group: PaletteGroup.Other,
   data: [4, 0.15, 64, 252, 155]
 };
 

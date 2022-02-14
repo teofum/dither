@@ -9,14 +9,14 @@ function CollapsablePanel(props: CollapsablePanelProps) {
   const [expanded, setExpanded] = useState(true);
 
   return (
-    <div className='pane-root bevel'>
-      <div className='pane-titlebar' onClick={() => setExpanded(!expanded)}>
-        <span className='pane-title'>{props.title}</span>
-        <div className='pane-titlebar-spacer' />
+    <div className='coll-root bevel'>
+      <div className='coll-titlebar' onClick={() => setExpanded(!expanded)}>
+        <span className='coll-title'>{props.title}</span>
+        <div className='coll-titlebar-spacer' />
         <img src={expanded ? ui_up : ui_down} />
       </div>
 
-      <div className='pane-content' style={!expanded ? {display: 'none'} : undefined}>
+      <div className='coll-content' style={!expanded ? {display: 'none'} : undefined}>
         {props.children}
       </div>
     </div>

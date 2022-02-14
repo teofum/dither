@@ -1,4 +1,4 @@
-.coll-titlebar {
+.clos-titlebar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   padding: 0.0625rem 0.25rem;
 }
 
-.coll-titlebar-spacer {
+.clos-titlebar-spacer {
   flex-grow: 1;
   height: 0.375rem;
   margin: 0 0.5rem;
@@ -18,12 +18,13 @@
   border-bottom: 0.0625rem solid var(--ct-text-light);
 }
 
-.coll-titlebar img {
+button.clos-close img {
   width: 0.75rem;
-  height: 0.75rem;
+  height: 0.625rem;
+
   filter: invert(var(--ct-is-dark-theme));
 }
 
-.coll-content {
+.clos-content {
   padding: 0.625rem;
 }
