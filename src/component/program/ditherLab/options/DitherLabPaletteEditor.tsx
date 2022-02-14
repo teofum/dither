@@ -123,11 +123,24 @@ function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
           <div className="dlab-editor-picker-preview bevel content wide"
             style={{ background: hex(editingColor) }} />
 
-          {[0, 1, 2].map(i => [
-            (<input key={`${i}_input`} type="range" min={0} max={255} step={1}
-              value={editingColor[i]} onChange={(e) => editColor(i, e.nativeEvent)} />),
-            (<span key={`${i}_value`}>{editingColor[i].toString().padStart(3, '0')}</span>)
-          ])}
+          {[0, 1, 2].map(i => {
+            // Dynamically set the slider backgrounds to cool gradients
+            const if0 = editingColor.slice();
+            const if255 = editingColor.slice();
+            if0[i] = 0;
+            if255[i] = 255;
+            const inputStyle = {
+              '--gradient-start': hex(if0),
+              '--gradient-end': hex(if255)
+            };
+
+            return [
+              (<input key={`${i}_input`} type="range" min={0} max={255} step={1}
+                value={editingColor[i]} style={inputStyle as any}
+                onChange={(e) => editColor(i, e.nativeEvent)} />),
+              (<span key={`${i}_value`}>{editingColor[i].toString().padStart(3, '0')}</span>)
+            ];
+          })}
         </div>
         : <div className='wide'>
           Click on a color to edit.

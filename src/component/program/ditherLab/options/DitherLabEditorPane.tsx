@@ -6,10 +6,6 @@ import { PaletteOptions } from '../DitherLab.state';
 import DitherLabPaletteEditor from './DitherLabPaletteEditor';
 import DitherLabPaletteInfo from './DitherLabPaletteInfo';
 import OptionsProps from './options.props';
-
-import ui_copy from '../../../../assets/ui/copy.png';
-import ui_new from '../../../../assets/ui/new.png';
-import ui_delete from '../../../../assets/ui/delete.png';
 import Win4bRGBI from '../../../../assets/palette/Win4bRGBI';
 
 function DitherLabEditorPane(props: OptionsProps<PaletteOptions>) {
