@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
+
 import App from './App';
+
+import { Provider } from 'react-redux';
+import store from './store';
 
 // Clamp scaling to an integer number so everything looks nice and crisp
 // This works by scaling the root font-size, then everything that isn't
@@ -21,7 +25,9 @@ if (storedTheme) document.documentElement.className = storedTheme;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

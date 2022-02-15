@@ -27,7 +27,6 @@ interface WindowProps {
   left?: number;
 
   // Events
-  onClose?: (id: number) => void;
   onFocus?: (id: number) => void;
 }
 

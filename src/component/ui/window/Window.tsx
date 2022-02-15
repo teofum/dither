@@ -3,6 +3,9 @@ import WindowProps from './Window.props';
 import WindowState from './WindowState';
 import ResizeMode from '../../../utils/etc/ResizeMode';
 
+import { useAppDispatch } from '../../../hooks';
+import { destroyWindow } from '../windowManager/windowSlice';
+
 import icon_computer from '../../../assets/icon/computer_16.png';
 import ui_close from '../../../assets/ui/close.png';
 import ui_close_d from '../../../assets/ui/close.d.png';
@@ -11,6 +14,8 @@ import ui_restore from '../../../assets/ui/restore.png';
 import './Window.css';
 
 function Window(props: WindowProps) {
+  const dispatch = useAppDispatch();
+
   const [position, setPosition] = useState({
     x: props.left || 0,
     y: props.top || 0
@@ -193,8 +198,7 @@ function Window(props: WindowProps) {
   };
 
   const destroy = () => {
-    if (props.onClose)
-      props.onClose(props.id);
+    dispatch(destroyWindow(props.id));
   };
 
   const focus = (init: boolean = false) => {

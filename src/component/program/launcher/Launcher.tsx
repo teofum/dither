@@ -1,8 +1,9 @@
 import React from 'react';
-import LauncherProps from './Launcher.props';
 import LauncherItem from './LauncherItem';
 import themeEditorWindow from '../themeEditor/ThemeEditor.window';
 import ditherLabWindow from '../ditherLab/DitherLab.window';
+import { useAppDispatch } from '../../../hooks';
+import { createWindow } from '../../ui/windowManager/windowSlice';
 
 import icon_generic_l from '../../../assets/icon/app-generic_48.png';
 import icon_theme_l from '../../../assets/icon/theme_48.png';
@@ -23,12 +24,14 @@ const launcherItems: LauncherItem[] = [
   }
 ];
 
-function Launcher(props: LauncherProps) {
+function Launcher() {
+  const dispatch = useAppDispatch();
+
   return (
     <div className='launch-root bevel content'>
       {launcherItems.map((item, i) => (
-        <div key={i} className='launch-item'
-          onDoubleClick={() => props.onLaunch(item.template)}>
+        <div key={item.id} className='launch-item'
+          onDoubleClick={() => dispatch(createWindow(item.template))}>
 
           <img src={item.iconUrl || icon_generic_l} alt={item.id} className='launch-icon' />
           <div className='launch-label'>{item.display}</div>
