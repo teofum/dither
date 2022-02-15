@@ -7,25 +7,23 @@ import { PaletteOptions } from '../DitherLab.state';
 import OptionsProps from './options.props';
 
 import ui_remove from '../../../../assets/ui/remove.png';
+import dlabActions from '../DitherLab.action';
 
 function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
+  const { palette, customPalettes } = props.slice;
   const [editing, setEditing] = useState<number>();
 
-  const palette = props.options.palette;
   if (!palette) return (<span>[No palette selected]</span>);
 
   const update = (updated: Palette) => {
     // Replace old with updated palette in custom palette list
-    const customPalettes = props.options.customPalettes
+    const newCustomPalettes = customPalettes
       .filter(p => p !== palette)
       .concat(updated);
 
     // Also set selected palette to the new one
-    props.onChange({
-      ...props.options,
-      customPalettes: customPalettes,
-      palette: updated
-    });
+    props.dispatch(dlabActions.setCustomPalettes(newCustomPalettes));
+    props.dispatch(dlabActions.setPalette(updated));
   };
 
   const updateName = (ev: Event) => {

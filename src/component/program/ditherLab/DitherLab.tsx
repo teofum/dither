@@ -5,9 +5,9 @@ import DitherLabResizeOptions from './options/DitherLabResizeOptions';
 import DitherLabPaletteOptions from './options/DitherLabPaletteOptions';
 import DitherLabProcessOptions from './options/DitherLabProcessOptions';
 
-import { DitherLabActionType } from './DitherLab.action';
-import dlabReducer from './DitherLab.reducer';
 import { dlabInitialState, DlabRenderStatus, DlabResizeMode } from './DitherLab.state';
+import dlabState from './DitherLab.reducer';
+import dlabActions from './DitherLab.action';
 
 import icon_save from '../../../assets/icon/save.png';
 import './DitherLab.css';
@@ -18,35 +18,22 @@ import ClosablePanel from '../../ui/closablePanel/ClosablePanel';
 function DitherLab() {
   let imageArea: HTMLDivElement | null = null;
 
-  const [state, dispatch] = useReducer(dlabReducer, dlabInitialState);
-  
+  const [state, dispatch] = useReducer(dlabState.reducer, dlabInitialState);
+
   useEffect(() => {
     const savedData = localStorage.getItem('__dlab_custom_palettes');
 
     if (savedData) {
       const saved = JSON.parse(savedData);
 
-      if (saved.length > 0 && saved[0].data) {
-        dispatch({
-          type: DitherLabActionType.Palette,
-          payload: {
-            ...state.options.palette,
-            customPalettes: saved
-          }
-        });
-      }
+      if (saved.length > 0 && saved[0].data)
+        dispatch(dlabActions.setCustomPalettes(saved));
     }
   }, []);
 
   useEffect(() => {
-    //const savedData = localStorage.getItem('__dlab_custom_palettes');
     const custom = state.options.palette.customPalettes;
 
-    /* if (savedData)
-      for (const savedPalette of JSON.parse(savedData))
-        if (!custom.some(pal => JSON.stringify(pal) === JSON.stringify(savedPalette)))
-          custom.push(savedPalette); */
-    
     localStorage.setItem('__dlab_custom_palettes', JSON.stringify(custom));
   }, [state.options.palette.customPalettes]);
 
@@ -55,7 +42,7 @@ function DitherLab() {
     const rt = ia?.querySelector('canvas');
     if (!ia || !rt) return;
 
-    rt.style.width = `${state.view * rt.width / 16}rem`;
+    rt.style.width = `${state.view.scale * rt.width / 16}rem`;
 
     const iaHasScroll = (
       ia.scrollWidth > ia.clientWidth ||
@@ -63,20 +50,18 @@ function DitherLab() {
 
     if (iaHasScroll) ia.classList.add('__scroll');
     else ia.classList.remove('__scroll');
-  }, [state.view]);
+  }, [state.view.scale]);
 
   useEffect(() => {
-    console.log('destroy');
     // Destroy render target on device change
-    dispatch({ type: DitherLabActionType.RenderTarget, payload: undefined });
+    dispatch(dlabActions.setRenderTarget(null));
   }, [state.options.process.device]);
 
   useEffect(() => {
     if (!state.renderTarget) {
-      console.log('create');
       // Create the render target if it doesn't exist
       const rt = React.createElement('canvas');
-      dispatch({ type: DitherLabActionType.RenderTarget, payload: rt });
+      dispatch(dlabActions.setRenderTarget(rt));
     }
   }, [state.options]);
 
@@ -84,7 +69,6 @@ function DitherLab() {
     const opt = state.options;
 
     if (opt.image.element) {
-      console.log('check');
       // Get the DOM element for the render target canvas
       const rt = imageArea?.querySelector('canvas');
       if (!rt) return;
@@ -113,23 +97,21 @@ function DitherLab() {
       }
 
       if (wNew !== rt.width || hNew !== rt.height) {
-        console.log(`resize ${wNew} ${hNew} ${rt.width} ${rt.height}`);
         rt.width = wNew;
         rt.height = hNew;
       }
-      rt.style.width = `${state.view * rt.width / 16}rem`;
+      rt.style.width = `${state.view.scale * rt.width / 16}rem`;
 
       // Support for live render in WebGL mode only
       if (opt.process.device === DitherLabDevice.GL && opt.liveRender) render();
-      else dispatch({
-        type: DitherLabActionType.Status,
-        payload: {
+      else {
+        dispatch(dlabActions.setStatus({
           ...state.status,
           renderStatus: DlabRenderStatus.Ready,
           renderWidth: rt.width,
           renderHeight: rt.height
-        }
-      });
+        }));
+      }
     }
   }, [state.options, state.renderTarget]);
 
@@ -139,43 +121,26 @@ function DitherLab() {
     if (!rt || !prog) return;
 
     const start = Date.now();
-    dispatch({
-      type: DitherLabActionType.Status,
-      payload: {
-        ...state.status,
-        renderStatus: DlabRenderStatus.Rendering
-      }
-    });
+    dispatch(dlabActions.setRenderStatus(DlabRenderStatus.Rendering));
     prog.run(rt, state.options)
-      .then(() => {
-        const time = Date.now() - start;
-        dispatch({
-          type: DitherLabActionType.Status,
-          payload: {
-            ...state.status,
-            renderStatus: DlabRenderStatus.Done,
-            lastRenderTime: time,
-            renderWidth: rt.width,
-            renderHeight: rt.height
-          }
-        });
-      });
+      .then(() => dispatch(dlabActions.setStatus({
+        renderStatus: DlabRenderStatus.Done,
+        lastRenderTime: Date.now() - start,
+        renderWidth: rt.width,
+        renderHeight: rt.height
+      })));
   };
 
   const zoomOut = () => {
-    if (state.view > 1)
-      dispatch({
-        type: DitherLabActionType.View,
-        payload: state.view > 4 ? state.view / 2 : state.view - 1
-      });
+    if (state.view.scale > 1)
+      dispatch(dlabActions.setViewScale(
+        state.view.scale > 4 ? state.view.scale / 2 : state.view.scale - 1));
   };
 
   const zoomIn = () => {
-    if (state.view < 16)
-      dispatch({
-        type: DitherLabActionType.View,
-        payload: state.view < 4 ? state.view + 1 : state.view * 2
-      });
+    if (state.view.scale < 16)
+      dispatch(dlabActions.setViewScale(
+        state.view.scale < 4 ? state.view.scale + 1 : state.view.scale * 2));
   };
 
   const pan = (ev: Event) => {
@@ -198,6 +163,7 @@ function DitherLab() {
     link.click();
   };
 
+  console.log(state.status.renderStatus);
   return (
     <div className='dlab-root'>
       <div className='dlab-content bevel content'>
@@ -211,9 +177,9 @@ function DitherLab() {
           <div className='dlab-control dlab-control-view'>
             <span>Zoom</span>
             <div className='bevel content'>
-              <button className='bevel' onClick={zoomOut} disabled={state.view <= 1}>-</button>
-              <input type='text' readOnly value={`${state.view * 100}%`} />
-              <button className='bevel' onClick={zoomIn} disabled={state.view >= 16}>+</button>
+              <button className='bevel' onClick={zoomOut} disabled={state.view.scale <= 1}>-</button>
+              <input type='text' readOnly value={`${state.view.scale * 100}%`} />
+              <button className='bevel' onClick={zoomIn} disabled={state.view.scale >= 16}>+</button>
             </div>
           </div>
 
@@ -223,10 +189,8 @@ function DitherLab() {
             <input type='checkbox' id='dlab-live-render' name='dlab-live-render'
               checked={state.options.liveRender}
               disabled={state.options.process.device === DitherLabDevice.CPU}
-              onChange={(e) => dispatch({
-                type: DitherLabActionType.Live,
-                payload: (e.nativeEvent.target as HTMLInputElement).checked
-              })} />
+              onChange={(e) => dispatch(dlabActions.setLiveRender(
+                (e.nativeEvent.target as HTMLInputElement).checked))} />
             <label htmlFor='dlab-live-render'>Live Render</label>
 
             <button className='bevel' onClick={render}
@@ -249,57 +213,39 @@ function DitherLab() {
           {/* Image upload, preview and properties */}
           <CollapsablePanel title='Source Image'>
             <DitherLabImageOptions
-              options={state.options.image}
-              onChange={(val) => dispatch({
-                type: DitherLabActionType.Image,
-                payload: val
-              })} />
+              slice={state.options.image}
+              dispatch={dispatch} />
           </CollapsablePanel>
 
           {/* Image resizing */}
           <CollapsablePanel title='Resize'>
             <DitherLabResizeOptions
-              options={state.options.resize}
-              onChange={(val) => dispatch({
-                type: DitherLabActionType.Resize,
-                payload: val
-              })} />
+              slice={state.options.resize}
+              dispatch={dispatch} />
           </CollapsablePanel>
 
           {/* Color palette selection */}
           <CollapsablePanel title='Color Palette'>
             <DitherLabPaletteOptions
-              options={state.options.palette}
-              onChange={(val) => dispatch({
-                type: DitherLabActionType.Palette,
-                payload: val
-              })} />
+              slice={state.options.palette}
+              dispatch={dispatch} />
           </CollapsablePanel>
 
           {/* Process selection */}
           <CollapsablePanel title='Process'>
             <DitherLabProcessOptions
-              options={state.options.process}
-              onChange={(val) => dispatch({
-                type: DitherLabActionType.Process,
-                payload: val
-              })} />
+              slice={state.options.process}
+              dispatch={dispatch} />
           </CollapsablePanel>
         </div>
 
         {state.options.palette.showEditor &&
           <div className='dlab-tool-pane dlab-editor-pane'>
             <ClosablePanel title='Palette Editor'
-              onClosed={() => dispatch({
-                type: DitherLabActionType.Palette,
-                payload: { ...state.options.palette, showEditor: false }
-              })}>
+              onClosed={() => dispatch(dlabActions.setShowEditor(false))}>
               <DitherLabEditorPane
-                options={state.options.palette}
-                onChange={(val) => dispatch({
-                  type: DitherLabActionType.Palette,
-                  payload: val
-                })} />
+                slice={state.options.palette}
+                dispatch={dispatch} />
             </ClosablePanel>
           </div>}
       </div>

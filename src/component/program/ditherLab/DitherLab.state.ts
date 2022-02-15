@@ -2,9 +2,9 @@ import Palette from './utils/Palette';
 import PaletteGroup from './utils/PaletteGroup';
 import DitherLabProgram, { DitherLabDevice } from './utils/DitherLabProgram';
 
-export type RTType = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>;
+export type RTType = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 
-interface ImageInfo {
+export interface ImageInfo {
   src: string;
   filename: string;
   width: number;
@@ -63,11 +63,15 @@ export interface DitherLabStatus {
   renderHeight: number;
 }
 
+export interface DitherLabViewState {
+  scale: number;
+}
+
 interface DitherLabState {
   renderTarget: RTType | null;
   options: DitherLabOptions;
   status: DitherLabStatus;
-  view: number;
+  view: DitherLabViewState;
 };
 
 export default DitherLabState;
@@ -109,5 +113,7 @@ export const dlabInitialState: DitherLabState = {
     renderWidth: 0,
     renderHeight: 0
   },
-  view: 1
+  view: {
+    scale: 1
+  }
 };

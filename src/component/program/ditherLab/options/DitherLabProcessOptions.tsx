@@ -4,24 +4,20 @@ import { ProcessOptions } from '../DitherLab.state';
 import { DitherLabDevice, DitherLabProgramSettingType } from '../utils/DitherLabProgram';
 import programs from '../assets/programs';
 import OptionsProps from './options.props';
+import dlabActions from '../DitherLab.action';
 
 const devOptions = Object.values(DitherLabDevice)
   .filter(val => programs.filter(p => p.device === val).length > 0)
   .map(val => ({ name: val, value: val }));
 
 function DitherLabProcessOptions(props: OptionsProps<ProcessOptions>) {
-  const update = (newState: ProcessOptions) => {
-    props.onChange(newState);
-  };
+  const { device, process, settingValues } = props.slice;
 
-  const updateSetting = (key: string, value: number) => {
-    update({
-      ...props.options,
-      settingValues: {
-        ...props.options.settingValues,
-        [key]: value
-      }
-    });
+  const updateSetting = (setting: string, value: number) => {
+    props.dispatch(dlabActions.setProcSetting({
+      setting,
+      value
+    }));
   };
 
   const blockNonDigits = (ev: Event) => {
@@ -35,34 +31,30 @@ function DitherLabProcessOptions(props: OptionsProps<ProcessOptions>) {
   };
 
   const progOptions = programs
-    .filter(prog => prog.device === props.options.device)
+    .filter(prog => prog.device === device)
     .map(prog => ({ name: prog.name, value: prog }));
 
-  const settings = props.options.process?.settings || {};
+  const settings = process?.settings || {};
   const setKeys = Object.keys(settings);
 
   return (
     <div className='dlab-process-root'>
       <span className='dlab-process-label'>Device</span>
-      <ComboBox options={devOptions} value={props.options.device}
-        onChange={(e) => update({
-          ...props.options,
-          device: e.selected.value
-        })} />
+      <ComboBox options={devOptions} value={device}
+        onChange={(e) => props.dispatch(dlabActions.setDevice(e.selected.value))} />
 
       <span className='dlab-process-label'>Process</span>
-      <ComboBox options={progOptions} value={props.options.process}
-        onChange={(e) => update({
-          ...props.options,
-          process: e.selected.value,
-          settingValues: {}
-        })} />
+      <ComboBox options={progOptions} value={process}
+        onChange={(e) => {
+          props.dispatch(dlabActions.setProcess(e.selected.value));
+          props.dispatch(dlabActions.setProcSettings({}));
+        }} />
 
       {setKeys.length > 0 && <hr className='divider bevel horizontal' />}
       {setKeys.map(key => {
         let control: JSX.Element;
 
-        const valOrDefault = def(props.options.settingValues[key], settings[key].default);
+        const valOrDefault = def(settingValues[key], settings[key].default);
 
         switch (settings[key].type) {
           case DitherLabProgramSettingType.Input:
@@ -78,7 +70,7 @@ function DitherLabProcessOptions(props: OptionsProps<ProcessOptions>) {
           case DitherLabProgramSettingType.Combo:
             control = (
               <ComboBox key={key}
-                value={props.options.settingValues[key]}
+                value={settingValues[key]}
                 options={settings[key].options || []}
                 onChange={(e) => updateSetting(key, e.selected.value)} />
             );
