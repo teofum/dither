@@ -1,4 +1,4 @@
-import { ErrorDiffusionMatrix } from '../../component/program/ditherLab/asyncProcess/ErrorDiffusion';
+import { ErrorDiffusionMatrix } from '../asyncProcess/ErrorDiffusion';
 
 const floydSteinberg: ErrorDiffusionMatrix = [
   { x:  1, y: 0, w: 7 / 16 },

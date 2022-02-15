@@ -1,6 +1,6 @@
-import Palette from '../../../utils/ditherLab/Palette';
-import PaletteGroup from '../../../utils/ditherLab/PaletteGroup';
-import DitherLabProgram, { DitherLabDevice } from './DitherLabProgram';
+import Palette from './utils/Palette';
+import PaletteGroup from './utils/PaletteGroup';
+import DitherLabProgram, { DitherLabDevice } from './utils/DitherLabProgram';
 
 export type RTType = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>;
 

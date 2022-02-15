@@ -1,6 +1,6 @@
-import Palette from '../../utils/ditherLab/Palette';
-import PaletteGroup from '../../utils/ditherLab/PaletteGroup';
-import PaletteType from '../../utils/ditherLab/PaletteType';
+import Palette from '../../utils/Palette';
+import PaletteGroup from '../../utils/PaletteGroup';
+import PaletteType from '../../utils/PaletteType';
 
 export const Mono2W: Palette = {
   name: 'Black/White (1-bit MC)',

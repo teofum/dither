@@ -1,6 +1,6 @@
-import Palette from '../../utils/ditherLab/Palette';
-import PaletteGroup from '../../utils/ditherLab/PaletteGroup';
-import PaletteType from '../../utils/ditherLab/PaletteType';
+import Palette from '../../utils/Palette';
+import PaletteGroup from '../../utils/PaletteGroup';
+import PaletteType from '../../utils/PaletteType';
 
 export const GameBoy: Palette = {
   name: 'Game Boy (2-bit MC)',

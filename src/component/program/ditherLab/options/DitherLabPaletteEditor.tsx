@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import getPaletteColors, { getPaletteColor } from '../../../../utils/ditherLab/getColors';
-import Palette from '../../../../utils/ditherLab/Palette';
-import PaletteType from '../../../../utils/ditherLab/PaletteType';
+import getPaletteColors, { getPaletteColor } from '../utils/getColors';
+import Palette from '../utils/Palette';
+import PaletteType from '../utils/PaletteType';
 import classlist from '../../../../utils/etc/classlist';
 import { PaletteOptions } from '../DitherLab.state';
 import OptionsProps from './options.props';

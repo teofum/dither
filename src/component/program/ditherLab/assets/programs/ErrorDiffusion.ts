@@ -1,5 +1,5 @@
-import DitherLabProgram, { DitherLabDevice, DitherLabProgramSettingType } from '../DitherLabProgram';
-import renderOnWorkers from '../SoftwareRenderer';
+import DitherLabProgram, { DitherLabDevice, DitherLabProgramSettingType } from '../../utils/DitherLabProgram';
+import renderOnWorkers from '../../utils/SoftwareRenderer';
 
 const errorDiffusion: DitherLabProgram = {
   device: DitherLabDevice.CPU,

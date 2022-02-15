@@ -1,12 +1,12 @@
 import React from 'react';
-import Palette from '../../../../utils/ditherLab/Palette';
-import PaletteGroup from '../../../../utils/ditherLab/PaletteGroup';
-import PaletteType from '../../../../utils/ditherLab/PaletteType';
+import Palette from '../utils/Palette';
+import PaletteGroup from '../utils/PaletteGroup';
+import PaletteType from '../utils/PaletteType';
 import { PaletteOptions } from '../DitherLab.state';
 import DitherLabPaletteEditor from './DitherLabPaletteEditor';
 import DitherLabPaletteInfo from './DitherLabPaletteInfo';
 import OptionsProps from './options.props';
-import Win4bRGBI from '../../../../assets/palette/Win4bRGBI';
+import Win4bRGBI from '../assets/palette/Win4bRGBI';
 
 function DitherLabEditorPane(props: OptionsProps<PaletteOptions>) {
   const update = (newState: PaletteOptions) => {

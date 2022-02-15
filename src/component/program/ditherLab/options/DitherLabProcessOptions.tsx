@@ -1,8 +1,8 @@
 import React from 'react';
 import ComboBox from '../../../ui/comboBox/ComboBox';
 import { ProcessOptions } from '../DitherLab.state';
-import { DitherLabDevice, DitherLabProgramSettingType } from '../DitherLabProgram';
-import programs from '../programs';
+import { DitherLabDevice, DitherLabProgramSettingType } from '../utils/DitherLabProgram';
+import programs from '../assets/programs';
 import OptionsProps from './options.props';
 
 const devOptions = Object.values(DitherLabDevice)

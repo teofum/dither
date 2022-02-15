@@ -11,7 +11,7 @@ import { dlabInitialState, DlabRenderStatus, DlabResizeMode } from './DitherLab.
 
 import icon_save from '../../../assets/icon/save.png';
 import './DitherLab.css';
-import { DitherLabDevice } from './DitherLabProgram';
+import { DitherLabDevice } from './utils/DitherLabProgram';
 import DitherLabEditorPane from './options/DitherLabEditorPane';
 import ClosablePanel from '../../ui/closablePanel/ClosablePanel';
 

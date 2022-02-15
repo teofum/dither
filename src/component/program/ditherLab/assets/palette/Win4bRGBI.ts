@@ -1,6 +1,6 @@
-import Palette from '../../utils/ditherLab/Palette';
-import PaletteGroup from '../../utils/ditherLab/PaletteGroup';
-import PaletteType from '../../utils/ditherLab/PaletteType';
+import Palette from '../../utils/Palette';
+import PaletteGroup from '../../utils/PaletteGroup';
+import PaletteType from '../../utils/PaletteType';
 
 const Win4bRGBI: Palette = {
   name: 'Windows 4-bit RGBI',

@@ -1,7 +1,7 @@
-import { getPaletteSize } from '../../../utils/ditherLab/getColors';
-import { ImagePart } from '../../../utils/ditherLab/RenderUtils';
-import asyncProcess from './asyncProcess';
-import { DitherLabOptions } from './DitherLab.state';
+import { getPaletteSize } from './getColors';
+import { ImagePart } from './RenderUtils';
+import asyncProcess from '../assets/asyncProcess';
+import { DitherLabOptions } from '../DitherLab.state';
 import ProcessWorker from './ProcessWorker';
 
 export const threadsAvailable = navigator.hardwareConcurrency;

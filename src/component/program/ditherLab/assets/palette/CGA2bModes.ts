@@ -1,6 +1,6 @@
-import Palette from '../../utils/ditherLab/Palette';
-import PaletteGroup from '../../utils/ditherLab/PaletteGroup';
-import PaletteType from '../../utils/ditherLab/PaletteType';
+import Palette from '../../utils/Palette';
+import PaletteGroup from '../../utils/PaletteGroup';
+import PaletteType from '../../utils/PaletteType';
 
 export const CGAm4p0l: Palette = {
   name: 'CGA Mode 4 Palette 0 (low)',

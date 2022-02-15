@@ -3,9 +3,9 @@ import ComboBox from '../../../ui/comboBox/ComboBox';
 import OptionsProps from './options.props';
 import { PaletteOptions } from '../DitherLab.state';
 
-import PaletteGroup from '../../../../utils/ditherLab/PaletteGroup';
-import getPaletteColors from '../../../../utils/ditherLab/getColors';
-import palettes from '../../../../assets/palettes';
+import PaletteGroup from '../utils/PaletteGroup';
+import getPaletteColors from '../utils/getColors';
+import palettes from '../assets/palettes';
 
 import '../DitherLab.css';
 import classlist from '../../../../utils/etc/classlist';

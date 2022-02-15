@@ -1,10 +1,10 @@
-import edMatrices from '../../../../assets/edmatrices';
-import { linear2srgb, srgb2linear } from '../../../../utils/ditherLab/colorUtils';
-import getPaletteColors from '../../../../utils/ditherLab/getColors';
-import { paletteMap } from '../../../../utils/ditherLab/paletteMap';
+import edMatrices from '../edmatrices';
+import { linear2srgb, srgb2linear } from '../../utils/colorUtils';
+import getPaletteColors from '../../utils/getColors';
+import { paletteMap } from '../../utils/paletteMap';
 import { AsyncProcess } from '../asyncProcess';
-import { DitherLabOptions } from '../DitherLab.state';
-import { ProgressFn } from '../ProcessWorker';
+import { DitherLabOptions } from '../../DitherLab.state';
+import { ProgressFn } from '../../utils/ProcessWorker';
 
 const vec3distance = (a: number[], b: number[]): number => {
   return (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]) + (a[2] - b[2]) * (a[2] - b[2]);

@@ -1,6 +1,6 @@
-import { ImagePart } from '../../../utils/ditherLab/RenderUtils';
-import ProcWorker from '../../../assets/worker/worker?worker';
-import { DitherLabOptions } from './DitherLab.state';
+import { ImagePart } from './RenderUtils';
+import ProcWorker from '../../../../assets/worker/worker?worker';
+import { DitherLabOptions } from '../DitherLab.state';
 
 enum ProcessEvent {
   Progress,

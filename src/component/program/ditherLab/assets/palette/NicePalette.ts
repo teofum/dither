@@ -1,6 +1,6 @@
-import Palette from '../../utils/ditherLab/Palette';
-import PaletteGroup from '../../utils/ditherLab/PaletteGroup';
-import PaletteType from '../../utils/ditherLab/PaletteType';
+import Palette from '../../utils/Palette';
+import PaletteGroup from '../../utils/PaletteGroup';
+import PaletteType from '../../utils/PaletteType';
 
 const NicePalette: Palette = {
   name: '16-color palette 1',

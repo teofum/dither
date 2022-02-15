@@ -1,5 +1,5 @@
-import { ComboBoxOption } from '../../ui/comboBox/ComboBox.props';
-import { DitherLabOptions } from './DitherLab.state';
+import { ComboBoxOption } from '../../../ui/comboBox/ComboBox.props';
+import { DitherLabOptions } from '../DitherLab.state';
 
 export enum DitherLabDevice {
   CPU = 'Software',

@@ -1,13 +1,13 @@
-import shaders from '../../../../assets/shaders';
-import getPaletteColors from '../../../../utils/ditherLab/getColors';
-import autosizeViewport from '../../../../utils/gl/autosizeViewport';
-import createShader from '../../../../utils/gl/createShader';
-import enableAndBindAttrib from '../../../../utils/gl/enableAndBindAttrib';
-import linkProgram from '../../../../utils/gl/linkProgram';
-import tex2DFromData from '../../../../utils/gl/tex2DFromData';
-import tex2DFromImage from '../../../../utils/gl/tex2DFromImage';
-import { DitherLabOptions } from '../DitherLab.state';
-import DitherLabProgram, { DitherLabDevice, DitherLabProgramSettingType } from '../DitherLabProgram';
+import shaders from '../shaders';
+import getPaletteColors from '../../utils/getColors';
+import autosizeViewport from '../../../../../utils/gl/autosizeViewport';
+import createShader from '../../../../../utils/gl/createShader';
+import enableAndBindAttrib from '../../../../../utils/gl/enableAndBindAttrib';
+import linkProgram from '../../../../../utils/gl/linkProgram';
+import tex2DFromData from '../../../../../utils/gl/tex2DFromData';
+import tex2DFromImage from '../../../../../utils/gl/tex2DFromImage';
+import { DitherLabOptions } from '../../DitherLab.state';
+import DitherLabProgram, { DitherLabDevice, DitherLabProgramSettingType } from '../../utils/DitherLabProgram';
 
 const positions = [
   -1, 1,

@@ -1,6 +1,6 @@
 import ErrorDiffusion from './asyncProcess/ErrorDiffusion';
-import { DitherLabOptions } from './DitherLab.state';
-import { ProgressFn } from './ProcessWorker';
+import { DitherLabOptions } from '../DitherLab.state';
+import { ProgressFn } from '../utils/ProcessWorker';
 
 type ProcessFn = (
   dataIn: ImageData,
