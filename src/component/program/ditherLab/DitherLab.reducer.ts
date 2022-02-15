@@ -18,7 +18,6 @@ const dlabState = createReducerAndActions<DitherLabState>({
     palette: {
       group: (state, action) => state.options.palette.group = action.payload,
       palette: (state, action) => state.options.palette.palette = action.payload,
-      showEditor: (state, action) => state.options.palette.showEditor = action.payload,
       custom: (state, action) => state.options.palette.customPalettes = action.payload
     },
     process: {
@@ -41,7 +40,9 @@ const dlabState = createReducerAndActions<DitherLabState>({
     }
   },
   view: {
-    scale: (state, action) => state.view.scale = action.payload
+    scale: (state, action) => state.view.scale = action.payload,
+    showPaletteEditor: (state) => state.view.showEditor = true,
+    hidePaletteEditor: (state) => state.view.showEditor = false
   }
 });
 

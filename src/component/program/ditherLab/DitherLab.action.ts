@@ -15,7 +15,6 @@ const dlabActions = {
 
   setPaletteGroup: createAction<PaletteGroup>('options/palette/group'),
   setPalette: createAction<Palette | null>('options/palette/palette'),
-  setShowEditor: createAction<boolean>('options/palette/showEditor'),
   setCustomPalettes: createAction<Palette[]>('options/palette/custom'),
 
   setDevice: createAction<DitherLabDevice>('options/process/device'),
@@ -30,7 +29,9 @@ const dlabActions = {
   setRenderTime: createAction<number>('status/time'),
   setRenderSize: createAction<{ w: number, h: number }>('status/size'),
 
-  setViewScale: createAction<number>('view/scale')
+  setViewScale: createAction<number>('view/scale'),
+  showPaletteEditor: createAction<void>('view/showPaletteEditor'),
+  hidePaletteEditor: createAction<void>('view/hidePaletteEditor')
 };
 
 export default dlabActions;

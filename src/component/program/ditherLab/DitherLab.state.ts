@@ -30,16 +30,15 @@ export interface ResizeOptions {
 }
 
 export interface PaletteOptions {
-  group: PaletteGroup,
-  palette: Palette | null,
-  customPalettes: Palette[],
-  showEditor: boolean
+  group: PaletteGroup;
+  palette: Palette | null;
+  customPalettes: Palette[];
 }
 
 export interface ProcessOptions {
-  device: DitherLabDevice,
-  process: DitherLabProgram | null,
-  settingValues: { [key: string]: number }
+  device: DitherLabDevice;
+  process: DitherLabProgram | null;
+  settingValues: { [key: string]: number };
 }
 
 export interface DitherLabOptions {
@@ -65,6 +64,7 @@ export interface DitherLabStatus {
 
 export interface DitherLabViewState {
   scale: number;
+  showEditor: boolean;
 }
 
 interface DitherLabState {
@@ -97,8 +97,7 @@ export const dlabInitialState: DitherLabState = {
     palette: {
       group: PaletteGroup.RetroPC,
       palette: null,
-      customPalettes: [],
-      showEditor: false
+      customPalettes: []
     },
     process: {
       device: DitherLabDevice.GL,
@@ -114,6 +113,7 @@ export const dlabInitialState: DitherLabState = {
     renderHeight: 0
   },
   view: {
-    scale: 1
+    scale: 1,
+    showEditor: false
   }
 };

@@ -49,7 +49,7 @@ function DitherLabPaletteOptions(props: OptionsProps<PaletteOptions>) {
         </div>}
 
       <button className='bevel' onClick={() => props.dispatch(
-        dlabActions.setShowEditor(true)
+        dlabActions.showPaletteEditor()
       )}>
         Palette Editor
       </button>

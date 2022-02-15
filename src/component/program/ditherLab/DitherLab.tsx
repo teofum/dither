@@ -163,7 +163,6 @@ function DitherLab() {
     link.click();
   };
 
-  console.log(state.status.renderStatus);
   return (
     <div className='dlab-root'>
       <div className='dlab-content bevel content'>
@@ -239,10 +238,10 @@ function DitherLab() {
           </CollapsablePanel>
         </div>
 
-        {state.options.palette.showEditor &&
+        {state.view.showEditor &&
           <div className='dlab-tool-pane dlab-editor-pane'>
             <ClosablePanel title='Palette Editor'
-              onClosed={() => dispatch(dlabActions.setShowEditor(false))}>
+              onClosed={() => dispatch(dlabActions.hidePaletteEditor())}>
               <DitherLabEditorPane
                 slice={state.options.palette}
                 dispatch={dispatch} />
