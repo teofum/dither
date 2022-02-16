@@ -53,6 +53,8 @@
   display: grid;
   place-items: center;
   overflow: auto;
+
+  background-color: var(--ct-content-bg);
 }
 
 .dlab-image-area.__scroll {

@@ -4,11 +4,6 @@
 }
 
 @font-face {
-  font-family: 'HP 100LX 10x11';
-  src: url('/src/assets/font/woff/Web437_HP_100LX_10x11.woff');
-}
-
-@font-face {
   font-family: 'Siemens PC-D';
   src: url('/src/assets/font/woff/Web437_Siemens_PC-D.woff');
 }
@@ -16,11 +11,6 @@
 @font-face {
   font-family: 'ApricotXenC';
   src: url('/src/assets/font/woff/Web437_ApricotXenC.woff');
-}
-
-@font-face {
-  font-family: 'Philips :YES G';
-  src: url('/src/assets/font/woff/Web437_Philips_YES_G.woff');
 }
 
 @font-face {
@@ -34,13 +24,13 @@
 }
 
 @font-face {
-  font-family: 'DOS/V re. JPN16';
-  src: url('/src/assets/font/woff/Web437_DOS-V_re_JPN16.woff');
+  font-family: 'DOS/V re. ANK16';
+  src: url('/src/assets/font/woff/Web437_DOS-V_re_ANK16.woff');
 }
 
 @font-face {
-  font-family: 'DOS/V re. ANK16';
-  src: url('/src/assets/font/woff/Web437_DOS-V_re_ANK16.woff');
+  font-family: 'DOS/V re. ANK24';
+  src: url('/src/assets/font/woff/Web437_DOS-V_re_ANK24.woff');
 }
 
 @font-face {

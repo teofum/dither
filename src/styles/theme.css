@@ -12,6 +12,68 @@ body {
   line-height: var(--ft-lh-base);
 }
 
+h1 {
+  font-family: var(--ft-head);
+  font-size: calc(var(--ft-size-head));
+  line-height: calc(var(--ft-lh-head));
+  margin: 0em 0 0.5em;
+
+  font-weight: normal;
+  letter-spacing: 0.0625rem;
+  color: var(--ct-text-heading);
+}
+
+h2 {
+  font-family: var(--ft-head-2);
+  font-size: var(--ft-size-head-2);
+  line-height: var(--ft-lh-head-2);
+  margin: 1em 0 0.5em;
+
+  font-weight: normal;
+  color: var(--ct-text-heading-2);
+}
+
+h3 {
+  font-family: var(--ft-text);
+  font-size: var(--ft-size-text);
+  line-height: var(--ft-lh-text);
+  margin: 1em 0 0.5em;
+
+  font-weight: normal;
+  color: var(--ct-text-heading-3);
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+ul,
+ol {
+  list-style: "\2022  " outside;
+  padding-left: 2em;
+  margin: 1em 0 1em;
+}
+
+strong {
+  font-weight: inherit;
+  letter-spacing: 0.0625rem;
+  text-shadow: 0.0625rem 0 var(--ct-text-light);
+}
+
+a.fake-href {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+a[href],
+a.fake-href {
+  color: var(--ct-text-link);
+}
+
+a[href]:visited {
+  color: var(--ct-text-visited);
+}
+
 /* Fallback theme in case root elem loses its class somehow */
 :root:not([class]) {
   --ct-is-dark-theme: 0;
@@ -26,9 +88,16 @@ body {
 
   --ct-title: var(--ct-darker);
   --ct-text: var(--ct-darker);
+  --ct-text-heading: var(--ct-darker);
+  --ct-text-heading-2: var(--ct-text-heading);
+  --ct-text-heading-3: var(--ct-text-heading);
+  
   --ct-text-light: #404040;
   --ct-text-disabled: var(--ct-dark);
   --ct-text-disabled-shadow: var(--ct-lighter);
+
+  --ct-text-link: rgb(0, 102, 204);
+  --ct-text-visited: rgb(85, 26, 139);
 
   --ct-accent-bg: #000080;
   --ct-accent-text: var(--ct-lighter);

@@ -15,18 +15,22 @@ const colorThemes = [
   { className: 'theme__blue', displayName: 'Steel' }
 ];
 
-const fonts = [
-  { className: 'hp', displayName: 'HP 100LX 6x8' },
-  { className: 'hp-big', displayName: 'HP 100LX 10x11' },
-  { className: 'apricot', displayName: 'Apricot Xen C' },
+const fontSets = [
+  { className: 'set0', displayName: 'Default Font Set' },
+  { className: 'set1', displayName: 'Font Set 1' },
+  { className: 'set2', displayName: 'Font Set 2' },
+  { className: 'set3', displayName: 'Font Set 3' }
+];
+
+const titleFonts = [
   { className: 'siemens', displayName: 'Siemens PC-D' },
-  { className: 'philips', displayName: 'Philips :YES G' },
+  { className: 'apricot', displayName: 'Apricot Xen C' },
   { className: 'ti', displayName: 'TI Pro' },
   { className: 'jpn12', displayName: 'DOS/V JPN12' },
-  { className: 'jpn16', displayName: 'DOS/V JPN16' },
   { className: 'ank16', displayName: 'DOS/V ANK16' },
   { className: 'stingray', displayName: 'CL Stingray 8x16' }
 ];
+
 
 function ThemeEditor() {
   const currentTheme = document.documentElement.className.split(' ');
@@ -122,7 +126,7 @@ function ThemeEditor() {
         <span className='theme-label'>Text Font</span>
         <ComboBox
           value={textFont}
-          options={fonts.map(font => ({
+          options={fontSets.map(font => ({
             name: font.displayName,
             value: font.className
           }))}
@@ -131,7 +135,7 @@ function ThemeEditor() {
         <span className='theme-label'>Title Font</span>
         <ComboBox
           value={titleFont}
-          options={fonts.map(font => ({
+          options={titleFonts.map(font => ({
             name: font.displayName,
             value: font.className
           }))}
