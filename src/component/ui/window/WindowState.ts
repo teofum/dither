@@ -1,6 +1,6 @@
-enum WindowState {
+enum WindowViewState {
   Restored = 0,
   Maximized = 1
 }
 
-export default WindowState;
+export default WindowViewState;

@@ -8,6 +8,7 @@ import OptionsProps from './options.props';
 
 import ui_remove from '../../../../assets/ui/remove.png';
 import dlabActions from '../DitherLab.action';
+import { luma_srgb } from '../utils/colorUtils';
 
 function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
   const { palette, customPalettes } = props.slice;
@@ -106,6 +107,7 @@ function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
   }
 
   const editingColor = getPaletteColor(palette, editing || 0);
+  const contrastColor = luma_srgb(editingColor) > 0.5 ? 'black' : 'white';
   return (
     <div className='dlab-editor-root'>
       <input type='text' className='bevel wide'
@@ -119,7 +121,9 @@ function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
       {editing !== undefined ?
         <div className='dlab-editor-picker wide'>
           <div className="dlab-editor-picker-preview bevel content wide"
-            style={{ background: hex(editingColor) }} />
+            style={{ background: hex(editingColor), color: contrastColor }}>
+            {hex(editingColor)}
+          </div>
 
           {[0, 1, 2].map(i => {
             // Dynamically set the slider backgrounds to cool gradients

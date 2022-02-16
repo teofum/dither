@@ -1,8 +1,8 @@
 import React from 'react';
 import LauncherItem from './LauncherItem';
-import themeEditorWindow from '../themeEditor/ThemeEditor.window';
-import ditherLabWindow from '../ditherLab/DitherLab.window';
-import helpWindow from '../help/Help.window';
+import themeEditorWindow from '../../ui/window/templates/ThemeEditor.window';
+import ditherLabWindow from '../../ui/window/templates/DitherLab.window';
+import helpWindow from '../../ui/window/templates/Help.window';
 
 import { useAppDispatch } from '../../../hooks';
 import { createWindow } from '../../ui/windowManager/windowSlice';

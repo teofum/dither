@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
-import WindowProps, { WindowTemplate } from '../window/Window.props';
+import WindowState, { WindowTemplate } from '../window/Window.props';
 
 export const windowsSlice = createSlice({
   name: 'windows',
   initialState: {
     nextWindowId: 0,
-    windows: [] as WindowProps[]
+    windows: [] as WindowState[]
   },
   reducers: {
     createWindow: (state, action: PayloadAction<WindowTemplate>) => {

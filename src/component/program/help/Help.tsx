@@ -57,7 +57,7 @@ function Help() {
     const isSelected = selected === item;
 
     return (
-      <li id={item.id}
+      <li key={item.id}
         className={classlist('help-nav-item', isSelected ? 'selected' : '')}>
 
         {hasChildren &&

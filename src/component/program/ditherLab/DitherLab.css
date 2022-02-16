@@ -252,6 +252,9 @@
 
 .dlab-editor-picker-preview {
   height: 1.5rem;
+
+  display: grid;
+  place-items: center;
 }
 
 .dlab-editor-picker input[type=range]::-webkit-slider-runnable-track {

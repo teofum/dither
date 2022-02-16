@@ -1,8 +1,7 @@
-import React from 'react';
-import { WindowTemplate } from '../../ui/window/Window.props';
-import ThemeEditor from './ThemeEditor';
+import { WindowTemplate } from '../Window.props';
+import WindowContent from '../WindowContent';
 
-import icon_theme from '../../../assets/icon/theme_16.png';
+import icon_theme from '../../../../assets/icon/theme_16.png';
 
 const themeEditorWindow: WindowTemplate = {
   title: 'System Theme',
@@ -12,7 +11,7 @@ const themeEditorWindow: WindowTemplate = {
   iconUrl: icon_theme,
   autoSize: true,
   maximizable: false,
-  children: (<ThemeEditor />)
+  content: WindowContent.ThemeEditor
 };
 
 export default themeEditorWindow;
