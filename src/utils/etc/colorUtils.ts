@@ -58,9 +58,9 @@ export function xyz2srgb(xyz: readonly number[], gamma: number = 2.2): number[] 
 // Converts XYZ color to CIE-L*ab
 export function xyz2lab(xyz: readonly number[]): number[] {
   let ixyz = [
-    xyz[0] * 95.047,
-    xyz[1] * 100.000,
-    xyz[2] * 108.883
+    xyz[0] / 95.047,
+    xyz[1] / 100.000,
+    xyz[2] / 108.883
   ];
 
   ixyz = ixyz.map(val => (val > 0.008856) ?
@@ -107,3 +107,70 @@ export function srgb2lab(rgb: readonly number[], gamma: number = 2.2): number[] 
 export function lab2srgb(rgb: readonly number[], gamma: number = 2.2): number[] {
   return xyz2srgb(lab2xyz(rgb), gamma);
 }
+
+export function srgb2hsl(rgb: readonly number[]): number[] {
+  const [r, g, b] = rgb.map(c => c / 255);
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const dmax = max - min;
+
+  const l = (max + min) / 2;
+
+  if (dmax === 0) // Gray, no saturation and hue is indeterminate
+    return [0, 0, l * 100];
+
+  const s = (l < 0.5) ?
+    dmax / (max + min) :
+    dmax / (2 - max - min);
+
+  const [dr, dg, db] = [r, g, b].map(c => (((max - c) / 6) + (dmax / 2)) / dmax);
+
+  let h = 0;
+  if      (r === max) h = db - dg;
+  else if (g === max) h = (1 / 3) + dr - db;
+  else if (b === max) h = (2 / 3) + dg - dr;
+
+  if (h < 0) h = h + 1;
+  if (h > 1) h = h - 1;
+
+  return [h * 360, s * 100, l * 100];
+}
+
+function hue2rgb(v1: number, v2: number, h: number): number {
+  if (h < 0) h = h + 1;
+  if (h > 1) h = h - 1;
+
+  if (6 * h < 1) return (v1 + (v2 - v1) * 6 * h);
+  if (2 * h < 1) return v2;
+  if (3 * h < 2) return (v1 + (v2 - v1) * 6 * (2 / 3 - h));
+  return v1;
+}
+
+export function hsl2srgb(hsl: readonly number[]): number[] {
+  const [h, s, l] = hsl.map((v, i) => v / (i === 0 ? 360 : 100));
+  
+  if (s === 0) // Gray
+    return [l * 255, l * 255, l * 255];
+
+  const v2 = (l < 0.5) ?
+    l * (1 + s) :
+    (l + s) - (s * l);
+  
+  const v1 = 2 * l - v2;
+
+  const rgb = [
+    hue2rgb(v1, v2, h + (1 / 3)),
+    hue2rgb(v1, v2, h),
+    hue2rgb(v1, v2, h - (1 / 3))
+  ];
+  
+  return rgb.map(c => c * 255);
+}
+
+export function hex(color: number[]) {
+  return `#${color
+    .map(c => Math.round(c))
+    .map(c => c.toString(16).padStart(2, '0'))
+    .join('')}`;
+};

@@ -1,5 +1,5 @@
 import edMatrices from '../edmatrices';
-import { linear2srgb, srgb2linear } from '../../utils/colorUtils';
+import { linear2srgb, srgb2linear } from '../../../../../utils/etc/colorUtils';
 import getPaletteColors from '../../utils/getColors';
 import { paletteMap } from '../../utils/paletteMap';
 import { AsyncProcess } from '../asyncProcess';
