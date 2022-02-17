@@ -8,6 +8,9 @@ import md_dlab_ui from '../../../../assets/help_pages/program/ditherLab/ui.md?ra
 import md_dlab_settings from '../../../../assets/help_pages/program/ditherLab/settings.md?raw';
 import md_dlab_palettes from '../../../../assets/help_pages/program/ditherLab/settings/palettes.md?raw';
 import md_dlab_process from '../../../../assets/help_pages/program/ditherLab/process.md?raw';
+import md_dlab_error from '../../../../assets/help_pages/program/ditherLab/process/error.md?raw';
+import md_dlab_cpo from '../../../../assets/help_pages/program/ditherLab/process/bayer.md?raw';
+import md_dlab_pattern from '../../../../assets/help_pages/program/ditherLab/process/pattern.md?raw';
 import md_how from '../../../../assets/help_pages/how.md?raw';
 import md_how_font from '../../../../assets/help_pages/how/font.md?raw';
 
@@ -78,7 +81,24 @@ const helpPages: HelpItem = {
             {
               id: 'help/programs/dlab/process',
               name: 'Programs',
-              content: md_dlab_process
+              content: md_dlab_process,
+              children: [
+                {
+                  id: 'help/programs/dlab/process/errord',
+                  name: 'Error Diffusion',
+                  content: md_dlab_error
+                },
+                {
+                  id: 'help/programs/dlab/process/cpo',
+                  name: 'Color Pair Ordered',
+                  content: md_dlab_cpo
+                },
+                {
+                  id: 'help/programs/dlab/process/pattern',
+                  name: 'Pattern Dithering',
+                  content: md_dlab_pattern
+                }
+              ]
             }
           ]
         }

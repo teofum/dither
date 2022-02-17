@@ -5,9 +5,9 @@ import icon_help from '../../../../assets/icon/help_16.png';
 
 const helpWindow: WindowTemplate = {
   title: 'Help',
-  minWidth: 480,
+  minWidth: 540,
   minHeight: 480,
-  width: 640,
+  width: 680,
   height: 540,
   iconUrl: icon_help,
   content: WindowContent.Help

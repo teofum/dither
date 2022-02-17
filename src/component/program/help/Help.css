@@ -2,7 +2,7 @@
   height: 100%;
 
   display: grid;
-  grid-template-columns: 10rem 1fr;
+  grid-template-columns: 12rem 1fr;
   grid-template-rows: 1.625rem calc(100% - 1.75rem);
   gap: 0.125rem;
 }
@@ -59,7 +59,18 @@ button.help-nav-item-button img {
 }
 
 .help-infobar > div {
-  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+  overflow: hidden;
+  justify-self: start;
+  max-width: calc(100% - 1rem);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.help-infobar > div * {
+  white-space: nowrap;
 }
 
 .help-content {
