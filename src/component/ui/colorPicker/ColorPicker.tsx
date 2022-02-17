@@ -25,7 +25,7 @@ function ColorPicker(props: InputProps<number[]>) {
 
       if (!same) setLastValue(null);
     }
-  }, [props.value]);
+  }, [props.value, mode]);
 
   const convert = (color: number[]) => {
     switch (mode) {
