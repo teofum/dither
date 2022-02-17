@@ -8,7 +8,6 @@ const createReducer = <T>(reducers: { [key: string]: ReducerTemplate<T> }): Redu
   const keys = Object.keys(reducers);
 
   return (state: T, action: Action) => {
-    console.log(action.type, action.payload);
     if (keys.includes(action.type))
       return produce(state, draft => {reducers[action.type](draft, action);});
     else return state;
