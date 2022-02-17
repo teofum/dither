@@ -11,9 +11,20 @@ enum ColorMode {
 function ColorPicker(props: InputProps<number[]>) {
   const [mode, setMode] = useState(ColorMode.RGB);
   const [tempValue, setTempValue] = useState<number[] | null>(null);
+  const [lastValue, setLastValue] = useState<number[] | null>(null);
 
-  useEffect(() => {
+  useEffect(() => {    
     setTempValue(null);
+    
+    // Persist last value in selected color space
+    // This prevents picker value from 'jumping' upon selecting a color with
+    // several picker space but only one RGB representation (eg, HSL with L=0)
+    if (lastValue) {
+      const same = deconvert(lastValue)
+        .every((v, i) => v === props.value[i]);
+
+      if (!same) setLastValue(null);
+    }
   }, [props.value]);
 
   const convert = (color: number[]) => {
@@ -35,7 +46,7 @@ function ColorPicker(props: InputProps<number[]>) {
   };
 
   const { value, set } = {
-    value: tempValue || convert(props.value),
+    value: tempValue || lastValue || convert(props.value),
     set: props.onChange
   };
 
@@ -50,6 +61,7 @@ function ColorPicker(props: InputProps<number[]>) {
   const commitChanges = () => {
     if (tempValue !== null) {
       set(deconvert(tempValue));
+      setLastValue(tempValue);
       setTempValue(null);
     }
   };
