@@ -3,6 +3,8 @@ import md_basics from '../../../../assets/help_pages/basics.md?raw';
 import md_about from '../../../../assets/help_pages/about.md?raw';
 import md_credits from '../../../../assets/help_pages/about/credits.md?raw';
 import md_programs from '../../../../assets/help_pages/programs.md?raw';
+import md_dlab from '../../../../assets/help_pages/program/ditherLab.md?raw';
+import md_dlab_ui from '../../../../assets/help_pages/program/ditherLab/ui.md?raw';
 import md_how from '../../../../assets/help_pages/how.md?raw';
 import md_how_font from '../../../../assets/help_pages/how/font.md?raw';
 
@@ -48,6 +50,18 @@ const helpPages: HelpItem = {
       name: 'Programs',
       content: md_programs,
       children: [
+        {
+          id: 'help/programs/dlab',
+          name: 'DitherLab',
+          content: md_dlab,
+          children: [
+            {
+              id: 'help/programs/dlab/ui',
+              name: 'User Interface',
+              content: md_dlab_ui
+            }
+          ]
+        }
       ]
     },
     {
