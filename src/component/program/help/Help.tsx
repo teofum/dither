@@ -21,7 +21,7 @@ function Help() {
     else setExpanded(expanded.concat(fullId));
   };
 
-  const goToPage = (fullPath: string) => {
+  const getPage = (fullPath: string) => {
     const parts = fullPath.split('/').slice(1);
     let item = helpPages;
     let id = 'help';
@@ -32,9 +32,16 @@ function Help() {
       else return;
     }
 
-    const parentId = id.split('/').slice(0, -1).join('/');
+    return { item, id };
+  };
+
+  const goToPage = (fullPath: string) => {
+    const page = getPage(fullPath);
+    if (!page) return;
+
+    const parentId = page.id.split('/').slice(0, -1).join('/');
     if (!expanded.includes(parentId)) toggleExpanded(parentId);
-    setSelected(item);
+    setSelected(page.item);
   };
 
   const getPreviousId = () => {
@@ -49,6 +56,16 @@ function Help() {
     if (index === -1 || index >= flat.length - 1) return;
 
     return flat[index + 1].id;
+  };
+
+  const getParents = (fullPath: string) => {
+    return fullPath
+      .split('/')
+      .slice(0, -1)
+      .map((v, i, path) => {
+        const id = path.slice(0, i + 1).join('/');
+        return getPage(id);
+      });
   };
 
   const renderHelpItem = (item: HelpItem) => {
@@ -99,7 +116,16 @@ function Help() {
           onClick={() => goToPage(getNextId() || '')}>
           ↓
         </button>
-        <span>{selected.name}</span>
+        <div>
+          {getParents(selected.id).map((v, i) => [
+            (<a key={`${i}_item`} className='fake-href'
+              onClick={() => goToPage(v?.id || '')}>
+              {v?.item.name}
+            </a>),
+            (<span key={`${i}_sep`}>&nbsp;→&nbsp;</span>)
+          ])}
+          <span>{selected.name}</span>
+        </div>
       </div>
 
       <div className='help-content bevel content'>

@@ -5,6 +5,9 @@ import md_credits from '../../../../assets/help_pages/about/credits.md?raw';
 import md_programs from '../../../../assets/help_pages/programs.md?raw';
 import md_dlab from '../../../../assets/help_pages/program/ditherLab.md?raw';
 import md_dlab_ui from '../../../../assets/help_pages/program/ditherLab/ui.md?raw';
+import md_dlab_settings from '../../../../assets/help_pages/program/ditherLab/settings.md?raw';
+import md_dlab_palettes from '../../../../assets/help_pages/program/ditherLab/settings/palettes.md?raw';
+import md_dlab_process from '../../../../assets/help_pages/program/ditherLab/process.md?raw';
 import md_how from '../../../../assets/help_pages/how.md?raw';
 import md_how_font from '../../../../assets/help_pages/how/font.md?raw';
 
@@ -59,6 +62,23 @@ const helpPages: HelpItem = {
               id: 'help/programs/dlab/ui',
               name: 'User Interface',
               content: md_dlab_ui
+            },
+            {
+              id: 'help/programs/dlab/settings',
+              name: 'Settings',
+              content: md_dlab_settings,
+              children: [
+                {
+                  id: 'help/programs/dlab/settings/palettes',
+                  name: 'Palette Editor',
+                  content: md_dlab_palettes
+                }
+              ]
+            },
+            {
+              id: 'help/programs/dlab/process',
+              name: 'Programs',
+              content: md_dlab_process
             }
           ]
         }

@@ -58,7 +58,7 @@ button.help-nav-item-button img {
   padding: 0.125rem;
 }
 
-.help-infobar span {
+.help-infobar > div {
   padding-left: 0.5rem;
 }
 
