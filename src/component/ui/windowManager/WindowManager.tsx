@@ -1,53 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import launcherWindow from '../../program/launcher/Launcher.window';
+import React from 'react';
+import launcherWindow from '../window/templates/Launcher.window';
 import Window from '../window/Window';
-import WindowProps, { WindowTemplate } from '../window/Window.props';
-
-let nwLocation = {x: 100, y: 100};
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { createWindow, selectWindows } from './windowSlice';
+import Launcher from '../../program/launcher/Launcher';
+import Help from '../../program/help/Help';
+import ThemeEditor from '../../program/themeEditor/ThemeEditor';
+import DitherLab from '../../program/ditherLab/DitherLab';
+import WindowContent from '../window/WindowContent';
 
 function WindowManager() {
-  const [newId, setNewId] = useState(0);
-  const [windows, setWindows] = useState<WindowProps[]>([]);
-  const [newWindow, setNewWindow] = useState<WindowTemplate>();
+  const { windows } = useAppSelector(selectWindows);
+  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (newWindow) {
-      create(newWindow);
-      setNewWindow(undefined);
+  const getComponent = (program: WindowContent) => {
+    switch (program) {
+      case WindowContent.Launcher:
+        return (<Launcher />);
+      case WindowContent.Help:
+        return (<Help />);
+      case WindowContent.ThemeEditor:
+        return (<ThemeEditor />);
+      case WindowContent.DitherLab:
+        return (<DitherLab />);
     }
-  }, [newWindow]);
-
-  const create = (template: WindowTemplate) => {
-    const newWindow = {
-      id: newId,
-      ...template,
-      top: template.top || nwLocation.y,
-      left: template.left || nwLocation.x
-    };
-
-    setWindows(windows.concat(newWindow));
-    setNewId(newId + 1);
-
-    nwLocation = { x: 100 + (nwLocation.x - 50) % 500, y: 100 + (nwLocation.y - 50) % 300 };
-  };
-
-  const destroy = (wid: number) => {
-    setWindows(windows.filter(win => win.id !== wid));
-  };
-
-  const launch = (template: WindowTemplate) => {
-    setNewWindow(template);
   };
 
   return (
     <div className='desktop'>
-      <button className='bevel' onClick={() => create(launcherWindow({onLaunch: launch}))}>
+      <button className='bevel'
+        onClick={() => dispatch(createWindow(launcherWindow))}>
         Program Manager
       </button>
 
       {windows.map(window => (
-        <Window key={window.id} {...window} onClose={destroy}>
-          {window.children}
+        <Window key={window.id} {...window}>
+          {window.content && getComponent(window.content)}
         </Window>
       ))}
     </div>

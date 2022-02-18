@@ -1,7 +1,16 @@
 const tex2DFromImage = (
   gl: WebGLRenderingContext,
   image: HTMLImageElement,
-  texUnitIndex: number
+  options: {
+    internalFormat: number,
+    format: number,
+    type: number
+  } = {
+      internalFormat: gl.RGBA,
+      format: gl.RGBA,
+      type: gl.UNSIGNED_BYTE
+    },
+  texUnitIndex: number = gl.TEXTURE0
 ): WebGLTexture => {
   // Create a texture
   const texture = gl.createTexture();
@@ -17,7 +26,13 @@ const tex2DFromImage = (
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 
   // Upload the image into the texture.
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+  gl.texImage2D(
+    gl.TEXTURE_2D,
+    0,
+    options.internalFormat,
+    options.format,
+    options.type,
+    image);
 
   return texture;
 };

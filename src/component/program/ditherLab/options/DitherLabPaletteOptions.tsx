@@ -3,19 +3,18 @@ import ComboBox from '../../../ui/comboBox/ComboBox';
 import OptionsProps from './options.props';
 import { PaletteOptions } from '../DitherLab.state';
 
-import PaletteGroup from '../../../../utils/ditherLab/PaletteGroup';
-import getPaletteColors from '../../../../utils/ditherLab/getColors';
-import palettes from '../../../../assets/palettes';
+import PaletteGroup from '../utils/PaletteGroup';
+import getPaletteColors from '../utils/getColors';
+import palettes from '../assets/palettes';
 
 import '../DitherLab.css';
 import classlist from '../../../../utils/etc/classlist';
+import dlabActions from '../DitherLab.action';
 
 function DitherLabPaletteOptions(props: OptionsProps<PaletteOptions>) {
-  const update = (newState: PaletteOptions) => {
-    props.onChange(newState);
-  };
+  const { group, palette, customPalettes } = props.slice;
 
-  const allPalettes = palettes.concat(props.options.customPalettes);
+  const allPalettes = palettes.concat(customPalettes);
 
   const pgOptions = Object.values(PaletteGroup)
     .filter(val => !val.startsWith('__'))
@@ -23,25 +22,23 @@ function DitherLabPaletteOptions(props: OptionsProps<PaletteOptions>) {
     .map(val => ({ name: val, value: val }));
 
   const palOptions = allPalettes
-    .filter(pal => pal.group === props.options.group)
+    .filter(pal => pal.group === group)
     .map(pal => ({ name: pal.name, value: pal }));
 
-  const colors = props.options.palette && getPaletteColors(props.options.palette);
+  const colors = palette && getPaletteColors(palette);
   const cl = colors?.length || 0;
   const sizeClass = cl > 64 ? 'smaller' : cl > 32 ? 'small' : '';
   return (
     <div className='dlab-palette-root'>
-      <ComboBox options={pgOptions} value={props.options.group}
-        onChange={(e) => update({
-          ...props.options,
-          group: e.selected.value
-        })} />
+      <ComboBox options={pgOptions} value={group}
+        onChange={(e) => props.dispatch(
+          dlabActions.setPaletteGroup(e.selected.value)
+        )} />
 
-      <ComboBox options={palOptions} value={props.options.palette}
-        onChange={(e) => update({
-          ...props.options,
-          palette: e.selected.value
-        })} />
+      <ComboBox options={palOptions} value={palette}
+        onChange={(e) => props.dispatch(
+          dlabActions.setPalette(e.selected.value)
+        )} />
 
       {colors &&
         <div className={classlist('dlab-palette-preview', sizeClass)}>
@@ -51,10 +48,9 @@ function DitherLabPaletteOptions(props: OptionsProps<PaletteOptions>) {
           ))}
         </div>}
 
-      <button className='bevel' onClick={() => update({
-        ...props.options,
-        showEditor: true
-      })}>
+      <button className='bevel' onClick={() => props.dispatch(
+        dlabActions.showPaletteEditor()
+      )}>
         Palette Editor
       </button>
     </div>

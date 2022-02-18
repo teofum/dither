@@ -13,9 +13,16 @@
 
   --ct-title: var(--ct-darker);
   --ct-text: var(--ct-darker);
-  --ct-text-light: #404040;
+  --ct-text-heading: var(--ct-text);
+  --ct-text-heading-2: var(--ct-text-heading);
+  --ct-text-heading-3: var(--ct-select-bg);
+
+  --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-dark);
   --ct-text-disabled-shadow: var(--ct-lighter);
+
+  --ct-text-link: rgb(0, 102, 204);
+  --ct-text-visited: rgb(85, 26, 139);
 
   --ct-accent-bg: #000080;
   --ct-accent-text: var(--ct-lighter);
@@ -29,26 +36,33 @@
 
 .theme__dark {
   --ct-is-dark-theme: 1;
-  --ct-background: #202020;
-  --ct-content-bg: #282828;
+  --ct-background: #282828;
+  --ct-content-bg: #202020;
 
   --ct-base: #404040;
-  --ct-dark: #282828;
+  --ct-dark: #202020;
   --ct-darker: #000000;
   --ct-light: #6f6f6f;
   --ct-lighter: #808080;
 
   --ct-title: #dedede;
   --ct-text: #dedede;
-  --ct-text-light: var(--ct-lighter);
+  --ct-text-heading: var(--ct-text);
+  --ct-text-heading-2: hsl(212, 75%, 80%);
+  --ct-text-heading-3: hsl(212, 75%, 75%);
+
+  --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-light);
   --ct-text-disabled-shadow: var(--ct-darker);
+
+  --ct-text-link: hsl(212, 55%, 60%);
+  --ct-text-visited: hsl(280, 55%, 55%);
 
   --ct-accent-bg: #000080;
   --ct-accent-text: var(--ct-text);
   --ct-is-dark-accent: 1;
 
-  --ct-select-bg: #a0a0a0;
+  --ct-select-bg: hsl(212, 75%, 60%);
   --ct-select-text: var(--ct-darker);
 
   --ct-border: var(--ct-lighter);
@@ -67,9 +81,16 @@
 
   --ct-title: #000000;
   --ct-text: #000000;
-  --ct-text-light: #404040;
+  --ct-text-heading: var(--ct-text);
+  --ct-text-heading-2: var(--ct-text-heading);
+  --ct-text-heading-3: var(--ct-select-bg);
+
+  --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-dark);
   --ct-text-disabled-shadow: var(--ct-lighter);
+
+  --ct-text-link: rgb(0, 102, 204);
+  --ct-text-visited: rgb(85, 26, 139);
   
   --ct-accent-bg: #000080;
   --ct-accent-text: var(--ct-lighter);
@@ -94,9 +115,16 @@
 
   --ct-title: #faf74b;
   --ct-text: #fffda1;
+  --ct-text-heading: var(--ct-text);
+  --ct-text-heading-2: var(--ct-title);
+  --ct-text-heading-3: var(--ct-title);
+
   --ct-text-light: var(--ct-lighter);
   --ct-text-disabled: var(--ct-light);
   --ct-text-disabled-shadow: var(--ct-darker);
+
+  --ct-text-link: var(--ct-title);
+  --ct-text-visited: hsl(32, 95%, 57%);
 
   --ct-accent-bg: #000080;
   --ct-accent-text: var(--ct-text);

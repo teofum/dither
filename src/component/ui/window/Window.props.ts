@@ -1,7 +1,7 @@
-import React from 'react';
+import WindowContent from './WindowContent';
 
-interface WindowProps {
-  children?: React.ReactNode;
+interface WindowState {
+  content: WindowContent;
 
   // Basic properties
   id: number;
@@ -25,11 +25,8 @@ interface WindowProps {
   // Positioning
   top?: number;
   left?: number;
-
-  // Events
-  onClose?: (id: number) => void;
-  onFocus?: (id: number) => void;
 }
 
-export default WindowProps;
-export type WindowTemplate = Omit<WindowProps, 'id'>;
+export default WindowState;
+export type WindowTemplate = Omit<WindowState, 'id'>;
+export type WindowProps = WindowState & { children?: React.ReactNode };

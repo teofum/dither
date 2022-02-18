@@ -8,8 +8,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.2",
+    "immer": "^9.0.12",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-markdown": "^8.0.0",
+    "react-redux": "^7.2.6"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",

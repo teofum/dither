@@ -5,124 +5,84 @@
   --ft-lh-base: 1rem;
 }
 
-/* === TEXT FONT ======================================= */
-.font-text__siemens {
-  --ft-text: 'Siemens PC-D';
-  --ft-size-text: 0.875rem;
-  --ft-lh-text: 1.25rem;
-}
-
-.font-text__ank16 {
-  --ft-text: 'DOS/V re. ANK16';
+/* === FONT THEME ====================================== */
+.font-text__set0 {
+  --ft-text: 'Mx437 Paradise132 7x16', 'Paradise132 7x16';
   --ft-size-text: 1rem;
-  --ft-lh-text: 1.25rem;
+  --ft-lh-text: 1.125rem;
+  
+  --ft-head-2: 'Mx437 ToshibaTxL1 8x16', 'ToshibaTxL1 8x16';
+  --ft-size-head-2: 1rem;
+  --ft-lh-head-2: 1.25rem;
+  
+  --ft-head: 'Mx437 DOS/V re. ANK24', 'DOS/V re. ANK24';
+  --ft-size-head: 1.5rem;
+  --ft-lh-head: 1.75rem;
 }
 
-.font-text__jpn16 {
-  --ft-text: 'DOS/V re. JPN16';
+.font-text__set1 {
+  --ft-text: 'Mx437 Paradise132 7x16', 'Paradise132 7x16';
   --ft-size-text: 1rem;
-  --ft-lh-text: 1.25rem;
+  --ft-lh-text: 1.125rem;
+  
+  --ft-head-2: 'Mx437 Nix8810 M15', 'Nix8810 M15';
+  --ft-size-head-2: 1rem;
+  --ft-lh-head-2: 1.25rem;
+  
+  --ft-head: 'Mx437 DOS/V re. ANK24', 'DOS/V re. ANK24';
+  --ft-size-head: 1.5rem;
+  --ft-lh-head: 1.75rem;
 }
 
-.font-text__jpn12 {
-  --ft-text: 'DOS/V re. JPN12';
+.font-text__set2 {
+  --ft-text: 'Mx437 DOS/V re. JPN12', 'DOS/V re. JPN12';
   --ft-size-text: 0.75rem;
-  --ft-lh-text: 1.25rem;
+  --ft-lh-text: 1.125rem;
+  
+  --ft-head-2: 'Mx437 DOS/V re. ANK16', 'DOS/V re. ANK16';
+  --ft-size-head-2: 1rem;
+  --ft-lh-head-2: 1.25rem;
+  
+  --ft-head: 'Mx437 DOS/V re. ANK24', 'DOS/V re. ANK24';
+  --ft-size-head: 1.5rem;
+  --ft-lh-head: 1.75rem;
 }
 
-.font-text__stingray {
-  --ft-text: 'CL Stingray 8x16';
+.font-text__set3 {
+  --ft-text: 'Mx437 ToshibaTxL2 8x16', 'ToshibaTxL2 8x16';
   --ft-size-text: 1rem;
   --ft-lh-text: 1.25rem;
-}
-
-.font-text__apricot {
-  --ft-text: 'ApricotXenC';
-  --ft-size-text: 0.875rem;
-  --ft-lh-text: 1.25rem;
-}
-
-.font-text__philips {
-  --ft-text: 'Philips :YES G';
-  --ft-size-text: 0.625rem;
-  --ft-lh-text: 1.25rem;
-}
-
-.font-text__ti {
-  --ft-text: 'Ti Pro';
-  --ft-size-text: 0.75rem;
-  --ft-lh-text: 1.25rem;
-}
-
-.font-text__hp {
-  --ft-text: 'Mx437 HP 100LX 6x8', 'HP 100LX 6x8';
-  --ft-size-text: 0.5rem;
-  --ft-lh-text: 1rem;
-}
-
-.font-text__hp-big {
-  --ft-text: 'HP 100LX 10x11';
-  --ft-size-text: 0.6875rem;
-  --ft-lh-text: 1rem;
+  
+  --ft-head-2: 'Mx437 CL EagleII 9x16', 'CL EagleII 9x16';
+  --ft-size-head-2: 1rem;
+  --ft-lh-head-2: 1.25rem;
+  
+  --ft-head: 'Mx437 DOS/V re. ANK24', 'DOS/V re. ANK24';
+  --ft-size-head: 1.5rem;
+  --ft-lh-head: 1.75rem;
 }
 
 /* === TITLE FONT ======================================= */
-.font-title__siemens {
-  --ft-title: 'Siemens PC-D';
-  --ft-size-title: 0.875rem;
-  --ft-lh-title: 1.25rem;
-}
-
-.font-title__ank16 {
-  --ft-title: 'DOS/V re. ANK16';
-  --ft-size-title: 1rem;
-  --ft-lh-title: 1.25rem;
-}
-
-.font-title__jpn16 {
-  --ft-title: 'DOS/V re. JPN16';
+.font-title__paradise {
+  --ft-title: 'Mx437 Paradise132 7x16', 'Paradise132 7x16';
   --ft-size-title: 1rem;
   --ft-lh-title: 1.25rem;
 }
 
 .font-title__jpn12 {
-  --ft-title: 'DOS/V re. JPN12';
+  --ft-title: 'Mx437 DOS/V re. JPN12', 'DOS/V re. JPN12';
   --ft-size-title: 0.75rem;
   --ft-lh-title: 1.25rem;
 }
 
-.font-title__stingray {
-  --ft-title: 'CL Stingray 8x16';
+.font-title__ank16 {
+  --ft-title: 'Mx437 DOS/V re. ANK16', 'DOS/V re. ANK16';
   --ft-size-title: 1rem;
   --ft-lh-title: 1.25rem;
 }
 
-.font-title__apricot {
-  --ft-title: 'ApricotXenC';
-  --ft-size-title: 0.875rem;
+.font-title__tosh2 {
+  --ft-title: 'Mx437 ToshibaTxL2 8x16', 'ToshibaTxL2 8x16';
+  --ft-size-title: 1rem;
   --ft-lh-title: 1.25rem;
-}
-
-.font-title__philips {
-  --ft-title: 'Philips :YES G';
-  --ft-size-title: 0.625rem;
-  --ft-lh-title: 1.25rem;
-}
-
-.font-title__ti {
-  --ft-title: 'Ti Pro';
-  --ft-size-title: 0.75rem;
-  --ft-lh-title: 1.25rem;
-}
-
-.font-title__hp {
-  --ft-title: 'HP 100LX 6x8';
-  --ft-size-title: 0.5rem;
-  --ft-lh-title: 1rem;
-}
-
-.font-title__hp-big {
-  --ft-title: 'HP 100LX 10x11';
-  --ft-size-title: 0.6875rem;
-  --ft-lh-title: 1rem;
 }

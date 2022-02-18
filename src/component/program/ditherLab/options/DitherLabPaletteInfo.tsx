@@ -1,17 +1,16 @@
 import React from 'react';
-import Palette from '../../../../utils/ditherLab/Palette';
-import PaletteGroup from '../../../../utils/ditherLab/PaletteGroup';
-import PaletteType from '../../../../utils/ditherLab/PaletteType';
+import Palette from '../utils/Palette';
+import PaletteGroup from '../utils/PaletteGroup';
+import PaletteType from '../utils/PaletteType';
 import { PaletteOptions } from '../DitherLab.state';
 import OptionsProps from './options.props';
+import dlabActions from '../DitherLab.action';
 
 function DitherLabPaletteInfo(props: OptionsProps<PaletteOptions>) {
-  const update = (newState: PaletteOptions) => {
-    props.onChange(newState);
-  };
+  const { palette, customPalettes } = props.slice;
 
   const makeCustomFromCurrent = () => {
-    const current = props.options.palette;
+    const current = palette;
     if (!current) return;
 
     const newPalette: Palette = {
@@ -21,19 +20,16 @@ function DitherLabPaletteInfo(props: OptionsProps<PaletteOptions>) {
       data: current.data.slice()
     };
 
-    update({
-      ...props.options,
-      customPalettes: props.options.customPalettes.concat(newPalette),
-      group: PaletteGroup.User,
-      palette: newPalette
-    });
+    props.dispatch(dlabActions.setCustomPalettes(customPalettes.concat(newPalette)));
+    props.dispatch(dlabActions.setPaletteGroup(PaletteGroup.User));
+    props.dispatch(dlabActions.setPalette(newPalette));
   };
 
   const hex = (color: number[]) => {
     return `#${color.map(c => c.toString(16).padStart(2, '0')).join('')}`;
   };
 
-  const data = props.options.palette?.data;
+  const data = palette?.data;
   const getInfoItem = (type: string) => {
     if (!data) return;
     switch (type) {
@@ -53,7 +49,7 @@ function DitherLabPaletteInfo(props: OptionsProps<PaletteOptions>) {
   };
 
   let info: JSX.Element[] = [];
-  switch (props.options.palette?.type) {
+  switch (palette?.type) {
     case PaletteType.Indexed:
       info = [
         (<span key={0} className='dlab-editor-info-label'>Colors</span>),
@@ -92,16 +88,16 @@ function DitherLabPaletteInfo(props: OptionsProps<PaletteOptions>) {
   return (
     <div className='dlab-editor-root'>
       <div className='dlab-editor-title wide'>
-        {props.options.palette?.name}
+        {palette?.name}
       </div>
 
       <span className='dlab-editor-info-label'>Group</span>
       <input readOnly className='dlab-editor-info-value bevel'
-        value={props.options.palette?.group} />
+        value={palette?.group} />
 
       <span className='dlab-editor-info-label'>Type</span>
       <input readOnly className='dlab-editor-info-value bevel'
-        value={props.options.palette?.type} />
+        value={palette?.type} />
 
       {info}
 

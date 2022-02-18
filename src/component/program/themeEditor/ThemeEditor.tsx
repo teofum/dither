@@ -15,28 +15,26 @@ const colorThemes = [
   { className: 'theme__blue', displayName: 'Steel' }
 ];
 
-const fonts = [
-  { className: 'hp', displayName: 'HP 100LX 6x8' },
-  { className: 'hp-big', displayName: 'HP 100LX 10x11' },
-  { className: 'apricot', displayName: 'Apricot Xen C' },
-  { className: 'siemens', displayName: 'Siemens PC-D' },
-  { className: 'philips', displayName: 'Philips :YES G' },
-  { className: 'ti', displayName: 'TI Pro' },
-  { className: 'jpn12', displayName: 'DOS/V JPN12' },
-  { className: 'jpn16', displayName: 'DOS/V JPN16' },
-  { className: 'ank16', displayName: 'DOS/V ANK16' },
-  { className: 'stingray', displayName: 'CL Stingray 8x16' }
+const fontSets = [
+  { className: 'set0', displayName: 'Default Font Set' },
+  { className: 'set1', displayName: 'Font Set 1' },
+  { className: 'set2', displayName: 'Font Set 2' },
+  { className: 'set3', displayName: 'Font Set 3' }
 ];
+
+const titleFonts = [
+  { className: 'paradise',  displayName: 'Paradise132 7x16' },
+  { className: 'jpn12', displayName: 'DOS/V JPN12' },
+  { className: 'ank16', displayName: 'DOS/V ANK16' },
+  { className: 'tosh2', displayName: 'ToshibaTxL2 8x16' }
+];
+
 
 function ThemeEditor() {
   const currentTheme = document.documentElement.className.split(' ');
 
   const currentColorTheme = currentTheme
     .find(cl => cl.startsWith('theme__'));
-
-  const currentBaseFont = currentTheme
-    .find(cl => cl.startsWith('font-base__'))
-    ?.split('__')[1];
 
   const currentTextFont = currentTheme
     .find(cl => cl.startsWith('font-text__'))
@@ -46,15 +44,16 @@ function ThemeEditor() {
     .find(cl => cl.startsWith('font-title__'))
     ?.split('__')[1];
   
-  const [colorTheme, setColorTheme] = useState(currentColorTheme || '');
-  const [baseFont, setBaseFont] = useState(currentBaseFont || '');
-  const [textFont, setTextFont] = useState(currentTextFont || '');
-  const [titleFont, setTitleFont] = useState(currentTitleFont || '');
+  const [colorTheme, setColorTheme] = useState(
+    colorThemes.find(ct => ct.className === currentColorTheme)?.className || '');
+  const [fontSet, setFontSet] = useState(
+    fontSets.find(fs => fs.className === currentTextFont)?.className || '');
+  const [titleFont, setTitleFont] = useState(
+    titleFonts.find(tf => tf.className === currentTitleFont)?.className || '');
 
   const theme = classlist(
     colorTheme,
-    `font-base__${baseFont}`,
-    `font-text__${textFont}`,
+    `font-text__${fontSet}`,
     `font-title__${titleFont}`
   );
   console.log(theme);
@@ -88,7 +87,10 @@ function ThemeEditor() {
               </div>
 
               <div className='win-content theme-fake-content bevel'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <h1>Heading</h1>
+                <h2>Heading 2</h2>
+                <h3>Heading 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
 
               <div className='action-bar'>
@@ -110,28 +112,19 @@ function ThemeEditor() {
           }))}
           onChange={(e) => setColorTheme(e.selected.value)} />
 
-        {/* <span className='theme-label'>UI Font</span>
-        <ComboBox
-          value={baseFont}
-          options={fonts.map(font => ({
-            name: font.displayName,
-            value: font.className
-          }))}
-          onChange={(e) => setBaseFont(e.selected.value)} /> */}
-
         <span className='theme-label'>Text Font</span>
         <ComboBox
-          value={textFont}
-          options={fonts.map(font => ({
+          value={fontSet}
+          options={fontSets.map(font => ({
             name: font.displayName,
             value: font.className
           }))}
-          onChange={(e) => setTextFont(e.selected.value)} />
+          onChange={(e) => setFontSet(e.selected.value)} />
 
         <span className='theme-label'>Title Font</span>
         <ComboBox
           value={titleFont}
-          options={fonts.map(font => ({
+          options={titleFonts.map(font => ({
             name: font.displayName,
             value: font.className
           }))}

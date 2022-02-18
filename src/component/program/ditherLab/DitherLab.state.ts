@@ -1,10 +1,10 @@
-import Palette from '../../../utils/ditherLab/Palette';
-import PaletteGroup from '../../../utils/ditherLab/PaletteGroup';
-import DitherLabProgram, { DitherLabDevice } from './DitherLabProgram';
+import Palette from './utils/Palette';
+import PaletteGroup from './utils/PaletteGroup';
+import DitherLabProgram, { DitherLabDevice } from './utils/DitherLabProgram';
 
-export type RTType = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>;
+export type RTType = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 
-interface ImageInfo {
+export interface ImageInfo {
   src: string;
   filename: string;
   width: number;
@@ -30,16 +30,15 @@ export interface ResizeOptions {
 }
 
 export interface PaletteOptions {
-  group: PaletteGroup,
-  palette: Palette | null,
-  customPalettes: Palette[],
-  showEditor: boolean
+  group: PaletteGroup;
+  palette: Palette | null;
+  customPalettes: Palette[];
 }
 
 export interface ProcessOptions {
-  device: DitherLabDevice,
-  process: DitherLabProgram | null,
-  settingValues: { [key: string]: number }
+  device: DitherLabDevice;
+  process: DitherLabProgram | null;
+  settingValues: { [key: string]: number };
 }
 
 export interface DitherLabOptions {
@@ -63,11 +62,16 @@ export interface DitherLabStatus {
   renderHeight: number;
 }
 
+export interface DitherLabViewState {
+  scale: number;
+  showEditor: boolean;
+}
+
 interface DitherLabState {
   renderTarget: RTType | null;
   options: DitherLabOptions;
   status: DitherLabStatus;
-  view: number;
+  view: DitherLabViewState;
 };
 
 export default DitherLabState;
@@ -93,8 +97,7 @@ export const dlabInitialState: DitherLabState = {
     palette: {
       group: PaletteGroup.RetroPC,
       palette: null,
-      customPalettes: [],
-      showEditor: false
+      customPalettes: []
     },
     process: {
       device: DitherLabDevice.GL,
@@ -109,5 +112,8 @@ export const dlabInitialState: DitherLabState = {
     renderWidth: 0,
     renderHeight: 0
   },
-  view: 1
+  view: {
+    scale: 1,
+    showEditor: false
+  }
 };

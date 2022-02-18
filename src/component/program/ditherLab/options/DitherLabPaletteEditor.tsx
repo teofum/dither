@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
-import getPaletteColors, { getPaletteColor } from '../../../../utils/ditherLab/getColors';
-import Palette from '../../../../utils/ditherLab/Palette';
-import PaletteType from '../../../../utils/ditherLab/PaletteType';
+import getPaletteColors, { getPaletteColor } from '../utils/getColors';
+import Palette from '../utils/Palette';
+import PaletteType from '../utils/PaletteType';
 import classlist from '../../../../utils/etc/classlist';
 import { PaletteOptions } from '../DitherLab.state';
 import OptionsProps from './options.props';
 
 import ui_remove from '../../../../assets/ui/remove.png';
+import dlabActions from '../DitherLab.action';
+import { hex } from '../../../../utils/etc/colorUtils';
+import ColorPicker from '../../../ui/colorPicker/ColorPicker';
 
 function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
+  const { palette, customPalettes } = props.slice;
   const [editing, setEditing] = useState<number>();
 
-  const palette = props.options.palette;
   if (!palette) return (<span>[No palette selected]</span>);
 
   const update = (updated: Palette) => {
     // Replace old with updated palette in custom palette list
-    const customPalettes = props.options.customPalettes
+    const newCustomPalettes = customPalettes
       .filter(p => p !== palette)
       .concat(updated);
 
     // Also set selected palette to the new one
-    props.onChange({
-      ...props.options,
-      customPalettes: customPalettes,
-      palette: updated
-    });
+    props.dispatch(dlabActions.setCustomPalettes(newCustomPalettes));
+    props.dispatch(dlabActions.setPalette(updated));
   };
 
   const updateName = (ev: Event) => {
@@ -35,12 +35,13 @@ function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
     });
   };
 
-  const editColor = (channel: number, ev: Event) => {
+  const setColor = (color: number[]) => {
     if (editing === undefined) return;
 
     const newData = palette.data.slice();
-    const i = editing * 3 + channel;
-    newData[i] = parseInt((ev.target as HTMLInputElement).value);
+    const i = editing * 3;
+    for (let ch = 0; ch < 3; ch++)
+      newData[i + ch] = color[ch];
 
     update({
       ...palette,
@@ -69,10 +70,6 @@ function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
       ...palette,
       data: newData
     });
-  };
-
-  const hex = (color: number[]) => {
-    return `#${color.map(c => c.toString(16).padStart(2, '0')).join('')}`;
   };
 
   const options: JSX.Element[] = [];
@@ -120,27 +117,8 @@ function DitherLabPaletteEditor(props: OptionsProps<PaletteOptions>) {
 
       {editing !== undefined ?
         <div className='dlab-editor-picker wide'>
-          <div className="dlab-editor-picker-preview bevel content wide"
-            style={{ background: hex(editingColor) }} />
-
-          {[0, 1, 2].map(i => {
-            // Dynamically set the slider backgrounds to cool gradients
-            const if0 = editingColor.slice();
-            const if255 = editingColor.slice();
-            if0[i] = 0;
-            if255[i] = 255;
-            const inputStyle = {
-              '--gradient-start': hex(if0),
-              '--gradient-end': hex(if255)
-            };
-
-            return [
-              (<input key={`${i}_input`} type="range" min={0} max={255} step={1}
-                value={editingColor[i]} style={inputStyle as any}
-                onChange={(e) => editColor(i, e.nativeEvent)} />),
-              (<span key={`${i}_value`}>{editingColor[i].toString().padStart(3, '0')}</span>)
-            ];
-          })}
+          <ColorPicker value={editingColor}
+            onChange={setColor} />
         </div>
         : <div className='wide'>
           Click on a color to edit.

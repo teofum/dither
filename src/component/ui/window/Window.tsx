@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import WindowProps from './Window.props';
-import WindowState from './WindowState';
+import { WindowProps } from './Window.props';
+import WindowViewState from './WindowState';
 import ResizeMode from '../../../utils/etc/ResizeMode';
+
+import { useAppDispatch } from '../../../hooks';
+import { destroyWindow } from '../windowManager/windowSlice';
 
 import icon_computer from '../../../assets/icon/computer_16.png';
 import ui_close from '../../../assets/ui/close.png';
@@ -11,6 +14,8 @@ import ui_restore from '../../../assets/ui/restore.png';
 import './Window.css';
 
 function Window(props: WindowProps) {
+  const dispatch = useAppDispatch();
+
   const [position, setPosition] = useState({
     x: props.left || 0,
     y: props.top || 0
@@ -21,7 +26,7 @@ function Window(props: WindowProps) {
     h: Math.max(props.height || 0, props.minHeight)
   });
 
-  const [state, setState] = useState(WindowState.Restored);
+  const [state, setState] = useState(WindowViewState.Restored);
 
   useEffect(() => focus(true), []);
 
@@ -29,14 +34,14 @@ function Window(props: WindowProps) {
 
   const frameStyle: React.CSSProperties = (() => {
     switch (state) {
-      case WindowState.Restored:
+      case WindowViewState.Restored:
         return {
           width: props.autoSize ? 'auto' : size.w,
           height: props.autoSize ? 'auto' : size.h,
           left: position.x,
           top: position.y
         };
-      case WindowState.Maximized:
+      case WindowViewState.Maximized:
         return {
           width: '100%',
           height: '100%',
@@ -188,13 +193,12 @@ function Window(props: WindowProps) {
   const toggleMaximized = () => {
     if (props.maximizable === false) return;
 
-    if (state === WindowState.Maximized) setState(WindowState.Restored);
-    else setState(WindowState.Maximized);
+    if (state === WindowViewState.Maximized) setState(WindowViewState.Restored);
+    else setState(WindowViewState.Maximized);
   };
 
   const destroy = () => {
-    if (props.onClose)
-      props.onClose(props.id);
+    dispatch(destroyWindow(props.id));
   };
 
   const focus = (init: boolean = false) => {
@@ -257,7 +261,7 @@ function Window(props: WindowProps) {
 
       <div className='win-main'>
         <div className='win-titlebar'
-          onMouseDown={state === WindowState.Restored ?
+          onMouseDown={state === WindowViewState.Restored ?
             (e) => dragHandler(e.nativeEvent, (e) => move(e))
             : undefined}
           onDoubleClick={toggleMaximized}>
@@ -271,7 +275,7 @@ function Window(props: WindowProps) {
           <div className='win-titlebar-button-group'>
             {props.maximizable !== false &&
               <button className='win-titlebar-button icon-button bevel' onClick={toggleMaximized}>
-                <img src={state === WindowState.Maximized ? ui_restore : ui_max} alt='max' />
+                <img src={state === WindowViewState.Maximized ? ui_restore : ui_max} alt='max' />
               </button>}
             <button className='win-titlebar-button icon-button bevel'
               onClick={destroy} disabled={props.closeable === false}>
@@ -285,7 +289,7 @@ function Window(props: WindowProps) {
         </div>
       </div>
 
-      {canResize && state === WindowState.Restored && resizeHandles}
+      {canResize && state === WindowViewState.Restored && resizeHandles}
     </div>
   );
 }

@@ -1,7 +1,18 @@
 const tex2DFromData = (
   gl: WebGLRenderingContext,
+  width: number,
+  height: number,
   data: number[],
-  texUnitIndex: number
+  options: {
+    internalFormat: number,
+    format: number,
+    type: number
+  } = {
+      internalFormat: gl.RGBA,
+      format: gl.RGBA,
+      type: gl.UNSIGNED_BYTE
+    },
+  texUnitIndex: number = gl.TEXTURE0
 ): WebGLTexture => {
   // Create a texture
   const texture = gl.createTexture();
@@ -16,17 +27,36 @@ const tex2DFromData = (
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 
+  let dataArray: ArrayBufferView | null = null;
+  switch (options.type) {
+    case gl.UNSIGNED_BYTE:
+      dataArray = new Uint8Array(data);
+      break;
+    case gl.UNSIGNED_SHORT:
+    case gl.UNSIGNED_SHORT_5_6_5:
+    case gl.UNSIGNED_SHORT_5_5_5_1:
+    case gl.UNSIGNED_SHORT_4_4_4_4:
+      dataArray = new Uint16Array(data);
+      break;
+    case gl.UNSIGNED_INT:
+      dataArray = new Uint32Array(data);
+      break;
+    case gl.FLOAT:
+      dataArray = new Float32Array(data);
+      break;
+  }
+
   // Create the texture from data.
   gl.texImage2D(
     gl.TEXTURE_2D,
     0,
-    gl.LUMINANCE,
-    8,
-    8,
+    options.internalFormat,
+    width,
+    height,
     0,
-    gl.LUMINANCE,
-    gl.UNSIGNED_BYTE,
-    new Uint8Array(data));
+    options.format,
+    options.type,
+    dataArray);
 
   return texture;
 };

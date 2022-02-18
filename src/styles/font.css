@@ -4,38 +4,8 @@
 }
 
 @font-face {
-  font-family: 'HP 100LX 10x11';
-  src: url('/src/assets/font/woff/Web437_HP_100LX_10x11.woff');
-}
-
-@font-face {
-  font-family: 'Siemens PC-D';
-  src: url('/src/assets/font/woff/Web437_Siemens_PC-D.woff');
-}
-
-@font-face {
-  font-family: 'ApricotXenC';
-  src: url('/src/assets/font/woff/Web437_ApricotXenC.woff');
-}
-
-@font-face {
-  font-family: 'Philips :YES G';
-  src: url('/src/assets/font/woff/Web437_Philips_YES_G.woff');
-}
-
-@font-face {
-  font-family: 'Ti Pro';
-  src: url('/src/assets/font/woff/Web437_Ti_Pro.woff');
-}
-
-@font-face {
   font-family: 'DOS/V re. JPN12';
   src: url('/src/assets/font/woff/Web437_DOS-V_re_JPN12.woff');
-}
-
-@font-face {
-  font-family: 'DOS/V re. JPN16';
-  src: url('/src/assets/font/woff/Web437_DOS-V_re_JPN16.woff');
 }
 
 @font-face {
@@ -44,6 +14,31 @@
 }
 
 @font-face {
-  font-family: 'CL Stingray 8x16';
-  src: url('/src/assets/font/woff/Web437_CL_Stingray_8x16.woff');
+  font-family: 'DOS/V re. ANK24';
+  src: url('/src/assets/font/woff/Web437_DOS-V_re_ANK24.woff');
+}
+
+@font-face {
+  font-family: 'ToshibaTxL1 8x16';
+  src: url('/src/assets/font/woff/Web437_ToshibaTxL1_8x16.woff');
+}
+
+@font-face {
+  font-family: 'ToshibaTxL2 8x16';
+  src: url('/src/assets/font/woff/Web437_ToshibaTxL2_8x16.woff');
+}
+
+@font-face {
+  font-family: 'Nix8810 M15';
+  src: url('/src/assets/font/woff/Web437_Nix8810_M15.woff');
+}
+
+@font-face {
+  font-family: 'CL EagleII 9x16';
+  src: url('/src/assets/font/woff/Web437_CL_EagleII_9x16.woff');
+}
+
+@font-face {
+  font-family: 'Paradise132 7x16';
+  src: url('/src/assets/font/woff/Web437_Paradise132_7x16.woff');
 }

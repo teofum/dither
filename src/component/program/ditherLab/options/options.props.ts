@@ -1,6 +1,9 @@
+import React from 'react';
+import Action from '../../../../utils/state/Action';
+
 interface OptionsProps<T> {
-  options: T;
-  onChange: (value: T) => void;
+  slice: T;
+  dispatch: React.Dispatch<Action>;
 }
 
 export default OptionsProps;

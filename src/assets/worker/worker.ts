@@ -1,6 +1,6 @@
-import asyncProcess from '../../component/program/ditherLab/asyncProcess';
+import asyncProcess from '../../component/program/ditherLab/assets/asyncProcess';
 import { DitherLabOptions } from '../../component/program/ditherLab/DitherLab.state';
-import { initGammaLUT } from '../../utils/ditherLab/gamma';
+import { initGammaLUT } from '../../component/program/ditherLab/utils/gamma';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ctx: Worker = self as any;

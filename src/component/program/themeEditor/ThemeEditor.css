@@ -22,8 +22,6 @@
 }
 
 .theme-preview-bg {
-  min-height: 12.5rem;
-  height: 100%;
   padding: 1.5rem 4rem 3rem 1rem;
 
   background: var(--ct-background);
@@ -48,7 +46,7 @@
   background: var(--ct-base);
   pointer-events: none;
 
-  height: 10rem;
+  height: 13rem;
   max-width: 18rem;
   width: 18rem;
   padding: 0;
@@ -63,8 +61,12 @@
   text-align: left;
   padding: 0.25rem;
   margin-bottom: 0.25rem;
+}
 
-  font-family: var(--ft-text);
-  font-size: var(--ft-size-text);
-  line-height: var(--ft-lh-text);
+.theme-fake-content > * {
+  margin: 0.5rem 0 0;
+}
+
+.theme-fake-content > h1 {
+  margin: 0;
 }
