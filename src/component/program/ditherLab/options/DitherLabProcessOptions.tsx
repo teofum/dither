@@ -43,7 +43,7 @@ function DitherLabProcessOptions(props: OptionsProps<ProcessOptions>) {
       <ComboBox options={devOptions} value={device}
         onChange={(e) => props.dispatch(dlabActions.setDevice(e.selected.value))} />
 
-      <span className='dlab-process-label'>Process</span>
+      <span className='dlab-process-label'>Process&nbsp;</span>
       <ComboBox options={progOptions} value={process}
         onChange={(e) => {
           props.dispatch(dlabActions.setProcess(e.selected.value));

@@ -10,9 +10,17 @@ For a full explanation of the algorithm, see [How it works: Pattern Dithering](h
 
 ## Pattern Dithering options
 
+### Matrix
+
+Threshold map or matrix used for dithering. A larger matrix allows for finer mixing and higher quality. The matrix type changes the look of the dithered image:
+
+* A Bayer Matrix is mathematically balanced and will produce a distinct cross-hatch pattern.
+* Blue Noise (Void and Cluster) is randomly generated, and looks similar to error diffusion dithering.
+* Halftone maps are clustered maps that produce a circular halftone pattern.
+
 ### Mix
 
-The maximum number of colors used in mixing and, by extension, possible mix levels. A higher value will result in higher quality dithering, but you may want to experiment with lower values for aesthetic reasons or for performance resaons.
+The maximum number of colors used in mixing and, by extension, possible mix levels. A higher value will result in higher quality dithering, but you may want to experiment with lower values for aesthetic or performance reasons.
 
 ### Dither
 

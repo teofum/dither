@@ -8,6 +8,7 @@ uniform float u_gamma;
 uniform sampler2D u_image;
 uniform sampler2D u_threshold;
 uniform float u_thres_size;
+uniform float u_variance;
 
 varying vec2 v_texCoord;
 
@@ -18,7 +19,7 @@ struct ColorMix {
 };
 
 float mixError(vec3 target, vec3 cmix, float compDist, float rmh) {
-  return length(target - cmix) + compDist * (abs(rmh) + 0.5) / (40.0 / float(PALETTE_SIZE));
+  return length(target - cmix) + compDist * (abs(rmh) + 0.5) * float(PALETTE_SIZE) / (10.0 * pow(2.0, u_variance));
 }
 
 vec3 gamma(vec3 color) {

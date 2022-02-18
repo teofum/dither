@@ -169,7 +169,10 @@ const patternDither: DitherLabProgram = {
         { name: '8x8 Bayer Matrix', value: 0 },
         { name: '4x4 Bayer Matrix', value: 1 },
         { name: '64x64 Blue Noise', value: 2 },
-        { name: '16x16 Blue Noise', value: 3 }
+        { name: '16x16 Blue Noise', value: 3 },
+        { name: '8x8 Halftone', value: 4 },
+        { name: '6x6 Halftone', value: 5 },
+        { name: '4x4 Halftone', value: 6 }
       ]
     },
     clist_size: {

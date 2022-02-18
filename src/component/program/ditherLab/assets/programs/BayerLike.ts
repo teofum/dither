@@ -91,6 +91,7 @@ const runBayerLike = async (
   const u_image = gl.getUniformLocation(program, 'u_image');
   const u_threshold = gl.getUniformLocation(program, 'u_threshold');
   const u_thres_size = gl.getUniformLocation(program, 'u_thres_size');
+  const u_variance = gl.getUniformLocation(program, 'u_variance');
   const u_gamma = gl.getUniformLocation(program, 'u_gamma');
 
   // Populate positions buffer
@@ -132,6 +133,8 @@ const runBayerLike = async (
   gl.uniform1i(u_image, 0);
   gl.uniform1i(u_threshold, 1);
   gl.uniform1f(u_thres_size, threshold.size);
+  gl.uniform1f(u_variance,
+    def(settings.variance, bayerLike.settings.variance.default) || 0);
   gl.uniform1f(u_gamma,
     def(settings.gamma, bayerLike.settings.gamma.default) || 0);
 
@@ -160,8 +163,20 @@ const bayerLike: DitherLabProgram = {
         { name: '8x8 Bayer Matrix', value: 0 },
         { name: '4x4 Bayer Matrix', value: 1 },
         { name: '64x64 Blue Noise', value: 2 },
-        { name: '16x16 Blue Noise', value: 3 }
+        { name: '16x16 Blue Noise', value: 3 },
+        { name: '8x8 Halftone', value: 4 },
+        { name: '6x6 Halftone', value: 5 },
+        { name: '4x4 Halftone', value: 6 }
       ]
+    },
+    variance: {
+      name: 'Variance',
+      type: DitherLabProgramSettingType.Range,
+      min: 0,
+      max: 8,
+      step: 0.2,
+      default: 3,
+      showValue: val => val.toFixed(1)
     },
     gamma: {
       name: 'Gamma',
