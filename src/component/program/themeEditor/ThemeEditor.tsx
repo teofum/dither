@@ -36,10 +36,6 @@ function ThemeEditor() {
   const currentColorTheme = currentTheme
     .find(cl => cl.startsWith('theme__'));
 
-  const currentBaseFont = currentTheme
-    .find(cl => cl.startsWith('font-base__'))
-    ?.split('__')[1];
-
   const currentTextFont = currentTheme
     .find(cl => cl.startsWith('font-text__'))
     ?.split('__')[1];
@@ -48,15 +44,16 @@ function ThemeEditor() {
     .find(cl => cl.startsWith('font-title__'))
     ?.split('__')[1];
   
-  const [colorTheme, setColorTheme] = useState(currentColorTheme || '');
-  const [baseFont, setBaseFont] = useState(currentBaseFont || '');
-  const [textFont, setTextFont] = useState(currentTextFont || '');
-  const [titleFont, setTitleFont] = useState(currentTitleFont || '');
+  const [colorTheme, setColorTheme] = useState(
+    colorThemes.find(ct => ct.className === currentColorTheme)?.className || '');
+  const [fontSet, setFontSet] = useState(
+    fontSets.find(fs => fs.className === currentTextFont)?.className || '');
+  const [titleFont, setTitleFont] = useState(
+    titleFonts.find(tf => tf.className === currentTitleFont)?.className || '');
 
   const theme = classlist(
     colorTheme,
-    `font-base__${baseFont}`,
-    `font-text__${textFont}`,
+    `font-text__${fontSet}`,
     `font-title__${titleFont}`
   );
   console.log(theme);
@@ -115,23 +112,14 @@ function ThemeEditor() {
           }))}
           onChange={(e) => setColorTheme(e.selected.value)} />
 
-        {/* <span className='theme-label'>UI Font</span>
-        <ComboBox
-          value={baseFont}
-          options={fonts.map(font => ({
-            name: font.displayName,
-            value: font.className
-          }))}
-          onChange={(e) => setBaseFont(e.selected.value)} /> */}
-
         <span className='theme-label'>Text Font</span>
         <ComboBox
-          value={textFont}
+          value={fontSet}
           options={fontSets.map(font => ({
             name: font.displayName,
             value: font.className
           }))}
-          onChange={(e) => setTextFont(e.selected.value)} />
+          onChange={(e) => setFontSet(e.selected.value)} />
 
         <span className='theme-label'>Title Font</span>
         <ComboBox
