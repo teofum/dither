@@ -23,12 +23,10 @@ const fontSets = [
 ];
 
 const titleFonts = [
-  { className: 'siemens', displayName: 'Siemens PC-D' },
-  { className: 'apricot', displayName: 'Apricot Xen C' },
-  { className: 'ti', displayName: 'TI Pro' },
+  { className: 'paradise',  displayName: 'Paradise132 7x16' },
   { className: 'jpn12', displayName: 'DOS/V JPN12' },
   { className: 'ank16', displayName: 'DOS/V ANK16' },
-  { className: 'stingray', displayName: 'CL Stingray 8x16' }
+  { className: 'tosh2', displayName: 'ToshibaTxL2 8x16' }
 ];
 
 
@@ -92,7 +90,10 @@ function ThemeEditor() {
               </div>
 
               <div className='win-content theme-fake-content bevel'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <h1>Heading</h1>
+                <h2>Heading 2</h2>
+                <h3>Heading 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
 
               <div className='action-bar'>

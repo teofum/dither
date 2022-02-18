@@ -7,6 +7,34 @@
 
 /* === FONT THEME ====================================== */
 .font-text__set0 {
+  --ft-text: 'Mx437 Paradise132 7x16', 'Paradise132 7x16';
+  --ft-size-text: 1rem;
+  --ft-lh-text: 1.125rem;
+  
+  --ft-head-2: 'Mx437 ToshibaTxL1 8x16', 'ToshibaTxL1 8x16';
+  --ft-size-head-2: 1rem;
+  --ft-lh-head-2: 1.25rem;
+  
+  --ft-head: 'Mx437 DOS/V re. ANK24', 'DOS/V re. ANK24';
+  --ft-size-head: 1.5rem;
+  --ft-lh-head: 1.75rem;
+}
+
+.font-text__set1 {
+  --ft-text: 'Mx437 Paradise132 7x16', 'Paradise132 7x16';
+  --ft-size-text: 1rem;
+  --ft-lh-text: 1.125rem;
+  
+  --ft-head-2: 'Mx437 Nix8810 M15', 'Nix8810 M15';
+  --ft-size-head-2: 1rem;
+  --ft-lh-head-2: 1.25rem;
+  
+  --ft-head: 'Mx437 DOS/V re. ANK24', 'DOS/V re. ANK24';
+  --ft-size-head: 1.5rem;
+  --ft-lh-head: 1.75rem;
+}
+
+.font-text__set2 {
   --ft-text: 'Mx437 DOS/V re. JPN12', 'DOS/V re. JPN12';
   --ft-size-text: 0.75rem;
   --ft-lh-text: 1.125rem;
@@ -20,81 +48,41 @@
   --ft-lh-head: 1.75rem;
 }
 
-.font-text__set1 {
-  --ft-text: 'Siemens PC-D';
-  --ft-size-text: 0.875rem;
-  --ft-lh-text: 1.25rem;
-  
-  --ft-head-2: 'DOS/V re. ANK16';
-  --ft-size-head-2: 1rem;
-  --ft-lh-head-2: 1.25rem;
-  
-  --ft-head: 'DOS/V re. ANK24';
-  --ft-size-head: 1.5rem;
-  --ft-lh-head: 1.75rem;
-}
-
-.font-text__set2 {
-  --ft-text: 'ApricotXenC';
-  --ft-size-text: 0.875rem;
-  --ft-lh-text: 1.25rem;
-  
-  --ft-head-2: 'DOS/V re. ANK16';
-  --ft-size-head-2: 1rem;
-  --ft-lh-head-2: 1.25rem;
-  
-  --ft-head: 'DOS/V re. ANK24';
-  --ft-size-head: 1.5rem;
-  --ft-lh-head: 1.75rem;
-}
-
 .font-text__set3 {
-  --ft-text: 'Ti Pro';
-  --ft-size-text: 0.75rem;
+  --ft-text: 'Mx437 ToshibaTxL2 8x16', 'ToshibaTxL2 8x16';
+  --ft-size-text: 1rem;
   --ft-lh-text: 1.25rem;
   
-  --ft-head-2: 'DOS/V re. ANK16';
+  --ft-head-2: 'Mx437 CL EagleII 9x16', 'CL EagleII 9x16';
   --ft-size-head-2: 1rem;
   --ft-lh-head-2: 1.25rem;
   
-  --ft-head: 'DOS/V re. ANK24';
+  --ft-head: 'Mx437 DOS/V re. ANK24', 'DOS/V re. ANK24';
   --ft-size-head: 1.5rem;
   --ft-lh-head: 1.75rem;
 }
 
 /* === TITLE FONT ======================================= */
-.font-title__siemens {
-  --ft-title: 'Siemens PC-D';
-  --ft-size-title: 0.875rem;
-  --ft-lh-title: 1.25rem;
-}
-
-.font-title__ank16 {
-  --ft-title: 'DOS/V re. ANK16';
+.font-title__paradise {
+  --ft-title: 'Mx437 Paradise132 7x16', 'Paradise132 7x16';
   --ft-size-title: 1rem;
   --ft-lh-title: 1.25rem;
 }
 
 .font-title__jpn12 {
-  --ft-title: 'DOS/V re. JPN12';
+  --ft-title: 'Mx437 DOS/V re. JPN12', 'DOS/V re. JPN12';
   --ft-size-title: 0.75rem;
   --ft-lh-title: 1.25rem;
 }
 
-.font-title__stingray {
-  --ft-title: 'CL Stingray 8x16';
+.font-title__ank16 {
+  --ft-title: 'Mx437 DOS/V re. ANK16', 'DOS/V re. ANK16';
   --ft-size-title: 1rem;
   --ft-lh-title: 1.25rem;
 }
 
-.font-title__apricot {
-  --ft-title: 'ApricotXenC';
-  --ft-size-title: 0.875rem;
-  --ft-lh-title: 1.25rem;
-}
-
-.font-title__ti {
-  --ft-title: 'Ti Pro';
-  --ft-size-title: 0.75rem;
+.font-title__tosh2 {
+  --ft-title: 'Mx437 ToshibaTxL2 8x16', 'ToshibaTxL2 8x16';
+  --ft-size-title: 1rem;
   --ft-lh-title: 1.25rem;
 }

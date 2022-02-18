@@ -15,13 +15,14 @@ Other libraries used:
 ### Fonts
 
 * HP 100LX 6x8
-* Siemens PC-D
-* Apricot XenC
-* TI Pro
+* Paradise132 7x16
 * DOS/V re. JPN12
 * DOS/V re. ANK16
 * DOS/V re. ANK24
-* CL Stingray 8x16
+* Nix8810 M15
+* Toshiba TxL2 8x16
+* Toshiba TxL1 8x16
+* CL EagleII 9x16
 
 All fonts from [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/) by VileR.
 

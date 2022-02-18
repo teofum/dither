@@ -39,8 +39,11 @@ function Help() {
     const page = getPage(fullPath);
     if (!page) return;
 
-    const parentId = page.id.split('/').slice(0, -1).join('/');
-    if (!expanded.includes(parentId)) toggleExpanded(parentId);
+    const parentIds = getParents(fullPath).map(parent => parent?.id || '');
+    setExpanded(expanded
+      .filter(id => !parentIds.includes(id))
+      .concat(parentIds)
+    );
     setSelected(page.item);
   };
 
