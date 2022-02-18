@@ -8,6 +8,7 @@ import tex2DFromData from '../../../../../utils/gl/tex2DFromData';
 import tex2DFromImage from '../../../../../utils/gl/tex2DFromImage';
 import { DitherLabOptions } from '../../DitherLab.state';
 import DitherLabProgram, { DitherLabDevice, DitherLabProgramSettingType } from '../../utils/DitherLabProgram';
+import thresholds from '../thresholds';
 
 const positions = [
   -1, 1,
@@ -81,15 +82,16 @@ const runBayerLike = async (
   }
 
   // Get attribute locations
-  const positionAttribLocation = gl.getAttribLocation(program, 'a_position');
-  const texCoordLocation = gl.getAttribLocation(program, 'a_texCoord');
+  const a_position = gl.getAttribLocation(program, 'a_position');
+  const a_texCoord = gl.getAttribLocation(program, 'a_texCoord');
 
   // Get uniform locations
-  const paletteUniformLocation = gl.getUniformLocation(program, 'u_palette');
-  const texSizeUniformLocation = gl.getUniformLocation(program, 'u_texSize');
-  const imageUniformLocation = gl.getUniformLocation(program, 'u_image');
-  const thresholdUniformLocation = gl.getUniformLocation(program, 'u_threshold');
-  const gammaUniformLocation = gl.getUniformLocation(program, 'u_gamma');
+  const u_palette = gl.getUniformLocation(program, 'u_palette');
+  const u_texSize = gl.getUniformLocation(program, 'u_texSize');
+  const u_image = gl.getUniformLocation(program, 'u_image');
+  const u_threshold = gl.getUniformLocation(program, 'u_threshold');
+  const u_thres_size = gl.getUniformLocation(program, 'u_thres_size');
+  const u_gamma = gl.getUniformLocation(program, 'u_gamma');
 
   // Populate positions buffer
   const positionBuffer = gl.createBuffer();
@@ -101,20 +103,21 @@ const runBayerLike = async (
   gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texCoords), gl.STATIC_DRAW);
 
-  // Load image to texture 0
-  tex2DFromImage(gl, options.image.element, gl.TEXTURE0);
+  const threshold = thresholds[settings.threshold || 0];
 
-  const thresholdData = [
-    0, 48, 12, 60, 3, 51, 15, 63,
-    32, 16, 44, 28, 35, 19, 47, 31,
-    8, 56, 4, 52, 11, 59, 7, 55,
-    40, 24, 36, 20, 43, 27, 39, 23,
-    2, 50, 14, 62, 1, 49, 13, 61,
-    34, 18, 46, 30, 33, 17, 45, 29,
-    10, 58, 6, 54, 9, 57, 5, 53,
-    42, 26, 38, 22, 41, 25, 37, 21
-  ].map(n => n * 4);
-  tex2DFromData(gl, thresholdData, gl.TEXTURE1);
+  // Load image to texture 0 and threshold matrix to texture 1
+  tex2DFromImage(gl, options.image.element);
+  tex2DFromData(
+    gl,
+    threshold.size,
+    threshold.size,
+    threshold.data,
+    {
+      format: gl.LUMINANCE,
+      internalFormat: gl.LUMINANCE,
+      type: gl.UNSIGNED_BYTE
+    },
+    gl.TEXTURE1);
 
   // Clear framebuffer
   gl.clearColor(0, 0, 0, 1);
@@ -124,19 +127,20 @@ const runBayerLike = async (
   gl.useProgram(program);
 
   // Set uniforms
-  gl.uniform3fv(paletteUniformLocation, palette);
-  gl.uniform2f(texSizeUniformLocation, gl.canvas.width, gl.canvas.height);
-  gl.uniform1i(imageUniformLocation, 0);
-  gl.uniform1i(thresholdUniformLocation, 1);
-  gl.uniform1f(gammaUniformLocation,
+  gl.uniform3fv(u_palette, palette);
+  gl.uniform2f(u_texSize, gl.canvas.width, gl.canvas.height);
+  gl.uniform1i(u_image, 0);
+  gl.uniform1i(u_threshold, 1);
+  gl.uniform1f(u_thres_size, threshold.size);
+  gl.uniform1f(u_gamma,
     def(settings.gamma, bayerLike.settings.gamma.default) || 0);
 
   // Bind attributes
-  enableAndBindAttrib(gl, positionAttribLocation, positionBuffer, {
+  enableAndBindAttrib(gl, a_position, positionBuffer, {
     size: 2,
     type: gl.FLOAT
   });
-  enableAndBindAttrib(gl, texCoordLocation, texCoordBuffer, {
+  enableAndBindAttrib(gl, a_texCoord, texCoordBuffer, {
     size: 2,
     type: gl.FLOAT
   });
@@ -149,6 +153,16 @@ const bayerLike: DitherLabProgram = {
   device: DitherLabDevice.GL,
   name: 'Color Pair Ordered',
   settings: {
+    threshold: {
+      name: 'Matrix',
+      type: DitherLabProgramSettingType.Combo,
+      options: [
+        { name: '8x8 Bayer Matrix', value: 0 },
+        { name: '4x4 Bayer Matrix', value: 1 },
+        { name: '64x64 Blue Noise', value: 2 },
+        { name: '16x16 Blue Noise', value: 3 }
+      ]
+    },
     gamma: {
       name: 'Gamma',
       type: DitherLabProgramSettingType.Range,

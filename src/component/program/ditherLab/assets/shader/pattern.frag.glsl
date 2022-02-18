@@ -10,6 +10,7 @@ uniform vec2 u_texSize;
 uniform float u_gamma;
 uniform sampler2D u_image;
 uniform sampler2D u_threshold;
+uniform float u_thres_size;
 uniform float u_err_mult;
 
 varying vec2 v_texCoord;
@@ -40,7 +41,7 @@ float luma(vec3 color) {
 }
 
 void main() {
-  vec2 thresholdCoord = fract(v_texCoord * u_texSize / 8.0);
+  vec2 thresholdCoord = fract(v_texCoord * u_texSize / u_thres_size);
   float threshold = texture2D(u_threshold, thresholdCoord).x;
 
   vec3 color = texture2D(u_image, v_texCoord).xyz;
