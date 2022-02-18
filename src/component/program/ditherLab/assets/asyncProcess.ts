@@ -1,6 +1,7 @@
 import ErrorDiffusion from './asyncProcess/ErrorDiffusion';
 import { DitherLabOptions } from '../DitherLab.state';
 import { ProgressFn } from '../utils/ProcessWorker';
+import PatternDither from './asyncProcess/PatternDitherA';
 
 type ProcessFn = (
   dataIn: ImageData,
@@ -23,7 +24,8 @@ export interface AsyncProcess {
 }
 
 const asyncProcess = [
-  ErrorDiffusion
+  ErrorDiffusion,
+  PatternDither
 ];
 
 export default asyncProcess;

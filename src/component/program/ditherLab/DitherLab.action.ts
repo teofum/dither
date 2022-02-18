@@ -1,11 +1,12 @@
 import createAction from '../../../utils/state/createAction';
 import { DitherLabStatus, DlabRenderStatus, DlabResizeMode, ImageInfo, RTType } from './DitherLab.state';
-import DitherLabProgram, { DitherLabDevice } from './utils/DitherLabProgram';
+import DitherLabProgram, { DitherLabDevice, RenderControl } from './utils/DitherLabProgram';
 import Palette from './utils/Palette';
 import PaletteGroup from './utils/PaletteGroup';
 
 const dlabActions = {
   setRenderTarget: createAction<RTType | null>('renderTarget'),
+  setRenderControl: createAction<RenderControl>('renderControl'),
 
   setImageInfo: createAction<ImageInfo>('options/image/info'),
   setImageElement: createAction<HTMLImageElement | null>('options/image/element'),

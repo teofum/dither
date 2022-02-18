@@ -11,7 +11,8 @@ const activeWorkers: ProcessWorker[] = [];
 
 const renderOnWorkers = (
   rt: HTMLCanvasElement,
-  options: DitherLabOptions
+  options: DitherLabOptions,
+  control?: { stop?: () => void }
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const input = options.image.element;
@@ -40,7 +41,7 @@ const renderOnWorkers = (
     // Set the number of threads to use
     let nThreads: number;
     if (!asyncProcessToUse.supports.threads) nThreads = 1;
-    else if (settings.autoThreads) {
+    else if (!settings.threads) {
       // Calculate the number of threads needed based on
       // process complexity and image size
       const cr = asyncProcessToUse.complexity(getPaletteSize(palette));
@@ -105,6 +106,9 @@ const renderOnWorkers = (
       activeThreads++;
       activeWorkers.push(worker);
     }
+
+    if (control) control.stop = () => activeWorkers.forEach(
+      worker => worker.terminate());
   });
 };
 

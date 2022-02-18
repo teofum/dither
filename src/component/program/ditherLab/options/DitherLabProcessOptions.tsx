@@ -54,9 +54,10 @@ function DitherLabProcessOptions(props: OptionsProps<ProcessOptions>) {
       {setKeys.map(key => {
         let control: JSX.Element;
 
-        const valOrDefault = def(settingValues[key], settings[key].default);
+        const setting = settings[key];
+        const valOrDefault = def(settingValues[key], setting.default);
 
-        switch (settings[key].type) {
+        switch (setting.type) {
           case DitherLabProgramSettingType.Input:
             control = (
               <input type='number' key={key} className='bevel'
@@ -71,7 +72,7 @@ function DitherLabProcessOptions(props: OptionsProps<ProcessOptions>) {
             control = (
               <ComboBox key={key}
                 value={settingValues[key]}
-                options={settings[key].options || []}
+                options={setting.options || []}
                 onChange={(e) => updateSetting(key, e.selected.value)} />
             );
             break;
@@ -79,15 +80,20 @@ function DitherLabProcessOptions(props: OptionsProps<ProcessOptions>) {
             control = (
               <div className='dlab-process-control' key={key}>
                 <input type='range'
-                  min={settings[key].min || 0}
-                  max={settings[key].max || 1}
-                  step={settings[key].step}
+                  min={setting.min || 0}
+                  max={setting.max || 1}
+                  step={setting.step}
                   value={valOrDefault}
                   onInput={(e) => updateSetting(key,
                     parseFloat((e.target as HTMLInputElement).value)
                   )} />
-                {settings[key].showValue &&
-                  <span>{settings[key].showValue?.call(undefined, valOrDefault || 0)}</span>}
+                {setting.showValue &&
+                  <span style={setting.valueColor ?
+                    { color: setting.valueColor(valOrDefault || 0) } :
+                    {}
+                  }>
+                    {setting.showValue(valOrDefault || 0)}
+                  </span>}
               </div>
             );
             break;

@@ -1,6 +1,6 @@
 import Palette from './utils/Palette';
 import PaletteGroup from './utils/PaletteGroup';
-import DitherLabProgram, { DitherLabDevice } from './utils/DitherLabProgram';
+import DitherLabProgram, { DitherLabDevice, RenderControl } from './utils/DitherLabProgram';
 
 export type RTType = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 
@@ -52,7 +52,8 @@ export interface DitherLabOptions {
 export enum DlabRenderStatus {
   Ready = 'Ready',
   Rendering = 'Rendering...',
-  Done = 'Done'
+  Done = 'Done',
+  Stopped = 'Stopped'
 }
 
 export interface DitherLabStatus {
@@ -69,6 +70,7 @@ export interface DitherLabViewState {
 
 interface DitherLabState {
   renderTarget: RTType | null;
+  renderControl: RenderControl;
   options: DitherLabOptions;
   status: DitherLabStatus;
   view: DitherLabViewState;
@@ -78,6 +80,7 @@ export default DitherLabState;
 
 export const dlabInitialState: DitherLabState = {
   renderTarget: null,
+  renderControl: {},
   options: {
     image: {
       info: {
