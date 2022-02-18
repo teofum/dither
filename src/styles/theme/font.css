@@ -1,4 +1,5 @@
 /* === BASE FONT ======================================= */
+:root,
 .font-base__hp {
   --ft-base: 'Mx437 HP 100LX 6x8', 'HP 100LX 6x8';
   --ft-size-base: 0.5rem;
