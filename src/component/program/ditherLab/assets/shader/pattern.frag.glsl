@@ -87,6 +87,8 @@ void main() {
   }
 
   int index = int(threshold * float(CLIST_SIZE));
+  if (threshold == 1.0) index = CLIST_SIZE - 1;
+
   // Silly workaround for GLSL not allowing indexing by variables
   for (int i = 0; i < CLIST_SIZE; i++) {
     if (i == index) color = clist[i];

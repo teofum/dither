@@ -6,9 +6,14 @@ export enum DitherLabDevice {
   GL = 'WebGL'
 }
 
+export interface RenderControl {
+  stop?: () => void;
+}
+
 type DitherLabProgramFn = (
   rt: HTMLCanvasElement,
-  options: DitherLabOptions
+  options: DitherLabOptions,
+  control?: RenderControl
 ) => Promise<void>;
 
 export enum DitherLabProgramSettingType {
@@ -26,6 +31,7 @@ export interface DitherLabProgramSetting {
   options?: ComboBoxOption<number>[];
   default?: number;
   showValue?: (val: number) => string;
+  valueColor?: (val: number) => string;
 }
 
 interface DitherLabProgram {

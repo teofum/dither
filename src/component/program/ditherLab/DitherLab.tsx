@@ -121,14 +121,24 @@ function DitherLab() {
     if (!rt || !prog) return;
 
     const start = Date.now();
-    dispatch(dlabActions.setRenderStatus(DlabRenderStatus.Rendering));
-    prog.run(rt, state.options)
+    const control = {};
+    prog.run(rt, state.options, control)
       .then(() => dispatch(dlabActions.setStatus({
         renderStatus: DlabRenderStatus.Done,
         lastRenderTime: Date.now() - start,
         renderWidth: rt.width,
         renderHeight: rt.height
       })));
+
+    dispatch(dlabActions.setRenderStatus(DlabRenderStatus.Rendering));
+    dispatch(dlabActions.setRenderControl(control));
+  };
+
+  const stopRender = () => {
+    if (state.renderControl.stop)
+      state.renderControl.stop();
+
+    dispatch(dlabActions.setRenderStatus(DlabRenderStatus.Stopped));
   };
 
   const zoomOut = () => {
@@ -163,6 +173,7 @@ function DitherLab() {
     link.click();
   };
 
+  const busy = state.status.renderStatus === DlabRenderStatus.Rendering;
   return (
     <div className='dlab-root'>
       <div className='dlab-content bevel content'>
@@ -192,10 +203,9 @@ function DitherLab() {
                 (e.nativeEvent.target as HTMLInputElement).checked))} />
             <label htmlFor='dlab-live-render'>Live Render</label>
 
-            <button className='bevel' onClick={render}
-              disabled={!state.options.image.element ||
-                state.status.renderStatus === DlabRenderStatus.Rendering}>
-              Render
+            <button className='bevel' disabled={!state.options.image.element}
+              onClick={() => busy ? stopRender() : render()}>
+              {busy ? ' Stop ' : 'Render'}
             </button>
           </div>
         </div>

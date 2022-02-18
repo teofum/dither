@@ -9,6 +9,10 @@ export function luma_srgb(rgb: readonly number[]): number {
   return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / (255.0 * 1000);
 }
 
+export function luma_srgb1(rgb: readonly number[]): number {
+  return rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.114;
+}
+
 export function luma_linear(lrgb: readonly number[]): number {
   return lrgb[0] * 0.2126 + lrgb[1] * 0.7152 + lrgb[2] * 0.0722;
 }

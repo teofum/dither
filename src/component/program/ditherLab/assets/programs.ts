@@ -1,6 +1,7 @@
 import bayerLike from './programs/BayerLike';
 import errorDiffusion from './programs/ErrorDiffusion';
 import patternDither from './programs/PatternDither';
+import patternDitherCPU from './programs/PatternDitherCPU';
 
 const programs = [
   // WebGL
@@ -8,7 +9,8 @@ const programs = [
   bayerLike,
 
   // Software
-  errorDiffusion
+  errorDiffusion,
+  patternDitherCPU
 ];
 
 export default programs;

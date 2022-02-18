@@ -3,6 +3,7 @@ import DitherLabState from './DitherLab.state';
 
 const dlabState = createReducerAndActions<DitherLabState>({
   renderTarget: (state, action) => state.renderTarget = action.payload,
+  renderControl: (state, action) => state.renderControl = action.payload,
   options: {
     image: {
       info: (state, action) => state.options.image.info = action.payload,
