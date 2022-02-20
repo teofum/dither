@@ -143,18 +143,6 @@ function DitherLab() {
     dispatch(dlabActions.setRenderStatus(DlabRenderStatus.Stopped));
   };
 
-  const zoomOut = () => {
-    if (state.view.scale > 1)
-      dispatch(dlabActions.setViewScale(
-        state.view.scale > 4 ? state.view.scale / 2 : state.view.scale - 1));
-  };
-
-  const zoomIn = () => {
-    if (state.view.scale < 16)
-      dispatch(dlabActions.setViewScale(
-        state.view.scale < 4 ? state.view.scale + 1 : state.view.scale * 2));
-  };
-
   const pan = (ev: Event) => {
     const mev = ev as MouseEvent;
     if (!(mev.buttons & 1)) return;
@@ -175,11 +163,25 @@ function DitherLab() {
     link.click();
   };
 
+  const menuSelect = (id: string) => {
+    console.log(id);
+    switch (id) {
+      case 'file/save':
+        save();
+        break;
+      default:
+        if (dlabState.actions.includes(id))
+          dispatch({ type: id, payload: null });
+        else console.log('no action found');
+        break;
+    }
+  };
+
   const busy = state.status.renderStatus === DlabRenderStatus.Rendering;
   return (
     <div className='dlab-root'>
       <div className="dlab-menu-bar">
-        <MenuBar menus={dlabMenus} onSelect={id => console.log(id)}/>
+        <MenuBar menus={dlabMenus} onSelect={id => menuSelect(id)} />
       </div>
 
       <div className='dlab-content bevel content'>
@@ -193,9 +195,13 @@ function DitherLab() {
           <div className='dlab-control dlab-control-view'>
             <span>Zoom</span>
             <div className='bevel content'>
-              <button className='bevel' onClick={zoomOut} disabled={state.view.scale <= 1}>-</button>
+              <button className='bevel'
+                onClick={() => dispatch(dlabActions.zoomOut())}
+                disabled={state.view.scale <= 1}>-</button>
               <input type='text' readOnly value={`${state.view.scale * 100}%`} />
-              <button className='bevel' onClick={zoomIn} disabled={state.view.scale >= 16}>+</button>
+              <button className='bevel'
+                onClick={() => dispatch(dlabActions.zoomIn())}
+                disabled={state.view.scale >= 16}>+</button>
             </div>
           </div>
 

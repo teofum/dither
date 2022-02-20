@@ -41,7 +41,21 @@ const dlabState = createReducerAndActions<DitherLabState>({
     }
   },
   view: {
-    scale: (state, action) => state.view.scale = action.payload,
+    zoom: {
+      in: (state) => {
+        if (state.view.scale < 16)
+          state.view.scale = state.view.scale < 4 ?
+            state.view.scale + 1 :
+            state.view.scale * 2;
+      },
+      out: (state) => {
+        if (state.view.scale > 1)
+          state.view.scale = state.view.scale > 4 ?
+            state.view.scale / 2 :
+            state.view.scale - 1;
+      },
+      reset: (state) => state.view.scale = 1
+    },
     showPaletteEditor: (state) => state.view.showEditor = true,
     hidePaletteEditor: (state) => state.view.showEditor = false
   }
