@@ -14,6 +14,8 @@ import './DitherLab.css';
 import { DitherLabDevice } from './utils/DitherLabProgram';
 import DitherLabEditorPane from './options/DitherLabEditorPane';
 import ClosablePanel from '../../ui/closablePanel/ClosablePanel';
+import MenuBar from '../../ui/menuBar/MenuBar';
+import dlabMenus from './DitherLab.menu';
 
 function DitherLab() {
   let imageArea: HTMLDivElement | null = null;
@@ -176,6 +178,10 @@ function DitherLab() {
   const busy = state.status.renderStatus === DlabRenderStatus.Rendering;
   return (
     <div className='dlab-root'>
+      <div className="dlab-menu-bar">
+        <MenuBar menus={dlabMenus} onSelect={id => console.log(id)}/>
+      </div>
+
       <div className='dlab-content bevel content'>
         <div className='dlab-control-bar bevel'>
           <div className='dlab-control dlab-control-save'>

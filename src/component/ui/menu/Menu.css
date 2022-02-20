@@ -1,0 +1,51 @@
+.menu-root.bevel {
+  padding: 0.25rem;
+
+  display: grid;
+  min-width: 8rem;
+}
+
+.menu-item {
+  padding: 0.0625rem 0.4375rem;
+  border: 0.0625rem solid transparent;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu-item:hover {
+  background-color: var(--ct-select-bg);
+  border-color: var(--ct-select-text);
+}
+
+.menu-item:hover > .menu-item-label {
+  color: var(--ct-select-text);
+}
+
+.menu-item-label {
+  flex-grow: 1;
+}
+
+.menu-item > img {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.menu-item:not(:hover) > img {
+  filter: invert(var(--ct-is-dark-theme));
+}
+
+.menu-submenu {
+  position: relative;
+}
+
+.menu-submenu > .menu-root {
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+
+.menu-submenu:not(:hover) > .menu-root {
+  display: none;
+}

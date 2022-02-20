@@ -1,8 +1,12 @@
 .dlab-root {
   display: grid;
-  grid-template-rows: calc(100% - 1.375rem) 1.25rem;
+  grid-template-rows: 1.25rem calc(100% - 2.75rem) 1.25rem;
   gap: 0.125rem;
   height: 100%;
+}
+
+.dlab-menu-bar {
+  justify-self: start;
 }
 
 .dlab-content {
