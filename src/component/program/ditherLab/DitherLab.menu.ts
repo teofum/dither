@@ -42,7 +42,7 @@ const dlabMenus: Menu[] = [
         ]
       },
       {
-        id: 'editor',
+        id: 'showPaletteEditor',
         name: 'Palette Editor'
       }
     ]

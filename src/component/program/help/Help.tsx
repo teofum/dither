@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import classlist from '../../../utils/etc/classlist';
+import ProgramProps from '../ProgramProps';
 
 import helpPages, { flattenPages, HelpItem } from './assets/helpPages';
 
@@ -11,9 +12,13 @@ import './Help.css';
 // Flattened help pages used for navigation
 const flat = flattenPages(helpPages);
 
-function Help() {
+function Help(props: ProgramProps & { path?: string }) {
   const [expanded, setExpanded] = useState(['/help']);
   const [selected, setSelected] = useState(helpPages);
+
+  useEffect(() => {
+    if (props.path) goToPage(props.path);
+  }, [props.path]);
 
   const toggleExpanded = (fullId: string) => {
     if (expanded.includes(fullId))

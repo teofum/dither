@@ -16,11 +16,17 @@ import DitherLabEditorPane from './options/DitherLabEditorPane';
 import ClosablePanel from '../../ui/closablePanel/ClosablePanel';
 import MenuBar from '../../ui/menuBar/MenuBar';
 import dlabMenus from './DitherLab.menu';
+import ProgramProps from '../ProgramProps';
+import { useAppDispatch } from '../../../hooks';
+import { createWindow, destroyWindow } from '../../ui/windowManager/windowSlice';
+import { createHelpWindow } from '../../ui/window/templates/Help.window';
 
-function DitherLab() {
+function DitherLab(props: ProgramProps) {
   let imageArea: HTMLDivElement | null = null;
+  let toolPane: HTMLDivElement | null = null;
 
   const [state, dispatch] = useReducer(dlabState.reducer, dlabInitialState);
+  const globalDispatch = useAppDispatch();
 
   useEffect(() => {
     const savedData = localStorage.getItem('__dlab_custom_palettes');
@@ -166,8 +172,17 @@ function DitherLab() {
   const menuSelect = (id: string) => {
     console.log(id);
     switch (id) {
+      case 'file/open':
+        (toolPane?.querySelector('input[type=file]') as HTMLElement).click();
+        break;
       case 'file/save':
         save();
+        break;
+      case 'file/exit':
+        globalDispatch(destroyWindow(props.windowId));
+        break;
+      case 'help/help':
+        globalDispatch(createWindow(createHelpWindow('help/programs/dlab')));
         break;
       default:
         if (dlabState.actions.includes(id))
@@ -229,7 +244,8 @@ function DitherLab() {
             <span>[No image loaded]</span>}
         </div>
 
-        <div className='dlab-tool-pane'>
+        <div className='dlab-tool-pane'
+          ref={el => toolPane = el}>
 
           {/* Image upload, preview and properties */}
           <CollapsablePanel title='Source Image'>

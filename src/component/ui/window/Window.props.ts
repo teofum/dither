@@ -2,6 +2,7 @@ import WindowContent from './WindowContent';
 
 interface WindowState {
   content: WindowContent;
+  contentProps?: unknown;
 
   // Basic properties
   id: number;
