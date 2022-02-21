@@ -55,10 +55,10 @@ const dlabMenus: Menu[] = [
         id: 'help',
         name: 'Open Help Pages'
       },
-      {
+      /* {
         id: 'about',
         name: 'About DitherLab'
-      }
+      } */
     ]
   }
 ];

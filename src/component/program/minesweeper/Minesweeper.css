@@ -1,0 +1,154 @@
+.mine-root {
+  --mine-near-1: #0000ff;
+  --mine-near-2: #008000;
+  --mine-near-3: #ff0000;
+  --mine-near-4: #000080;
+  --mine-near-5: #800000;
+  --mine-near-6: #008080;
+  --mine-near-7: #800080;
+  --mine-near-8: #505050;
+}
+
+.theme__dark .mine-root,
+.theme__blue .mine-root {
+  --mine-near-1: hsl(212, 95%, 55%);
+  --mine-near-2: hsl(128, 55%, 50%);
+  --mine-near-3: hsl(10, 95%, 55%);
+  --mine-near-4: hsl(212, 55%, 65%);
+  --mine-near-5: hsl(15, 95%, 60%);
+  --mine-near-6: hsl(170, 55%, 50%);
+  --mine-near-7: hsl(300, 55%, 55%);
+  --mine-near-8: #a0a0a0;
+}
+
+.mine-content {
+  display: grid;
+
+  padding: 0.5rem;
+  margin: 0.125rem;
+  gap: 0.5rem;
+}
+
+.mine-status-bar.bevel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+button.mine-reset-button {
+  place-self: center;
+  padding: 0.125rem;
+
+  display: grid;
+}
+
+.mine-reset-button > img {
+  width: 1.3125rem;
+  height: 1.3125rem;
+}
+
+.mine-reset-button .mine-smiley-click {
+  display: none;
+}
+
+.mine-content:active .mine-reset-button:not(:active) .mine-smiley-normal {
+  display: none;
+}
+
+.mine-content:active .mine-reset-button:not(:active) .mine-smiley-click {
+  display: unset;
+}
+
+.mine-game-area {
+  display: grid;
+  grid-auto-rows: auto;
+
+  place-content: start;
+}
+
+.mine-game-state-won,
+.mine-game-state-lost {
+  pointer-events: none;
+}
+
+.mine-cell {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+
+  border-right: 0.0625rem solid var(--ct-text-light);
+  border-bottom: 0.0625rem solid var(--ct-text-light);
+
+  display: grid;
+  place-items: center;
+}
+
+.mine-cell:not(.mine-cell-flagged):not(.mine-cell-revealed):active > * {
+  display: none;
+}
+
+.mine-cell-content {
+  display: grid;
+  place-items: center;
+
+  font-family: 'Mx437 Nix8810 M15', 'Nix8810 M15';
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.mine-cell-content.mine-cell-exploded {
+  background-color: red;
+}
+
+.mine-cell-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  padding: 0;
+}
+
+.mine-cell-content > img {
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+.mine-cell-cover > img {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.mine-cell-near-1 {
+  color: var(--mine-near-1);
+}
+
+.mine-cell-near-2 {
+  color: var(--mine-near-2);
+}
+
+.mine-cell-near-3 {
+  color: var(--mine-near-3);
+}
+
+.mine-cell-near-4 {
+  color: var(--mine-near-4);
+}
+
+.mine-cell-near-5 {
+  color: var(--mine-near-5);
+}
+
+.mine-cell-near-6 {
+  color: var(--mine-near-6);
+}
+
+.mine-cell-near-7 {
+  color: var(--mine-near-7);
+}
+
+.mine-cell-near-8 {
+  color: var(--mine-near-8);
+}

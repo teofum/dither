@@ -1,0 +1,9 @@
+.mined-root {
+  display: flex;
+  flex-direction: row;
+}
+
+.mined-root > img {
+  width: 0.8125rem;
+  height: 1.4375rem;
+}

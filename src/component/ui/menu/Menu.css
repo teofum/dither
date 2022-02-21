@@ -3,6 +3,8 @@
 
   display: grid;
   min-width: 8rem;
+
+  z-index: 100;
 }
 
 .menu-item {

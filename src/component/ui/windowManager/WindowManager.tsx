@@ -9,6 +9,7 @@ import ThemeEditor from '../../program/themeEditor/ThemeEditor';
 import DitherLab from '../../program/ditherLab/DitherLab';
 import WindowContent from '../window/WindowContent';
 import WindowState from '../window/Window.props';
+import Minesweeper from '../../program/minesweeper/Minesweeper';
 
 function WindowManager() {
   const { windows } = useAppSelector(selectWindows);
@@ -24,6 +25,8 @@ function WindowManager() {
         return (<ThemeEditor />);
       case WindowContent.DitherLab:
         return (<DitherLab windowId={window.id} />);
+      case WindowContent.Minesweeper:
+        return (<Minesweeper windowId={window.id} />);
     }
   };
 
