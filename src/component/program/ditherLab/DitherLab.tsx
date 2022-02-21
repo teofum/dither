@@ -14,11 +14,19 @@ import './DitherLab.css';
 import { DitherLabDevice } from './utils/DitherLabProgram';
 import DitherLabEditorPane from './options/DitherLabEditorPane';
 import ClosablePanel from '../../ui/closablePanel/ClosablePanel';
+import MenuBar from '../../ui/menuBar/MenuBar';
+import dlabMenus from './DitherLab.menu';
+import ProgramProps from '../ProgramProps';
+import { useAppDispatch } from '../../../hooks';
+import { createWindow, destroyWindow } from '../../ui/windowManager/windowSlice';
+import { createHelpWindow } from '../../ui/window/templates/Help.window';
 
-function DitherLab() {
+function DitherLab(props: ProgramProps) {
   let imageArea: HTMLDivElement | null = null;
+  let toolPane: HTMLDivElement | null = null;
 
   const [state, dispatch] = useReducer(dlabState.reducer, dlabInitialState);
+  const globalDispatch = useAppDispatch();
 
   useEffect(() => {
     const savedData = localStorage.getItem('__dlab_custom_palettes');
@@ -141,18 +149,6 @@ function DitherLab() {
     dispatch(dlabActions.setRenderStatus(DlabRenderStatus.Stopped));
   };
 
-  const zoomOut = () => {
-    if (state.view.scale > 1)
-      dispatch(dlabActions.setViewScale(
-        state.view.scale > 4 ? state.view.scale / 2 : state.view.scale - 1));
-  };
-
-  const zoomIn = () => {
-    if (state.view.scale < 16)
-      dispatch(dlabActions.setViewScale(
-        state.view.scale < 4 ? state.view.scale + 1 : state.view.scale * 2));
-  };
-
   const pan = (ev: Event) => {
     const mev = ev as MouseEvent;
     if (!(mev.buttons & 1)) return;
@@ -173,9 +169,36 @@ function DitherLab() {
     link.click();
   };
 
+  const menuSelect = (id: string) => {
+    console.log(id);
+    switch (id) {
+      case 'file/open':
+        (toolPane?.querySelector('input[type=file]') as HTMLElement).click();
+        break;
+      case 'file/save':
+        save();
+        break;
+      case 'file/exit':
+        globalDispatch(destroyWindow(props.windowId));
+        break;
+      case 'help/help':
+        globalDispatch(createWindow(createHelpWindow('help/programs/dlab')));
+        break;
+      default:
+        if (dlabState.actions.includes(id))
+          dispatch({ type: id, payload: null });
+        else console.log('no action found');
+        break;
+    }
+  };
+
   const busy = state.status.renderStatus === DlabRenderStatus.Rendering;
   return (
     <div className='dlab-root'>
+      <div className="dlab-menu-bar">
+        <MenuBar menus={dlabMenus} onSelect={id => menuSelect(id)} />
+      </div>
+
       <div className='dlab-content bevel content'>
         <div className='dlab-control-bar bevel'>
           <div className='dlab-control dlab-control-save'>
@@ -187,9 +210,13 @@ function DitherLab() {
           <div className='dlab-control dlab-control-view'>
             <span>Zoom</span>
             <div className='bevel content'>
-              <button className='bevel' onClick={zoomOut} disabled={state.view.scale <= 1}>-</button>
+              <button className='bevel'
+                onClick={() => dispatch(dlabActions.zoomOut())}
+                disabled={state.view.scale <= 1}>-</button>
               <input type='text' readOnly value={`${state.view.scale * 100}%`} />
-              <button className='bevel' onClick={zoomIn} disabled={state.view.scale >= 16}>+</button>
+              <button className='bevel'
+                onClick={() => dispatch(dlabActions.zoomIn())}
+                disabled={state.view.scale >= 16}>+</button>
             </div>
           </div>
 
@@ -217,7 +244,8 @@ function DitherLab() {
             <span>[No image loaded]</span>}
         </div>
 
-        <div className='dlab-tool-pane'>
+        <div className='dlab-tool-pane'
+          ref={el => toolPane = el}>
 
           {/* Image upload, preview and properties */}
           <CollapsablePanel title='Source Image'>

@@ -30,7 +30,9 @@ const dlabActions = {
   setRenderTime: createAction<number>('status/time'),
   setRenderSize: createAction<{ w: number, h: number }>('status/size'),
 
-  setViewScale: createAction<number>('view/scale'),
+  zoomIn: createAction<void>('view/zoom/in'),
+  zoomOut: createAction<void>('view/zoom/out'),
+  resetZoom: createAction<void>('view/zoom/reset'),
   showPaletteEditor: createAction<void>('view/showPaletteEditor'),
   hidePaletteEditor: createAction<void>('view/hidePaletteEditor')
 };

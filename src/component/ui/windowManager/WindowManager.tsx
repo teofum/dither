@@ -8,21 +8,25 @@ import Help from '../../program/help/Help';
 import ThemeEditor from '../../program/themeEditor/ThemeEditor';
 import DitherLab from '../../program/ditherLab/DitherLab';
 import WindowContent from '../window/WindowContent';
+import WindowState from '../window/Window.props';
+import Minesweeper from '../../program/minesweeper/Minesweeper';
 
 function WindowManager() {
   const { windows } = useAppSelector(selectWindows);
   const dispatch = useAppDispatch();
 
-  const getComponent = (program: WindowContent) => {
-    switch (program) {
+  const getComponent = (window: WindowState) => {
+    switch (window.content) {
       case WindowContent.Launcher:
         return (<Launcher />);
       case WindowContent.Help:
-        return (<Help />);
+        return (<Help windowId={window.id} {...window.contentProps} />);
       case WindowContent.ThemeEditor:
         return (<ThemeEditor />);
       case WindowContent.DitherLab:
-        return (<DitherLab />);
+        return (<DitherLab windowId={window.id} />);
+      case WindowContent.Minesweeper:
+        return (<Minesweeper windowId={window.id} />);
     }
   };
 
@@ -35,7 +39,7 @@ function WindowManager() {
 
       {windows.map(window => (
         <Window key={window.id} {...window}>
-          {window.content && getComponent(window.content)}
+          {window.content && getComponent(window)}
         </Window>
       ))}
     </div>
