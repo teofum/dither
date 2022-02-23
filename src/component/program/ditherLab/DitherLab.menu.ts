@@ -42,8 +42,9 @@ const dlabMenus: Menu[] = [
         ]
       },
       {
-        id: 'showPaletteEditor',
-        name: 'Palette Editor'
+        id: 'togglePaletteEditor',
+        name: 'Palette Editor',
+        checkIf: { prop: 'view/editor', value: 'true' }
       }
     ]
   },

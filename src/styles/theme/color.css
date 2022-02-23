@@ -30,6 +30,7 @@
 
   --ct-select-bg: var(--ct-accent-bg);
   --ct-select-text: var(--ct-lighter);
+  --ct-is-dark-select: 1;
 
   --ct-ok: #008000;
   --ct-warn: #800000;
@@ -67,6 +68,7 @@
 
   --ct-select-bg: hsl(212, 75%, 60%);
   --ct-select-text: var(--ct-darker);
+  --ct-is-dark-select: 0;
 
   --ct-ok: var(--ct-select-bg);
   --ct-warn: hsl(15, 95%, 60%);
@@ -104,6 +106,7 @@
 
   --ct-select-bg: #16293f;
   --ct-select-text: var(--ct-lighter);
+  --ct-is-dark-select: 1;
 
   --ct-ok: #008000;
   --ct-warn: #800000;
@@ -141,6 +144,7 @@
 
   --ct-select-bg: var(--ct-title);
   --ct-select-text: var(--ct-dark);
+  --ct-is-dark-select: 0;
 
   --ct-ok: hsl(120, 70%, 40%);
   --ct-warn: hsl(0, 95%, 60%);

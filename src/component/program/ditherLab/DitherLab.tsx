@@ -192,11 +192,16 @@ function DitherLab(props: ProgramProps) {
     }
   };
 
+  const menuData = {
+    'view/editor': `${state.view.showEditor}`
+  };
+
   const busy = state.status.renderStatus === DlabRenderStatus.Rendering;
   return (
     <div className='dlab-root'>
       <div className="dlab-menu-bar">
-        <MenuBar menus={dlabMenus} onSelect={id => menuSelect(id)} />
+        <MenuBar menus={dlabMenus} data={menuData}
+          onSelect={id => menuSelect(id)} />
       </div>
 
       <div className='dlab-content bevel content'>
