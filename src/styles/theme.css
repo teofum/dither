@@ -363,12 +363,33 @@ input[type=checkbox] + label {
   padding-left: 1.25rem;
 }
 
+input[type=checkbox] + label::before {
+  content: '';
+
+  background-color: var(--ct-content-bg);
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-0.4375rem);
+
+  width: 0.8125rem;
+  height: 0.8125rem;
+  box-shadow:
+    inset -0.0625rem -0.0625rem 0 0 var(--ct-lighter),
+    inset 0.0625rem 0.0625rem 0 0 var(--ct-dark),
+    inset -0.125rem -0.125rem 0 0 var(--ct-light),
+    inset 0.125rem 0.125rem 0 0 var(--ct-darker);
+}
+
 input[type=checkbox] + label::after {
   content: '';
 
   background-image: url('/src/assets/ui/check.png');
   background-position: center;
   background-size: 0.5625rem 0.5625rem;
+  background-repeat: no-repeat;
+  filter: invert(var(--ct-is-dark-theme));
 
   position: absolute;
   top: 50%;
@@ -380,11 +401,6 @@ input[type=checkbox] + label::after {
   width: 0.8125rem;
   height: 0.8125rem;
   padding: 0.125rem;
-  box-shadow:
-    inset -0.0625rem -0.0625rem 0 0 var(--ct-lighter),
-    inset 0.0625rem 0.0625rem 0 0 var(--ct-dark),
-    inset -0.125rem -0.125rem 0 0 var(--ct-light),
-    inset 0.125rem 0.125rem 0 0 var(--ct-darker);
 }
 
 input[type=checkbox]:checked + label::after {

@@ -45,15 +45,16 @@ interface MinesweeperBoard {
 }
 
 interface MinesweeperSettings {
+  name: string;
   width: number;
   height: number;
   mines: number;
 }
 
 const msDifficultyPresets: { [key: string]: MinesweeperSettings } = {
-  beginner: { width: 8, height: 8, mines: 10 },
-  intermediate: { width: 16, height: 16, mines: 40 },
-  expert: { width: 30, height: 16, mines: 99 }
+  beginner: { name: 'beginner', width: 8, height: 8, mines: 10 },
+  intermediate: { name: 'intermediate', width: 16, height: 16, mines: 40 },
+  expert: { name: 'expert', width: 30, height: 16, mines: 99 }
 };
 
 const emptyCell = (): MinesweeperCell => ({
@@ -129,7 +130,7 @@ function Minesweeper(props: ProgramProps) {
       setTime(0);
 
       const newTimer = setInterval(() => {
-        setTime(time => time + 1);
+        setTime(time => Math.min(time + 1, 999));
       }, 1000);
       setTimer(newTimer);
       return () => clearInterval(newTimer);
@@ -171,6 +172,10 @@ function Minesweeper(props: ProgramProps) {
         globalDispatch(destroyWindow(props.windowId));
         break;
     }
+  };
+
+  const menuData = {
+    'game/difficulty': settings.name
   };
 
   useEffect(reset, [settings]);
@@ -272,7 +277,8 @@ function Minesweeper(props: ProgramProps) {
   return (
     <div className='mine-root'>
       <div className='mine-menu-bar'>
-        <MenuBar menus={mineMenus} onSelect={menuHandler} />
+        <MenuBar menus={mineMenus} data={menuData}
+          onSelect={menuHandler} />
       </div>
 
       <div className='mine-content bevel'>

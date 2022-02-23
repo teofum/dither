@@ -47,7 +47,7 @@ function MenuBar(props: MenuBarProps) {
           <span className='mbar-item-label'>{menu.name}</span>
 
           {active === menu.id &&
-            <Menu items={menu.items} root={menu.id}
+            <Menu items={menu.items} root={menu.id} data={props.data}
               onSelect={id => select(`${menu.id}/${id}`)} />}
         </div>
       ))}

@@ -34,7 +34,8 @@ const dlabActions = {
   zoomOut: createAction<void>('view/zoom/out'),
   resetZoom: createAction<void>('view/zoom/reset'),
   showPaletteEditor: createAction<void>('view/showPaletteEditor'),
-  hidePaletteEditor: createAction<void>('view/hidePaletteEditor')
+  hidePaletteEditor: createAction<void>('view/hidePaletteEditor'),
+  togglePaletteEditor: createAction<void>('view/togglePaletteEditor')
 };
 
 export default dlabActions;

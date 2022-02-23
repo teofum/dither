@@ -57,7 +57,8 @@ const dlabState = createReducerAndActions<DitherLabState>({
       reset: (state) => state.view.scale = 1
     },
     showPaletteEditor: (state) => state.view.showEditor = true,
-    hidePaletteEditor: (state) => state.view.showEditor = false
+    hidePaletteEditor: (state) => state.view.showEditor = false,
+    togglePaletteEditor: (state) => state.view.showEditor = !state.view.showEditor
   }
 });
 

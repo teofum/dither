@@ -13,6 +13,9 @@ const dlabMenus: Menu[] = [
         id: 'save',
         name: 'Save Render'
       },
+
+      '---',
+
       {
         id: 'exit',
         name: 'Exit'
@@ -41,9 +44,13 @@ const dlabMenus: Menu[] = [
           }
         ]
       },
+
+      '---',
+
       {
-        id: 'showPaletteEditor',
-        name: 'Palette Editor'
+        id: 'togglePaletteEditor',
+        name: 'Palette Editor',
+        checkIf: { prop: 'view/editor', value: 'true' }
       }
     ]
   },
