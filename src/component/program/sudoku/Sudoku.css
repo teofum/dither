@@ -1,0 +1,95 @@
+.sudoku-content {
+  display: grid;
+
+  margin: 0.125rem;
+  gap: 0.5rem;
+}
+
+.sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, auto);
+  grid-template-rows: repeat(9, auto);
+
+  background-color: var(--ct-content-bg);
+}
+
+.sudoku-won {
+  pointer-events: none;
+}
+
+.sudoku-cell {
+  display: grid;
+  place-items: center;
+
+  width: 2rem;
+  height: 2rem;
+  box-sizing: content-box;
+
+  position: relative;
+}
+
+.sudoku-cell > span {
+  font-family: var(--ft-head);
+  font-size: var(--ft-size-head);
+  line-height: var(--ft-lh-head);
+}
+
+.sudoku-annotations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2rem;
+  height: 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  place-items: center;
+  line-height: 0.5rem;
+
+  color: var(--ct-text-light);
+}
+
+/* Selected Cell & etc. ===================================================== */
+.sudoku-cell.sudoku-highlight {
+  background-color: var(--ct-content-alt);
+}
+
+.sudoku-cell.sudoku-fixed {
+  color: var(--ct-text-light);
+}
+
+.sudoku-cell.sudoku-conflict {
+  color: var(--ct-warn);
+}
+
+.sudoku-cell.sudoku-selected {
+  background-color: var(--ct-select-bg);
+  color: var(--ct-select-text);
+}
+
+.sudoku-cell.sudoku-selected .sudoku-annotations {
+  color: var(--ct-select-text);
+}
+
+.sudoku-won .sudoku-cell {
+  color: var(--ct-ok);
+}
+
+/* Borders ================================================================== */
+.sudoku-cell:not(:nth-child(9n)) {
+  border-right: 0.0625rem solid var(--ct-text-light);
+}
+
+.sudoku-cell:nth-child(n+10) {
+  border-top: 0.0625rem solid var(--ct-text-light);
+}
+
+.sudoku-cell:nth-child(3n):not(:nth-child(9n)) {
+  border-right: 0.125rem solid var(--ct-border);
+}
+
+.sudoku-cell:nth-child(n+28):not(:nth-child(n+37)),
+.sudoku-cell:nth-child(n+55):not(:nth-child(n+64)) {
+  border-top: 0.125rem solid var(--ct-border);
+}

@@ -4,6 +4,7 @@ import themeEditorWindow from '../../ui/window/templates/ThemeEditor.window';
 import ditherLabWindow from '../../ui/window/templates/DitherLab.window';
 import helpWindow from '../../ui/window/templates/Help.window';
 import minesweeperWindow from '../../ui/window/templates/Minesweeper.window';
+import sudokuWindow from '../../ui/window/templates/Sudoku.window';
 
 import { useAppDispatch } from '../../../hooks';
 import { createWindow } from '../../ui/windowManager/windowSlice';
@@ -38,6 +39,12 @@ const launcherItems: LauncherItem[] = [
     display: 'Minesweeper',
     iconUrl: icon_mine_l,
     template: minesweeperWindow
+  },
+  {
+    id: 'sudoku',
+    display: 'Sudoku',
+    iconUrl: icon_mine_l,
+    template: sudokuWindow
   }
 ];
 
