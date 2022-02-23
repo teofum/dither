@@ -20,6 +20,7 @@ import ProgramProps from '../ProgramProps';
 import { useAppDispatch } from '../../../hooks';
 import { createWindow, destroyWindow } from '../../ui/windowManager/windowSlice';
 import { createHelpWindow } from '../../ui/window/templates/Help.window';
+import classlist from '../../../utils/etc/classlist';
 
 function DitherLab(props: ProgramProps) {
   let imageArea: HTMLDivElement | null = null;
@@ -197,6 +198,7 @@ function DitherLab(props: ProgramProps) {
   };
 
   const busy = state.status.renderStatus === DlabRenderStatus.Rendering;
+  const liveRender = state.options.liveRender && state.options.process.device === DitherLabDevice.GL;
   return (
     <div className='dlab-root'>
       <div className="dlab-menu-bar">
@@ -235,7 +237,13 @@ function DitherLab(props: ProgramProps) {
                 (e.nativeEvent.target as HTMLInputElement).checked))} />
             <label htmlFor='dlab-live-render'>Live Render</label>
 
-            <button className='bevel' disabled={!state.options.image.element}
+            <button className={
+              classlist(
+                'bevel',
+                (!busy && !liveRender) ?
+                  'dlab-render-ready' : ''
+              )}
+              disabled={!state.options.image.element}
               onClick={() => busy ? stopRender() : render()}>
               {busy ? ' Stop ' : 'Render'}
             </button>

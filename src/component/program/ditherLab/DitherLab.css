@@ -50,6 +50,10 @@
   height: 1.25rem;
 }
 
+.dlab-render-ready {
+  outline: 0.1875rem solid var(--ct-warn);
+}
+
 .dlab-image-area {
   grid-column: 1;
   grid-row: 2;
