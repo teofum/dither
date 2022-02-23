@@ -13,9 +13,9 @@ function Menu(props: MenuProps) {
 
   return (
     <div className='menu-root bevel'>
-      {props.items.map(item => {
+      {props.items.map((item, i) => {
         if (isMenu(item)) return (
-          <div key={item.id}  className='menu-item menu-submenu'>
+          <div key={item.id} className='menu-item menu-submenu'>
             <span className='menu-item-label'>{item.name}</span>
             <img src={ui_right} alt='>' className='menu-item-expand' />
 
@@ -32,7 +32,9 @@ function Menu(props: MenuProps) {
             <span className='menu-item-label'>{item.name}</span>
           </div>
         );
-        else return (<hr className='divider horizontal bevel' />);
+        else return (
+          <hr key={`div_${i}`} className='divider horizontal bevel' />
+        );
       })}
     </div>
   );
