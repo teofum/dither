@@ -13,6 +13,9 @@ const dlabMenus: Menu[] = [
         id: 'save',
         name: 'Save Render'
       },
+
+      '---',
+
       {
         id: 'exit',
         name: 'Exit'
@@ -41,6 +44,9 @@ const dlabMenus: Menu[] = [
           }
         ]
       },
+
+      '---',
+
       {
         id: 'togglePaletteEditor',
         name: 'Palette Editor',

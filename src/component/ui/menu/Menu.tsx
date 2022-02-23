@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuProps, { isMenu, Item } from './Menu.props';
+import MenuProps, { isItem, isMenu, Item } from './Menu.props';
 import './Menu.css';
 
 import ui_right from '../../../assets/ui/scrollright.png';
@@ -23,7 +23,7 @@ function Menu(props: MenuProps) {
               onSelect={id => props.onSelect(`${item.id}/${id}`)} />
           </div>
         );
-        else return (
+        else if (isItem(item)) return (
           <div key={item.id} className='menu-item'
             onClick={() => props.onSelect(item.id)}>
             {checked(item) &&
@@ -32,6 +32,7 @@ function Menu(props: MenuProps) {
             <span className='menu-item-label'>{item.name}</span>
           </div>
         );
+        else return (<hr className='divider horizontal bevel' />);
       })}
     </div>
   );

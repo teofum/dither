@@ -9,6 +9,9 @@ const mineMenus: Menu[] = [
         id: 'new',
         name: 'New'
       },
+
+      '---',
+
       {
         id: 'beginner',
         name: 'Beginner',
@@ -24,6 +27,9 @@ const mineMenus: Menu[] = [
         name: 'Expert',
         checkIf: { prop: 'game/difficulty', value: 'expert' }
       },
+
+      '---',
+      
       {
         id: 'exit',
         name: 'Exit'
