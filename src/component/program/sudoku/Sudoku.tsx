@@ -24,14 +24,22 @@ const skConfig = {
   mouse: true
 };
 
+enum SKGameState {
+  New = 'new',
+  Playing = 'playing',
+  Won = 'won'
+}
+
 function Sudoku(props: ProgramProps) {
   const [board, setBoard] = useState<SudokuBoard>();
   const [selected, setSelected] = useState<number>();
-  const [win, setWin] = useState(false);
-  const [showHelp, setShowHelp] = useState(true);
+  const [gameState, setGameState] = useState(SKGameState.New);
+  const [time, setTime] = useState(0);
+  const [timer, setTimer] = useState<number>();
 
   const [difficulty, setDifficulty] = useState(skDifficulty.easy);
   const [config, setConfig] = useState(skConfig);
+  const [showHelp, setShowHelp] = useState(true);
 
   const globalDispatch = useAppDispatch();
 
@@ -41,14 +49,30 @@ function Sudoku(props: ProgramProps) {
   }, [board]);
 
   useEffect(() => {
-    setWin(false);
+    setGameState(SKGameState.New);
     newBoard(difficulty).then(b => setBoard(b));
   }, [difficulty]);
+
+  useEffect(() => {
+    if (timer) clearInterval(timer);
+
+    if (gameState === SKGameState.New)
+      setTime(0);
+    else if (gameState === SKGameState.Playing) {
+      setTime(0);
+
+      const newTimer = setInterval(() => {
+        setTime(time => time + 1);
+      }, 1000);
+      setTimer(newTimer);
+      return () => clearInterval(newTimer);
+    }
+  }, [gameState]);
 
   const menuHandler = (cmd: string) => {
     switch (cmd) {
       case 'game/new':
-        setWin(false);
+        setGameState(SKGameState.New);
         newBoard(difficulty).then(b => setBoard(b));
         break;
       case 'game/easy':
@@ -90,7 +114,7 @@ function Sudoku(props: ProgramProps) {
   };
 
   const winGame = () => {
-    setWin(true);
+    setGameState(SKGameState.Won);
     setSelected(undefined);
   };
 
@@ -125,7 +149,7 @@ function Sudoku(props: ProgramProps) {
         <span>{cell.value || ''}</span>
 
         {config.annotations && !cell.value &&
-          <div className="sudoku-annotations">
+          <div className='sudoku-annotations'>
             {cell.annotations.map((a, i) => (
               <span key={`a_${i}`}>
                 {a ? i + 1 : ''}
@@ -139,6 +163,9 @@ function Sudoku(props: ProgramProps) {
   const clickHandler = (ev: Event, i: number, rclick: boolean = false) => {
     if (!board) return;
     ev.preventDefault();
+
+    if (gameState === SKGameState.New)
+      setGameState(SKGameState.Playing);
 
     if (i !== selected) {
       setSelected(i);
@@ -155,10 +182,14 @@ function Sudoku(props: ProgramProps) {
   };
 
   const kbCapture = (ev: Event) => {
-    if (!board || win || selected === undefined) return;
+    if (!board || selected === undefined) return;
+    if (gameState === SKGameState.Won) return;
 
     const kev = ev as KeyboardEvent;
     kev.preventDefault();
+    
+    if (gameState === SKGameState.New)
+      setGameState(SKGameState.Playing);
 
     // Handle movement
     if (kev.code.startsWith('Arrow')) {
@@ -229,7 +260,7 @@ function Sudoku(props: ProgramProps) {
       <div className={
         classlist(
           'sudoku-content',
-          win ? 'sudoku-won' : ''
+          gameState === SKGameState.Won ? 'sudoku-won' : ''
         )}>
         <div className='sudoku-board bevel content'>
           {board?.cells.map(getCell) ||
@@ -249,6 +280,12 @@ function Sudoku(props: ProgramProps) {
               </button>
             </div>}
         </div>
+      </div>
+
+      <div className='sudoku-status-bar'>
+        <div className='bevel inset light'>{gameState === SKGameState.Won ? 'COMPLETED' : ''}</div>
+        <div className='bevel inset light'>Time: {time}</div>
+        <div className='bevel inset light'>Difficulty: {difficulty.toUpperCase()}</div>
       </div>
     </div>
   );

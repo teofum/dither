@@ -79,6 +79,17 @@
   color: var(--ct-text-light);
 }
 
+.sudoku-status-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+
+  padding: 0.0625rem;
+}
+
+.sudoku-status-bar > div.bevel.inset {
+  padding: 0.125rem 0.375rem;
+}
+
 /* Selected Cell & etc. ===================================================== */
 .sudoku-cell.sudoku-highlight {
   background-color: var(--ct-content-alt);
