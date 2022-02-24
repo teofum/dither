@@ -62,7 +62,7 @@ function Sudoku(props: ProgramProps) {
       setTime(0);
 
       const newTimer = setInterval(() => {
-        setTime(time => time + 1);
+        setTime(time => Math.min(time + 1, 9999));
       }, 1000);
       setTimer(newTimer);
       return () => clearInterval(newTimer);
