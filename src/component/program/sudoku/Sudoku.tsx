@@ -52,6 +52,10 @@ function Sudoku(props: ProgramProps) {
     }
   };
 
+  const menuData = {
+    'game/difficulty': difficulty
+  };
+
   const winGame = () => {
     setWin(true);
     setSelected(undefined);
@@ -166,7 +170,7 @@ function Sudoku(props: ProgramProps) {
     <div className='sudoku-root' tabIndex={99999}
       onKeyDown={e => kbCapture(e.nativeEvent)}>
       <div className='sudoku-menu-bar'>
-        <MenuBar menus={sudokuMenus}
+        <MenuBar menus={sudokuMenus} data={menuData}
           onSelect={menuHandler} />
       </div>
 

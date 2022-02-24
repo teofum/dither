@@ -13,6 +13,7 @@ import icon_theme_l from '../../../assets/icon/theme_32.png';
 import icon_help_l from '../../../assets/icon/help_32.png';
 import icon_dlab_l from '../../../assets/icon/dlab_32.png';
 import icon_mine_l from '../../../assets/icon/mine_32.png';
+import icon_sudoku_l from '../../../assets/icon/sudoku_32.png';
 import './Launcher.css';
 
 const launcherItems: LauncherItem[] = [
@@ -43,7 +44,7 @@ const launcherItems: LauncherItem[] = [
   {
     id: 'sudoku',
     display: 'Sudoku',
-    iconUrl: icon_mine_l,
+    iconUrl: icon_sudoku_l,
     template: sudokuWindow
   }
 ];

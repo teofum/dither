@@ -14,15 +14,18 @@ const sudokuMenus: Menu[] = [
       
       {
         id: 'easy',
-        name: 'Easy'
+        name: 'Easy',
+        checkIf: { prop: 'game/difficulty', value: 'easy' }
       },
       {
         id: 'medium',
-        name: 'Medium'
+        name: 'Medium',
+        checkIf: { prop: 'game/difficulty', value: 'medium' }
       },
       {
         id: 'hard',
-        name: 'Hard'
+        name: 'Hard',
+        checkIf: { prop: 'game/difficulty', value: 'hard' }
       },
 
       '---',
