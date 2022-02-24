@@ -3,7 +3,8 @@ enum WindowContent {
   ThemeEditor = 'win_theme',
   Help = 'win_help',
   DitherLab = 'win_ditherLab',
-  Minesweeper = 'min_mine'
+  Minesweeper = 'min_mine',
+  Sudoku = 'min_sudoku'
 }
 
 export default WindowContent;

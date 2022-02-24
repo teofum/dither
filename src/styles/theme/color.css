@@ -4,6 +4,7 @@
   --ct-is-dark-theme: 0;
   --ct-background: #008080;
   --ct-content-bg: #ffffff;
+  --ct-content-alt: #ffff80;
 
   --ct-base: #c0c0c0;
   --ct-dark: #808080;
@@ -20,6 +21,7 @@
   --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-dark);
   --ct-text-disabled-shadow: var(--ct-lighter);
+  --ct-text-accent: #008080;
 
   --ct-text-link: rgb(0, 102, 204);
   --ct-text-visited: rgb(85, 26, 139);
@@ -33,7 +35,7 @@
   --ct-is-dark-select: 1;
 
   --ct-ok: #008000;
-  --ct-warn: #A00000;
+  --ct-warn: #d00000;
 
   --ct-border: var(--ct-darker);
 }
@@ -42,6 +44,7 @@
   --ct-is-dark-theme: 1;
   --ct-background: #282828;
   --ct-content-bg: #202020;
+  --ct-content-alt: #303030;
 
   --ct-base: #404040;
   --ct-dark: #202020;
@@ -58,6 +61,7 @@
   --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-light);
   --ct-text-disabled-shadow: var(--ct-darker);
+  --ct-text-accent: var(--ct-select-bg);
 
   --ct-text-link: hsl(212, 55%, 60%);
   --ct-text-visited: hsl(280, 55%, 55%);
@@ -80,6 +84,7 @@
   --ct-is-dark-theme: 0;
   --ct-background: #3a6ea5;
   --ct-content-bg: #ffffff;
+  --ct-content-alt: #ffff80;
 
   --ct-base: #d4d0c8;
   --ct-dark: #808080;
@@ -96,6 +101,7 @@
   --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-dark);
   --ct-text-disabled-shadow: var(--ct-lighter);
+  --ct-text-accent: #3a6ea5;
 
   --ct-text-link: rgb(0, 102, 204);
   --ct-text-visited: rgb(85, 26, 139);
@@ -104,22 +110,23 @@
   --ct-accent-text: var(--ct-lighter);
   --ct-is-dark-accent: 1;
 
-  --ct-select-bg: #16293f;
+  --ct-select-bg: #000080;
   --ct-select-text: var(--ct-lighter);
   --ct-is-dark-select: 1;
 
   --ct-ok: #008000;
-  --ct-warn: #A00000;
+  --ct-warn: #d00000;
 
   --ct-border: var(--ct-darker);
 }
 
 .theme__blue {
   --ct-is-dark-theme: 1;
-  --ct-background: #455364;
-  --ct-content-bg: #282e36;
+  --ct-background: hsl(213, 18%, 33%);
+  --ct-content-bg: hsl(214, 15%, 18%);
+  --ct-content-alt: hsl(214, 19%, 25%);
 
-  --ct-base: #343f4d;
+  --ct-base: hsl(214, 19%, 25%);
   --ct-dark: #111519;
   --ct-darker: #000000;
   --ct-light: #4d5e73;
@@ -134,6 +141,7 @@
   --ct-text-light: var(--ct-lighter);
   --ct-text-disabled: var(--ct-light);
   --ct-text-disabled-shadow: var(--ct-darker);
+  --ct-text-accent: var(--ct-title);
 
   --ct-text-link: var(--ct-title);
   --ct-text-visited: hsl(32, 95%, 57%);

@@ -64,6 +64,11 @@ strong {
   text-shadow: 0.0625rem 0 var(--ct-text-light);
 }
 
+em {
+  font-style: inherit;
+  color: var(--ct-text-accent);
+}
+
 a.fake-href {
   cursor: pointer;
   text-decoration: underline;
