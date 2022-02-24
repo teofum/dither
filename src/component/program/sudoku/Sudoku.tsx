@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useAppDispatch } from '../../../hooks';
-import MenuBar from '../../ui/menuBar/MenuBar';
 import { destroyWindow } from '../../ui/windowManager/windowSlice';
+import MenuBar from '../../ui/menuBar/MenuBar';
 import ProgramProps from '../ProgramProps';
 import sudokuMenus from './Sudoku.menu';
-import './Sudoku.css';
-import classlist from '../../../utils/etc/classlist';
 import newBoard, { checkBoard, SudokuBoard, SudokuCell } from './Sudoku.game';
+import classlist from '../../../utils/etc/classlist';
+
+import sk_help from './assets/help.md?raw';
+import './Sudoku.css';
 
 const skDifficulty = {
   easy: 'easy',
@@ -14,19 +17,21 @@ const skDifficulty = {
   hard: 'hard'
 };
 
-const skAssists = {
+const skConfig = {
   annotations: true,
   highlight: true,
-  warnings: true
+  warnings: true,
+  mouse: true
 };
 
 function Sudoku(props: ProgramProps) {
   const [board, setBoard] = useState<SudokuBoard>();
   const [selected, setSelected] = useState<number>();
   const [win, setWin] = useState(false);
+  const [showHelp, setShowHelp] = useState(true);
 
   const [difficulty, setDifficulty] = useState(skDifficulty.easy);
-  const [assists, setAssists] = useState(skAssists);
+  const [config, setConfig] = useState(skConfig);
 
   const globalDispatch = useAppDispatch();
 
@@ -55,14 +60,20 @@ function Sudoku(props: ProgramProps) {
       case 'game/hard':
         setDifficulty(skDifficulty.hard);
         break;
-      case 'game/assists/annotations':
-        setAssists({ ...assists, annotations: !assists.annotations });
+      case 'game/mouse':
+        setConfig({ ...config, mouse: !config.mouse });
         break;
-      case 'game/assists/highlight':
-        setAssists({ ...assists, highlight: !assists.highlight });
+      case 'view/annotations':
+        setConfig({ ...config, annotations: !config.annotations });
         break;
-      case 'game/assists/warnings':
-        setAssists({ ...assists, warnings: !assists.warnings });
+      case 'view/highlight':
+        setConfig({ ...config, highlight: !config.highlight });
+        break;
+      case 'view/warnings':
+        setConfig({ ...config, warnings: !config.warnings });
+        break;
+      case 'help/controls':
+        setShowHelp(true);
         break;
       case 'game/exit':
         globalDispatch(destroyWindow(props.windowId));
@@ -72,9 +83,10 @@ function Sudoku(props: ProgramProps) {
 
   const menuData = {
     'game/difficulty': difficulty,
-    'assists/annotations': `${assists.annotations}`,
-    'assists/highlight': `${assists.highlight}`,
-    'assists/warnings': `${assists.warnings}`
+    'game/mouse': `${config.mouse}`,
+    'view/annotations': `${config.annotations}`,
+    'view/highlight': `${config.highlight}`,
+    'view/warnings': `${config.warnings}`
   };
 
   const winGame = () => {
@@ -104,14 +116,15 @@ function Sudoku(props: ProgramProps) {
           classlist(
             'sudoku-cell',
             i === selected ? 'sudoku-selected' : '',
-            (assists.highlight && highlight) ? 'sudoku-highlight' : '',
-            (assists.warnings && conflict) ? 'sudoku-conflict' : '',
+            (config.highlight && highlight) ? 'sudoku-highlight' : '',
+            (config.warnings && conflict) ? 'sudoku-conflict' : '',
             cell.fixed ? 'sudoku-fixed' : ''
           )}
-        onClick={() => setSelected(i)}>
+        onClick={e => clickHandler(e.nativeEvent, i)}
+        onContextMenu={e => clickHandler(e.nativeEvent, i, true)}>
         <span>{cell.value || ''}</span>
 
-        {assists.annotations && !cell.value &&
+        {config.annotations && !cell.value &&
           <div className="sudoku-annotations">
             {cell.annotations.map((a, i) => (
               <span key={`a_${i}`}>
@@ -121,6 +134,24 @@ function Sudoku(props: ProgramProps) {
           </div>}
       </div>
     );
+  };
+
+  const clickHandler = (ev: Event, i: number, rclick: boolean = false) => {
+    if (!board) return;
+    ev.preventDefault();
+
+    if (i !== selected) {
+      setSelected(i);
+    } else if (config.mouse) {
+      const newBoard = { cells: board.cells.slice() };
+      const sl = newBoard.cells[selected];
+      if (sl.fixed) return; // Fixed cells cannot be modified
+
+      sl.value = (sl.value + (rclick ? -1 : 1));
+      if (sl.value > 9) sl.value -= 10;
+      if (sl.value < 0) sl.value += 10;
+      setBoard(newBoard);
+    }
   };
 
   const kbCapture = (ev: Event) => {
@@ -204,6 +235,18 @@ function Sudoku(props: ProgramProps) {
           {board?.cells.map(getCell) ||
             <div className='sudoku-placeholder'>
               Loading game...
+            </div>}
+
+          {showHelp &&
+            <div className='sudoku-help'>
+              <ReactMarkdown>
+                {sk_help}
+              </ReactMarkdown>
+
+              <button className='bevel'
+                onClick={() => setShowHelp(false)}>
+                Start Game
+              </button>
             </div>}
         </div>
       </div>

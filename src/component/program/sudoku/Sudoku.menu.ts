@@ -27,26 +27,13 @@ const sudokuMenus: Menu[] = [
         name: 'Hard',
         checkIf: { prop: 'game/difficulty', value: 'hard' }
       },
+
+      '---',
+      
       {
-        id: 'assists',
-        name: 'Assists',
-        items: [
-          {
-            id: 'annotations',
-            name: 'Allow Annotations',
-            checkIf: { prop: 'assists/annotations', value: 'true' }
-          },
-          {
-            id: 'highlight',
-            name: 'Highlight Neighbors',
-            checkIf: { prop: 'assists/highlight', value: 'true' }
-          },
-          {
-            id: 'warnings',
-            name: 'Highlight Conflicts',
-            checkIf: { prop: 'assists/warnings', value: 'true' }
-          }
-        ]
+        id: 'mouse',
+        name: 'Mouse Controls',
+        checkIf: { prop: 'game/mouse', value: 'true' }
       },
 
       '---',
@@ -54,6 +41,41 @@ const sudokuMenus: Menu[] = [
       {
         id: 'exit',
         name: 'Exit'
+      }
+    ]
+  },
+  {
+    id: 'view',
+    name: 'View',
+    items: [
+      {
+        id: 'annotations',
+        name: 'Annotations',
+        checkIf: { prop: 'view/annotations', value: 'true' }
+      },
+      {
+        id: 'highlight',
+        name: 'Highlight Neighbors',
+        checkIf: { prop: 'view/highlight', value: 'true' }
+      },
+      {
+        id: 'warnings',
+        name: 'Highlight Conflicts',
+        checkIf: { prop: 'view/warnings', value: 'true' }
+      }
+    ]
+  },
+  {
+    id: 'help',
+    name: 'Help',
+    items: [
+      {
+        id: 'help',
+        name: 'Open Help Pages'
+      },
+      {
+        id: 'controls',
+        name: 'Show Controls'
       }
     ]
   }

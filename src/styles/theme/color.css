@@ -21,6 +21,7 @@
   --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-dark);
   --ct-text-disabled-shadow: var(--ct-lighter);
+  --ct-text-accent: #008080;
 
   --ct-text-link: rgb(0, 102, 204);
   --ct-text-visited: rgb(85, 26, 139);
@@ -60,6 +61,7 @@
   --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-light);
   --ct-text-disabled-shadow: var(--ct-darker);
+  --ct-text-accent: var(--ct-select-bg);
 
   --ct-text-link: hsl(212, 55%, 60%);
   --ct-text-visited: hsl(280, 55%, 55%);
@@ -99,6 +101,7 @@
   --ct-text-light: #808080;
   --ct-text-disabled: var(--ct-dark);
   --ct-text-disabled-shadow: var(--ct-lighter);
+  --ct-text-accent: #3a6ea5;
 
   --ct-text-link: rgb(0, 102, 204);
   --ct-text-visited: rgb(85, 26, 139);
@@ -138,6 +141,7 @@
   --ct-text-light: var(--ct-lighter);
   --ct-text-disabled: var(--ct-light);
   --ct-text-disabled-shadow: var(--ct-darker);
+  --ct-text-accent: var(--ct-title);
 
   --ct-text-link: var(--ct-title);
   --ct-text-visited: hsl(32, 95%, 57%);
