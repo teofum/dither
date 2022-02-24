@@ -14,11 +14,20 @@ const skDifficulty = {
   hard: 'hard'
 };
 
+const skAssists = {
+  annotations: true,
+  highlight: true,
+  warnings: true
+};
+
 function Sudoku(props: ProgramProps) {
-  const [difficulty, setDifficulty] = useState(skDifficulty.easy);
   const [board, setBoard] = useState<SudokuBoard>();
   const [selected, setSelected] = useState<number>();
   const [win, setWin] = useState(false);
+
+  const [difficulty, setDifficulty] = useState(skDifficulty.easy);
+  const [assists, setAssists] = useState(skAssists);
+
   const globalDispatch = useAppDispatch();
 
   useEffect(() => {
@@ -46,6 +55,15 @@ function Sudoku(props: ProgramProps) {
       case 'game/hard':
         setDifficulty(skDifficulty.hard);
         break;
+      case 'game/assists/annotations':
+        setAssists({ ...assists, annotations: !assists.annotations });
+        break;
+      case 'game/assists/highlight':
+        setAssists({ ...assists, highlight: !assists.highlight });
+        break;
+      case 'game/assists/warnings':
+        setAssists({ ...assists, warnings: !assists.warnings });
+        break;
       case 'game/exit':
         globalDispatch(destroyWindow(props.windowId));
         break;
@@ -53,7 +71,10 @@ function Sudoku(props: ProgramProps) {
   };
 
   const menuData = {
-    'game/difficulty': difficulty
+    'game/difficulty': difficulty,
+    'assists/annotations': `${assists.annotations}`,
+    'assists/highlight': `${assists.highlight}`,
+    'assists/warnings': `${assists.warnings}`
   };
 
   const winGame = () => {
@@ -83,14 +104,14 @@ function Sudoku(props: ProgramProps) {
           classlist(
             'sudoku-cell',
             i === selected ? 'sudoku-selected' : '',
-            highlight ? 'sudoku-highlight' : '',
-            conflict ? 'sudoku-conflict' : '',
+            (assists.highlight && highlight) ? 'sudoku-highlight' : '',
+            (assists.warnings && conflict) ? 'sudoku-conflict' : '',
             cell.fixed ? 'sudoku-fixed' : ''
           )}
         onClick={() => setSelected(i)}>
         <span>{cell.value || ''}</span>
 
-        {!cell.value &&
+        {assists.annotations && !cell.value &&
           <div className="sudoku-annotations">
             {cell.annotations.map((a, i) => (
               <span key={`a_${i}`}>
@@ -180,7 +201,10 @@ function Sudoku(props: ProgramProps) {
           win ? 'sudoku-won' : ''
         )}>
         <div className='sudoku-board bevel content'>
-          {board?.cells.map(getCell)}
+          {board?.cells.map(getCell) ||
+            <div className='sudoku-placeholder'>
+              Loading game...
+            </div>}
         </div>
       </div>
     </div>

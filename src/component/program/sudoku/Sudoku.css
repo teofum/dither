@@ -13,6 +13,16 @@
   background-color: var(--ct-content-bg);
 }
 
+.sudoku-placeholder {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  width: 18.6875rem;
+  height: 18.6875rem;
+
+  display: grid;
+  place-items: center;
+}
+
 .sudoku-won {
   pointer-events: none;
 }
