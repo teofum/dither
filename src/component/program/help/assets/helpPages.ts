@@ -11,6 +11,8 @@ import md_dlab_process from '../../../../assets/help_pages/program/ditherLab/pro
 import md_dlab_error from '../../../../assets/help_pages/program/ditherLab/process/error.md?raw';
 import md_dlab_cpo from '../../../../assets/help_pages/program/ditherLab/process/bayer.md?raw';
 import md_dlab_pattern from '../../../../assets/help_pages/program/ditherLab/process/pattern.md?raw';
+import md_mine from '../../../../assets/help_pages/program/mine.md?raw';
+import md_sudoku from '../../../../assets/help_pages/program/sudoku.md?raw';
 import md_how from '../../../../assets/help_pages/how.md?raw';
 import md_how_font from '../../../../assets/help_pages/how/font.md?raw';
 
@@ -101,6 +103,16 @@ const helpPages: HelpItem = {
               ]
             }
           ]
+        },
+        {
+          id: 'help/programs/mine',
+          name: 'Minesweeper',
+          content: md_mine
+        },
+        {
+          id: 'help/programs/sudoku',
+          name: 'Sudoku',
+          content: md_sudoku
         }
       ]
     },
