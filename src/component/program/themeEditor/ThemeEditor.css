@@ -16,6 +16,16 @@
   gap: 0.5rem;
 }
 
+.theme-setting-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.theme-setting-split > * {
+  max-width: 8rem;
+}
+
 .theme-preview {
   margin: 0 auto;
   width: 100%;
@@ -24,8 +34,14 @@
 .theme-preview-bg {
   padding: 1.5rem 4rem 3rem 1rem;
 
-  background: var(--ct-background);
+  background-color: var(--ct-background);
   color: var(--ct-text);
+
+  background-image: var(--bg-image, none);
+  background-repeat: var(--bg-repeat);
+  background-size: var(--bg-size);
+  background-position: var(--bg-position);
+  background-blend-mode: var(--bg-blend, normal);
 
   font-family: var(--ft-base);
   font-size: var(--ft-size-base);
