@@ -4,7 +4,7 @@
 
 .bg__grid {
   --bg-image: url('/src/assets/background/grid.png');
-  --bg-blend: normal;
+  --bg-blend: overlay;
 }
 
 .bg__dots {
