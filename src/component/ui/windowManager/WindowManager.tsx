@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import launcherWindow from '../window/templates/Launcher.window';
 import Window from '../window/Window';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
@@ -15,6 +15,10 @@ import Sudoku from '../../program/sudoku/Sudoku';
 function WindowManager() {
   const { windows } = useAppSelector(selectWindows);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(createWindow(launcherWindow));
+  }, []);
 
   const getComponent = (window: WindowState) => {
     switch (window.content) {
