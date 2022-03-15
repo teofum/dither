@@ -15,6 +15,18 @@ const colorThemes = [
   { className: 'theme__blue', displayName: 'Steel' }
 ];
 
+const backgrounds = [
+  { className: 'bg__none', displayName: 'None' },
+  { className: 'bg__grid', displayName: 'Grid' },
+  { className: 'bg__dots', displayName: 'Dots' }
+];
+
+const backgroundModes = [
+  { className: 'bgm__tile', displayName: 'Tile' },
+  { className: 'bgm__center', displayName: 'Center' },
+  { className: 'bgm__fill', displayName: 'Fill' }
+];
+
 const fontSets = [
   { className: 'set0', displayName: 'Default Font Set' },
   { className: 'set1', displayName: 'Font Set 1' },
@@ -23,7 +35,7 @@ const fontSets = [
 ];
 
 const titleFonts = [
-  { className: 'paradise',  displayName: 'Paradise132 7x16' },
+  { className: 'paradise', displayName: 'Paradise132 7x16' },
   { className: 'jpn12', displayName: 'DOS/V JPN12' },
   { className: 'ank16', displayName: 'DOS/V ANK16' },
   { className: 'tosh2', displayName: 'ToshibaTxL2 8x16' }
@@ -36,6 +48,12 @@ function ThemeEditor() {
   const currentColorTheme = currentTheme
     .find(cl => cl.startsWith('theme__'));
 
+  const currentBackground = currentTheme
+    .find(cl => cl.startsWith('bg__'));
+
+  const currentBackgroundMode = currentTheme
+    .find(cl => cl.startsWith('bgm__'));
+
   const currentTextFont = currentTheme
     .find(cl => cl.startsWith('font-text__'))
     ?.split('__')[1];
@@ -43,9 +61,13 @@ function ThemeEditor() {
   const currentTitleFont = currentTheme
     .find(cl => cl.startsWith('font-title__'))
     ?.split('__')[1];
-  
+
   const [colorTheme, setColorTheme] = useState(
     colorThemes.find(ct => ct.className === currentColorTheme)?.className || '');
+  const [background, setBackground] = useState(
+    backgrounds.find(bg => bg.className === currentBackground)?.className || '');
+  const [backgroundMode, setBackgroundMode] = useState(
+    backgroundModes.find(bgm => bgm.className === currentBackgroundMode)?.className || '');
   const [fontSet, setFontSet] = useState(
     fontSets.find(fs => fs.className === currentTextFont)?.className || '');
   const [titleFont, setTitleFont] = useState(
@@ -53,6 +75,8 @@ function ThemeEditor() {
 
   const theme = classlist(
     colorTheme,
+    background,
+    backgroundMode,
     `font-text__${fontSet}`,
     `font-title__${titleFont}`
   );
@@ -111,6 +135,26 @@ function ThemeEditor() {
             value: theme.className
           }))}
           onChange={(e) => setColorTheme(e.selected.value)} />
+
+        <span className='theme-label'>Desktop Background</span>
+        <div className="theme-setting-split">
+          <ComboBox
+            value={background}
+            options={backgrounds.map(theme => ({
+              name: theme.displayName,
+              value: theme.className
+            }))}
+            onChange={(e) => setBackground(e.selected.value)} />
+
+          <ComboBox
+            value={backgroundMode}
+            options={backgroundModes.map(theme => ({
+              name: theme.displayName,
+              value: theme.className
+            }))}
+            disabled={background === 'bg__none'}
+            onChange={(e) => setBackgroundMode(e.selected.value)} />
+        </div>
 
         <span className='theme-label'>Text Font</span>
         <ComboBox

@@ -29,6 +29,23 @@ function Window(props: WindowProps) {
   const [state, setState] = useState(WindowViewState.Restored);
 
   useEffect(() => focus(true), []);
+  useEffect(() => {
+    const npos = {
+      x: position.x,
+      y: position.y
+    };
+
+    // On creation, move window if it overshoots screen
+    if (position.x + size.w > window.innerWidth)
+      npos.x = window.innerWidth - size.w;
+    if (position.y + size.h > window.innerHeight)
+      npos.y = window.innerHeight - size.h;
+
+    if (npos.x < 0 || npos.y < 0) {
+      setPosition({ x: 0, y: 0 });
+      setState(WindowViewState.Maximized); // Window bigger than viewport, maximize
+    } else setPosition(npos);
+  }, [])
 
   let frame: HTMLDivElement | null = null;
 

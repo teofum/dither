@@ -1,5 +1,6 @@
 @import url('./theme/color.css');
 @import url('./theme/font.css');
+@import url('./theme/background.css');
 
 :root {
   image-rendering: pixelated;
@@ -233,9 +234,16 @@ button.bevel.light:active {
 /* Theme components ========================================================= */
 
 /* "Desktop" */
-body {
-  background: var(--ct-background);
+body,
+.desktop {
+  background-color: var(--ct-background);
   color: var(--ct-text);
+
+  background-image: var(--bg-image, none);
+  background-repeat: var(--bg-repeat);
+  background-size: var(--bg-size);
+  background-position: var(--bg-position);
+  background-blend-mode: var(--bg-blend, normal);
 }
 
 /* Button */

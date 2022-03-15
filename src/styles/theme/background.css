@@ -1,0 +1,31 @@
+.bg__none {
+  --bg-image: none;
+}
+
+.bg__grid {
+  --bg-image: url('/src/assets/background/grid.png');
+  --bg-blend: overlay;
+}
+
+.bg__dots {
+  --bg-image: url('/src/assets/background/dots.png');
+  --bg-blend: overlay;
+}
+
+.bgm__tile {
+  --bg-repeat: repeat;
+  --bg-size: auto;
+  --bg-position: 0 0;
+}
+
+.bgm__center {
+  --bg-repeat: no-repeat;
+  --bg-size: auto;
+  --bg-position: center;
+}
+
+.bgm__fill {
+  --bg-repeat: no-repeat;
+  --bg-size: 100% 100%;
+  --bg-position: center;
+}

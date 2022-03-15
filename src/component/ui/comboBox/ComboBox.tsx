@@ -50,7 +50,8 @@ function ComboBox<T>(props: ComboBoxProps<T>) {
     <div className='cmb-root bevel inset' ref={el => container = el}>
       <input type='text' className='cmb-input' readOnly disabled={props.disabled}
         value={props.options.find(op => op.value === props.value)?.name || ''} />
-      <button className='cmb-button bevel' onClick={toggleList}>
+      <button className='cmb-button bevel' disabled={props.disabled}
+        onClick={toggleList}>
         <img src={props.disabled ? ui_down_d : ui_down} alt='v' />
       </button>
 
