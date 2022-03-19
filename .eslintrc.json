@@ -1,28 +1,37 @@
 {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-extra-semi": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "semi": [
+      "error",
+      "always"
     ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended"
+    "eqeqeq": [
+      "warn",
+      "always"
     ],
-    "rules": {
-      "@typescript-eslint/no-inferrable-types": "off",
-      "@typescript-eslint/no-extra-semi": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "semi": ["error", "always"],
-      "eqeqeq": ["warn", "always"],
-      "quotes": ["warn", "single"]
-    }
+    "quotes": [
+      "warn",
+      "single"
+    ]
   }
+}
