@@ -7,7 +7,7 @@ import CGA4bRGBI from './palette/CGA4bRGBI';
 import { CGAm4p0h, CGAm4p0l, CGAm4p1h, CGAm4p1l, CGAm5h, CGAm5l } from './palette/CGA2bModes';
 import { GameBoy } from './palette/Gameboy';
 import NES56 from './palette/NES';
-import { RGB16, RGB256, RGB32, RGB64, RGB8 } from './palette/RGB';
+import { RGB16, RGB216, RGB256, RGB32, RGB64, RGB8 } from './palette/RGB';
 import { Mono2W, Mono2G, Mono2A, Mono4W, Mono4A, Mono16, PipBoy } from './palette/Mono';
 
 const palettes = [
@@ -38,6 +38,7 @@ const palettes = [
   RGB32,
   RGB64,
   RGB256,
+  RGB216,
 
   // Mono
   Mono2W,
