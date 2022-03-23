@@ -36,3 +36,10 @@ export const RGB256: Palette = {
   group: PaletteGroup.RGB,
   data: [8, 8, 4]
 };
+
+export const RGB216: Palette = {
+  name: 'Web colors (216-color)',
+  type: PaletteType.RGB,
+  group: PaletteGroup.RGB,
+  data: [6, 6, 6]
+};
