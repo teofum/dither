@@ -18,7 +18,8 @@ const colorThemes = [
 const backgrounds = [
   { className: 'bg__none', displayName: 'None' },
   { className: 'bg__grid', displayName: 'Grid' },
-  { className: 'bg__dots', displayName: 'Dots' }
+  { className: 'bg__dots', displayName: 'Dots' },
+  { className: 'bg__bliss', displayName: 'Bliss' }
 ];
 
 const backgroundModes = [

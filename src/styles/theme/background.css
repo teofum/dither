@@ -12,6 +12,11 @@
   --bg-blend: overlay;
 }
 
+.bg__bliss {
+  --bg-image: url('/src/assets/background/bliss.webp');
+  --bg-blend: normal;
+}
+
 .bgm__tile {
   --bg-repeat: repeat;
   --bg-size: auto;
