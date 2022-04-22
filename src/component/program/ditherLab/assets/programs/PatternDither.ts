@@ -9,6 +9,7 @@ import tex2DFromImage from '../../../../../utils/gl/tex2DFromImage';
 import { DitherLabOptions } from '../../DitherLab.state';
 import DitherLabProgram, { DitherLabDevice, DitherLabProgramSettingType } from '../../utils/DitherLabProgram';
 import thresholds from '../thresholds';
+import makeRandomThreshold from '../threshold/makeRandomThreshold';
 
 const positions = [
   -1, 1,
@@ -110,7 +111,9 @@ const runPatternDither = async (
   gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texCoords), gl.STATIC_DRAW);
 
-  const threshold = thresholds[settings.threshold || 0];
+  const threshold = settings.threshold === -1 ?
+    makeRandomThreshold(Math.max(rt.width, rt.height)) :
+    thresholds[settings.threshold || 0];
 
   // Load image to texture 0 and threshold matrix to texture 1
   tex2DFromImage(gl, options.image.element);
@@ -172,7 +175,8 @@ const patternDither: DitherLabProgram = {
         { name: '16x16 Blue Noise', value: 3 },
         { name: '8x8 Halftone', value: 4 },
         { name: '6x6 Halftone', value: 5 },
-        { name: '4x4 Halftone', value: 6 }
+        { name: '4x4 Halftone', value: 6 },
+        { name: 'Random (white noise)', value: -1 }
       ]
     },
     clist_size: {
