@@ -39,11 +39,6 @@ function WindowManager() {
 
   return (
     <div className='desktop'>
-      <button className='bevel'
-        onClick={() => dispatch(createWindow(launcherWindow))}>
-        Program Manager
-      </button>
-
       {windows.map(window => (
         <Window key={window.id} {...window}>
           {window.content && getComponent(window)}

@@ -1,8 +1,13 @@
+import { Menu } from '../menu/Menu.props';
 import WindowContent from './WindowContent';
 
 interface WindowState {
   content: WindowContent;
   contentProps?: unknown;
+  
+  menus?: Menu[];
+  menuData?: { [key: string]: string };
+  onMenu?: (id: string) => void;
 
   // Basic properties
   id: number;
