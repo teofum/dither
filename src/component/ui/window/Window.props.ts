@@ -26,8 +26,12 @@ interface WindowState {
   // Positioning
   top?: number;
   left?: number;
+
+  // Depth
+  zIndex: number;
+  active: boolean;
 }
 
 export default WindowState;
-export type WindowTemplate = Omit<WindowState, 'id'>;
+export type WindowTemplate = Omit<WindowState, 'id' | 'zIndex' | 'active'>;
 export type WindowProps = WindowState & { children?: React.ReactNode };

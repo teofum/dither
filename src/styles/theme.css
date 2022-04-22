@@ -234,12 +234,9 @@ button.bevel.light:active {
 /* Theme components ========================================================= */
 
 /* "Desktop" */
-body,
 .desktop {
   background-color: var(--ct-background);
   color: var(--ct-text);
-  width: 100%;
-  height: 100%;
 
   background-image: var(--bg-image, none);
   background-repeat: var(--bg-repeat);

@@ -56,6 +56,17 @@
   border-bottom: 0.0625rem solid var(--ct-text-light);
 }
 
+/* Inactive titlebar */
+.win-frame:not(.win-active) .win-title {
+  color: var(--ct-text-disabled);
+  text-shadow: 0.0625rem 0.0625rem var(--ct-text-disabled-shadow);
+}
+
+.win-frame:not(.win-active) .win-titlebar-spacer {
+  border-color: var(--ct-text-disabled);
+  filter: drop-shadow(0.0625rem 0.0625rem var(--ct-text-disabled-shadow));
+}
+
 .win-titlebar-button-group {
   display: flex;
   flex-direction: row;
