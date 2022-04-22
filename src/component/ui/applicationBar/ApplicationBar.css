@@ -1,0 +1,14 @@
+.appbar-root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  padding: 0.25rem 0.5rem;
+  gap: 0.5rem;
+}
+
+.appbar-os-name {
+  color: var(--ct-title);
+  text-shadow: 0.0625rem 0 var(--ct-title);
+  letter-spacing: 0.0625rem;
+}

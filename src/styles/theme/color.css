@@ -59,8 +59,8 @@
   --ct-text-heading-3: hsl(212, 75%, 75%);
 
   --ct-text-light: #808080;
-  --ct-text-disabled: var(--ct-light);
-  --ct-text-disabled-shadow: var(--ct-darker);
+  --ct-text-disabled: var(--ct-darker);
+  --ct-text-disabled-shadow: var(--ct-light);
   --ct-text-accent: var(--ct-select-bg);
 
   --ct-text-link: hsl(212, 55%, 60%);
@@ -139,8 +139,8 @@
   --ct-text-heading-3: var(--ct-title);
 
   --ct-text-light: var(--ct-lighter);
-  --ct-text-disabled: var(--ct-light);
-  --ct-text-disabled-shadow: var(--ct-darker);
+  --ct-text-disabled: var(--ct-darker);
+  --ct-text-disabled-shadow: var(--ct-light);
   --ct-text-accent: var(--ct-title);
 
   --ct-text-link: var(--ct-title);

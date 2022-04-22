@@ -1,8 +1,13 @@
+import { Menu } from '../menu/Menu.props';
 import WindowContent from './WindowContent';
 
 interface WindowState {
   content: WindowContent;
   contentProps?: unknown;
+  
+  menus?: Menu[];
+  menuData?: { [key: string]: string };
+  onMenu?: (id: string) => void;
 
   // Basic properties
   id: number;
@@ -26,8 +31,12 @@ interface WindowState {
   // Positioning
   top?: number;
   left?: number;
+
+  // Depth
+  zIndex: number;
+  active: boolean;
 }
 
 export default WindowState;
-export type WindowTemplate = Omit<WindowState, 'id'>;
+export type WindowTemplate = Omit<WindowState, 'id' | 'zIndex' | 'active'>;
 export type WindowProps = WindowState & { children?: React.ReactNode };

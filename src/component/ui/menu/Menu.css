@@ -14,7 +14,6 @@
 
 .menu-item {
   padding: 0.0625rem 0.25rem;
-  border: 0.0625rem solid transparent;
 
   display: grid;
   grid-template-columns: 0.75rem auto 0.75rem;
@@ -24,7 +23,6 @@
 
 .menu-item:hover {
   background-color: var(--ct-select-bg);
-  border-color: var(--ct-select-text);
 }
 
 .menu-item:hover > .menu-item-label {
@@ -35,6 +33,13 @@
   grid-column: 1;
   width: 0.5625rem;
   height: 0.5625rem;
+}
+
+.menu-item-icon {
+  grid-column: 1;
+  width: 1rem;
+  height: 1rem;
+  margin-left: -0.1875rem;
 }
 
 .menu-item-label {
@@ -48,11 +53,11 @@
   height: 0.75rem;
 }
 
-.menu-item:not(:hover) > img {
+.menu-item:not(:hover) > img:not(.menu-item-icon) {
   filter: invert(var(--ct-is-dark-theme));
 }
 
-.menu-item:hover > img {
+.menu-item:hover > img:not(.menu-item-icon) {
   filter: invert(var(--ct-is-dark-select));
 }
 

@@ -4,7 +4,7 @@ import WindowViewState from './WindowState';
 import ResizeMode from '../../../utils/etc/ResizeMode';
 
 import { useAppDispatch } from '../../../hooks';
-import { destroyWindow } from '../windowManager/windowSlice';
+import { destroyWindow, focusWindow } from '../windowManager/windowSlice';
 
 import icon_computer from '../../../assets/icon/computer_16.png';
 import ui_close from '../../../assets/ui/close.png';
@@ -27,8 +27,8 @@ function Window(props: WindowProps) {
   });
 
   const [state, setState] = useState(WindowViewState.Restored);
+  const [shouldStartDrag, setShouldStartDrag] = useState(false);
 
-  useEffect(() => focus(true), []);
   useEffect(() => {
     const npos = {
       x: position.x,
@@ -45,7 +45,20 @@ function Window(props: WindowProps) {
       setPosition({ x: 0, y: 0 });
       setState(WindowViewState.Maximized); // Window bigger than viewport, maximize
     } else setPosition(npos);
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    if (shouldStartDrag) {
+      dragHandler((e) => move(e));
+    }
+
+    const dragEndEvent = () => {
+      setShouldStartDrag(false);
+    };
+
+    window.addEventListener('mouseup', dragEndEvent);
+    return () => window.removeEventListener('mouseup', dragEndEvent);
+  }, [shouldStartDrag, props.active]);
 
   let frame: HTMLDivElement | null = null;
 
@@ -56,14 +69,16 @@ function Window(props: WindowProps) {
           width: props.autoSize ? 'auto' : size.w,
           height: props.autoSize ? 'auto' : size.h,
           left: position.x,
-          top: position.y
+          top: position.y,
+          zIndex: props.zIndex
         };
       case WindowViewState.Maximized:
         return {
           width: '100%',
           height: '100%',
           left: 0,
-          top: 0
+          top: 0,
+          zIndex: props.zIndex
         };
     }
   })();
@@ -75,10 +90,12 @@ function Window(props: WindowProps) {
 
     // While dragging, move the element directly via DOM
     const dragging = (ev: MouseEvent) => {
-      if (!frame) return;
+      if (!frame || !frame.parentElement) return;
       const windowRect = frame.getBoundingClientRect();
-      frame.style.left = `${windowRect.left + ev.movementX}px`;
-      frame.style.top = `${windowRect.top + ev.movementY}px`;
+      const parentRect = frame.parentElement.getBoundingClientRect();
+
+      frame.style.left = `${windowRect.left - parentRect.left + ev.movementX}px`;
+      frame.style.top = `${windowRect.top - parentRect.top + ev.movementY}px`;
     };
 
     // At the end of a drag event (release)...
@@ -113,8 +130,9 @@ function Window(props: WindowProps) {
 
     // While dragging, move the element directly via DOM
     const dragging = (ev: MouseEvent) => {
-      if (!frame) return;
+      if (!frame || !frame.parentElement) return;
       const windowRect = frame.getBoundingClientRect();
+      const parentRect = frame.parentElement.getBoundingClientRect();
 
       const maxHeight = props.maxHeight || Number.MAX_VALUE;
       const maxExpandY = maxHeight - windowRect.height;
@@ -129,7 +147,7 @@ function Window(props: WindowProps) {
           Math.max(ev.movementY, -maxExpandY) :
           Math.min(ev.movementY, maxContractY);
 
-        frame.style.top = `${windowRect.top + move}px`;
+        frame.style.top = `${windowRect.top - parentRect.top + move}px`;
         frame.style.height = `${windowRect.height - move}px`;
       } else if (mode & ResizeMode.S) {
         const move = ev.movementY > 0 ?
@@ -144,7 +162,7 @@ function Window(props: WindowProps) {
           Math.max(ev.movementX, -maxExpandX) :
           Math.min(ev.movementX, maxContractX);
 
-        frame.style.left = `${windowRect.left + move}px`;
+        frame.style.left = `${windowRect.left - parentRect.left + move}px`;
         frame.style.width = `${windowRect.width - move}px`;
       } else if (mode & ResizeMode.E) {
         const move = ev.movementX > 0 ?
@@ -187,8 +205,8 @@ function Window(props: WindowProps) {
 
   //#region Drag handling
   // Start a drag event when conditions are right
-  const dragHandler = (ev: MouseEvent, onstart: (ev: MouseEvent) => void) => {
-    if (ev.button !== 0) return;
+  const dragHandler = (onstart: (ev: MouseEvent) => void, ev?: MouseEvent) => {
+    if (ev && ev.button !== 0) return;
 
     const start = (ev: MouseEvent) => {
       onstart(ev);
@@ -218,68 +236,47 @@ function Window(props: WindowProps) {
     dispatch(destroyWindow(props.id));
   };
 
-  const focus = (init: boolean = false) => {
-    if (!frame) return; // Can't focus the window if it doesn't exist, duh
+  const focus = (target?: EventTarget) => {
+    dispatch(focusWindow(props.id));
 
-    // DOM hackery, because we can't have a re-render on mousedown
-    const zPivot = parseInt(frame.style.zIndex || '0');
-    const framesQuery = document.querySelectorAll('.win-frame');
-
-    const other: HTMLElement[] = [];
-    for (let i = 0; i < framesQuery.length; i++) {
-      if (framesQuery.item(i).id !== frame.id)
-        other.push(framesQuery.item(i) as HTMLElement);
+    if (!props.active && target && (target as HTMLElement).className.includes('win-title')) {
+      setShouldStartDrag(true);
+      console.log('drag');
     }
-
-    if (!init) {
-      // Lower the z-index of every window above this one by 1
-      other.forEach(wf => {
-        const z = parseInt(wf.style.zIndex || '0');
-        if (z > zPivot)
-          wf.style.zIndex = (z - 1).toString();
-      });
-    }
-
-    // Set this window's z-index to the largest + 1
-    const largest = other
-      .map(wf => parseInt(wf.style.zIndex || '0'))
-      .reduce((prev: number, current: number) => Math.max(prev, current), 0);
-    frame.style.zIndex = (largest + 1).toString();
   };
 
   // resizeable defaults to true on undefined
   const canResize = !props.autoSize && props.resizeable !== false;
   const resizeHandles = [
     (<div key='nw' className='win-resize-handle-nw'
-      onMouseDown={(e) => dragHandler(e.nativeEvent, (e) => resize(e, ResizeMode.NW))} />),
+      onMouseDown={(e) => dragHandler((e) => resize(e, ResizeMode.NW), e.nativeEvent)} />),
     (<div key='n' className='win-resize-handle-n'
-      onMouseDown={(e) => dragHandler(e.nativeEvent, (e) => resize(e, ResizeMode.N))} />),
+      onMouseDown={(e) => dragHandler((e) => resize(e, ResizeMode.N), e.nativeEvent)} />),
     (<div key='ne' className='win-resize-handle-ne'
-      onMouseDown={(e) => dragHandler(e.nativeEvent, (e) => resize(e, ResizeMode.NE))} />),
+      onMouseDown={(e) => dragHandler((e) => resize(e, ResizeMode.NE), e.nativeEvent)} />),
     (<div key='w' className='win-resize-handle-w'
-      onMouseDown={(e) => dragHandler(e.nativeEvent, (e) => resize(e, ResizeMode.W))} />),
+      onMouseDown={(e) => dragHandler((e) => resize(e, ResizeMode.W), e.nativeEvent)} />),
     (<div key='e' className='win-resize-handle-e'
-      onMouseDown={(e) => dragHandler(e.nativeEvent, (e) => resize(e, ResizeMode.E))} />),
+      onMouseDown={(e) => dragHandler((e) => resize(e, ResizeMode.E), e.nativeEvent)} />),
     (<div key='sw' className='win-resize-handle-sw'
-      onMouseDown={(e) => dragHandler(e.nativeEvent, (e) => resize(e, ResizeMode.SW))} />),
+      onMouseDown={(e) => dragHandler((e) => resize(e, ResizeMode.SW), e.nativeEvent)} />),
     (<div key='s' className='win-resize-handle-s'
-      onMouseDown={(e) => dragHandler(e.nativeEvent, (e) => resize(e, ResizeMode.S))} />),
+      onMouseDown={(e) => dragHandler((e) => resize(e, ResizeMode.S), e.nativeEvent)} />),
     (<div key='se' className='win-resize-handle-se'
-      onMouseDown={(e) => dragHandler(e.nativeEvent, (e) => resize(e, ResizeMode.SE))} />)
+      onMouseDown={(e) => dragHandler((e) => resize(e, ResizeMode.SE), e.nativeEvent)} />)
   ];
 
-  console.log(`render window ${props.id} @ ${position.x}, ${position.y} [${size.w}x${size.h}] State: ${state}`);
   return (
-    <div className='win-frame bevel'
+    <div className={`win-frame bevel ${props.active ? 'win-active' : ''}`}
       id={`win_${props.id}`}
       style={frameStyle}
       ref={el => frame = el}
-      onMouseDown={() => focus()}>
+      onMouseDown={e => focus(e.target)}>
 
       <div className='win-main'>
         <div className='win-titlebar'
           onMouseDown={state === WindowViewState.Restored ?
-            (e) => dragHandler(e.nativeEvent, (e) => move(e))
+            (e) => dragHandler((e) => move(e), e.nativeEvent)
             : undefined}
           onDoubleClick={toggleMaximized}>
 
