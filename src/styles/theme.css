@@ -11,6 +11,7 @@ body {
   font-family: var(--ft-base);
   font-size: var(--ft-size-base);
   line-height: var(--ft-lh-base);
+  color: var(--ct-text);
 }
 
 h1 {

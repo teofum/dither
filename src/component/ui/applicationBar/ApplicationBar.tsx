@@ -29,14 +29,29 @@ function ApplicationBar() {
   const active = useSelector(selectActiveWindow);
   const dispatch = useAppDispatch();
 
+  const applicationMenuItem = (id: string) => ({
+    id: id,
+    name: applications[id].title,
+    //icon: applications[id].iconUrl
+  });
+
   const menus: Menu[] = [
     {
       id: 'applications',
       name: 'Applications',
       items: [
+        applicationMenuItem('launcher'),
+        applicationMenuItem('theme'),
+        applicationMenuItem('help'),
+        '---',
+        applicationMenuItem('dlab'),
         {
-          id: 'launcher',
-          name: 'Program Manager'
+          id: 'games',
+          name: 'Games',
+          items: [
+            applicationMenuItem('mine'),
+            applicationMenuItem('sudoku')
+          ]
         }
       ]
     },

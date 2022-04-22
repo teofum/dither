@@ -14,7 +14,6 @@
 
 .menu-item {
   padding: 0.0625rem 0.25rem;
-  border: 0.0625rem solid transparent;
 
   display: grid;
   grid-template-columns: 0.75rem auto 0.75rem;
@@ -24,7 +23,6 @@
 
 .menu-item:hover {
   background-color: var(--ct-select-bg);
-  border-color: var(--ct-select-text);
 }
 
 .menu-item:hover > .menu-item-label {
