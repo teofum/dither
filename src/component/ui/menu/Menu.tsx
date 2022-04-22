@@ -28,6 +28,9 @@ function Menu(props: MenuProps) {
             onClick={() => props.onSelect(item.id)}>
             {checked(item) &&
               <img src={ui_check} alt='check' className='menu-item-check' />}
+            
+            {!checked(item) && item.iconUrl &&
+              <img src={item.iconUrl} alt='icon' className='menu-item-icon' />}
 
             <span className='menu-item-label'>{item.name}</span>
           </div>

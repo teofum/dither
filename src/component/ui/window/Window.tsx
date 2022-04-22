@@ -90,10 +90,12 @@ function Window(props: WindowProps) {
 
     // While dragging, move the element directly via DOM
     const dragging = (ev: MouseEvent) => {
-      if (!frame) return;
+      if (!frame || !frame.parentElement) return;
       const windowRect = frame.getBoundingClientRect();
-      frame.style.left = `${windowRect.left + ev.movementX}px`;
-      frame.style.top = `${windowRect.top + ev.movementY}px`;
+      const parentRect = frame.parentElement.getBoundingClientRect();
+
+      frame.style.left = `${windowRect.left - parentRect.left + ev.movementX}px`;
+      frame.style.top = `${windowRect.top - parentRect.top + ev.movementY}px`;
     };
 
     // At the end of a drag event (release)...
@@ -101,12 +103,13 @@ function Window(props: WindowProps) {
       if (ev.button !== 0) return;
 
       // Save the position to component state
-      if (frame) {
+      if (frame && frame.parentElement) {
         const windowRect = frame.getBoundingClientRect();
+        const parentRect = frame.parentElement.getBoundingClientRect();
 
         setPosition({
-          x: windowRect.left,
-          y: windowRect.top
+          x: windowRect.left - parentRect.left,
+          y: windowRect.top - parentRect.top
         });
       }
 
@@ -127,8 +130,9 @@ function Window(props: WindowProps) {
 
     // While dragging, move the element directly via DOM
     const dragging = (ev: MouseEvent) => {
-      if (!frame) return;
+      if (!frame || !frame.parentElement) return;
       const windowRect = frame.getBoundingClientRect();
+      const parentRect = frame.parentElement.getBoundingClientRect();
 
       const maxHeight = props.maxHeight || Number.MAX_VALUE;
       const maxExpandY = maxHeight - windowRect.height;
@@ -143,7 +147,7 @@ function Window(props: WindowProps) {
           Math.max(ev.movementY, -maxExpandY) :
           Math.min(ev.movementY, maxContractY);
 
-        frame.style.top = `${windowRect.top + move}px`;
+        frame.style.top = `${windowRect.top - parentRect.top + move}px`;
         frame.style.height = `${windowRect.height - move}px`;
       } else if (mode & ResizeMode.S) {
         const move = ev.movementY > 0 ?
@@ -158,7 +162,7 @@ function Window(props: WindowProps) {
           Math.max(ev.movementX, -maxExpandX) :
           Math.min(ev.movementX, maxContractX);
 
-        frame.style.left = `${windowRect.left + move}px`;
+        frame.style.left = `${windowRect.left - parentRect.left + move}px`;
         frame.style.width = `${windowRect.width - move}px`;
       } else if (mode & ResizeMode.E) {
         const move = ev.movementX > 0 ?
@@ -174,12 +178,13 @@ function Window(props: WindowProps) {
       if (ev.button !== 0) return;
 
       // Save the position to component state
-      if (frame) {
+      if (frame && frame.parentElement) {
         const windowRect = frame.getBoundingClientRect();
+        const parentRect = frame.parentElement.getBoundingClientRect();
 
         setPosition({
-          x: windowRect.left,
-          y: windowRect.top
+          x: windowRect.left - parentRect.left,
+          y: windowRect.top - parentRect.top
         });
 
         setSize({

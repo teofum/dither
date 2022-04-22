@@ -1,6 +1,7 @@
 export interface Item {
   id: string;
   name: string;
+  iconUrl?: string;
   checkIf?: { prop: string, value: string };
 }
 

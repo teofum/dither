@@ -236,6 +236,8 @@ button.bevel.light:active {
 
 /* "Desktop" */
 .desktop {
+  position: relative;
+
   background-color: var(--ct-background);
   color: var(--ct-text);
 

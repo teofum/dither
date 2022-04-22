@@ -32,7 +32,7 @@ function ApplicationBar() {
   const applicationMenuItem = (id: string) => ({
     id: id,
     name: applications[id].title,
-    //icon: applications[id].iconUrl
+    iconUrl: applications[id].iconUrl
   });
 
   const menus: Menu[] = [

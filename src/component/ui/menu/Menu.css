@@ -35,6 +35,13 @@
   height: 0.5625rem;
 }
 
+.menu-item-icon {
+  grid-column: 1;
+  width: 1rem;
+  height: 1rem;
+  margin-left: -0.1875rem;
+}
+
 .menu-item-label {
   grid-column: 2;
   white-space: nowrap;
@@ -46,11 +53,11 @@
   height: 0.75rem;
 }
 
-.menu-item:not(:hover) > img {
+.menu-item:not(:hover) > img:not(.menu-item-icon) {
   filter: invert(var(--ct-is-dark-theme));
 }
 
-.menu-item:hover > img {
+.menu-item:hover > img:not(.menu-item-icon) {
   filter: invert(var(--ct-is-dark-select));
 }
 
