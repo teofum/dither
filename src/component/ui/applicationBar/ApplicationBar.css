@@ -14,7 +14,7 @@
     inset 0 -0.125rem 0 0 var(--ct-dark);
 }
 
-.appbar-os-name {
+.appbar-root .mbar-root .mbar-item:first-child .mbar-item-label {
   color: var(--ct-title);
   text-shadow: 0.0625rem 0 var(--ct-title);
   letter-spacing: 0.0625rem;
