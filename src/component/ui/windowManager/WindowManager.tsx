@@ -11,6 +11,7 @@ import WindowContent from '../window/WindowContent';
 import WindowState from '../window/Window.props';
 import Minesweeper from '../../program/minesweeper/Minesweeper';
 import Sudoku from '../../program/sudoku/Sudoku';
+import About from '../../program/about/About';
 
 function WindowManager() {
   const { windows } = useAppSelector(selectWindows);
@@ -22,6 +23,8 @@ function WindowManager() {
 
   const getComponent = (window: WindowState) => {
     switch (window.content) {
+      case WindowContent.About:
+        return (<About />);
       case WindowContent.Launcher:
         return (<Launcher />);
       case WindowContent.Help:

@@ -1,12 +1,15 @@
 import React from 'react';
 import readableFileSize from '../../../../utils/etc/readableFileSize';
+import { useAppDispatch } from '../../../../hooks';
 import { ImageOptions } from '../DitherLab.state';
+import dlabActions from '../DitherLab.action';
 import OptionsProps from './options.props';
 
 import '../DitherLab.css';
-import dlabActions from '../DitherLab.action';
+import { setWindowTitle } from '../../../ui/windowManager/windowSlice';
 
-function DitherLabImageOptions(props: OptionsProps<ImageOptions>) {
+function DitherLabImageOptions(props: OptionsProps<ImageOptions> & { windowId: number }) {
+  const globalDispatch = useAppDispatch();
   const { info } = props.slice;
   let hiddenInput: HTMLInputElement | null = null;
 
@@ -23,6 +26,15 @@ function DitherLabImageOptions(props: OptionsProps<ImageOptions>) {
         meta: [
           { prop: 'Size (bytes)', value: readableFileSize(file.size) }
         ]
+      }));
+
+      let shortname = file.name;
+      if (shortname.length > 20)
+        shortname = shortname.substring(0, 17) + '...';
+
+      globalDispatch(setWindowTitle({
+        windowId: props.windowId,
+        title: `${shortname} - DitherLab`
       }));
     }
   };

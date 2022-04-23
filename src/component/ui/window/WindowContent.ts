@@ -1,4 +1,5 @@
 enum WindowContent {
+  About = 'win_about',
   Launcher = 'win_launcher',
   ThemeEditor = 'win_theme',
   Help = 'win_help',

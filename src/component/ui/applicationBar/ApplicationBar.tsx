@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../hooks';
+import Anchor from '../../utils/Anchor';
+import Clock from '../clock/Clock';
 import { Menu } from '../menu/Menu.props';
 
 import MenuBar from '../menuBar/MenuBar';
@@ -14,8 +16,11 @@ import { WindowTemplate } from '../window/Window.props';
 import { createWindow, focusWindow, selectActiveWindow, selectWindows } from '../windowManager/windowSlice';
 
 import './ApplicationBar.css';
+import gh_logo from '../../../assets/icon/github_16.png';
+import aboutWindow from '../window/templates/About.window';
 
 const applications: { [key: string]: WindowTemplate } = {
+  about: aboutWindow,
   launcher: launcherWindow,
   theme: themeEditorWindow,
   dlab: ditherLabWindow,
@@ -36,6 +41,16 @@ function ApplicationBar() {
   });
 
   const menus: Menu[] = [
+    {
+      id: 'system',
+      name: 'DitherOS',
+      items: [
+        {
+          id: 'about',
+          name: 'About DitherOS'
+        }
+      ]
+    },
     {
       id: 'applications',
       name: 'Applications',
@@ -76,16 +91,24 @@ function ApplicationBar() {
       const id = parts[parts.length - 1];
 
       dispatch(createWindow(applications[id]));
+    } else if (cmd.startsWith('system')) {
+      const parts = cmd.split('/');
+      const id = parts[parts.length - 1];
+
+      dispatch(createWindow(applications[id]));
     }
   };
 
   console.log(active);
   return (
     <div className='appbar-root bevel'>
-      <span className='appbar-os-name'>DitherOS</span>
-      <hr className='bevel divider vertical' />
       <MenuBar menus={menus} onSelect={menuHandler}
         data={{ active: active?.id.toString() || '0' }} />
+
+      <Anchor href='https://github.com/teofum/dither'>
+        <img className='appbar-icon' src={gh_logo} alt='gh' />
+      </Anchor>
+      <Clock />
     </div>
   );
 };

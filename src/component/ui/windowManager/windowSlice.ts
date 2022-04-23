@@ -64,11 +64,18 @@ export const windowsSlice = createSlice({
     destroyWindow: (state, action: PayloadAction<number>) => {
       state.windows = state.windows
         .filter(win => win.id !== action.payload);
+    },
+
+    setWindowTitle: (state, action: PayloadAction<{ windowId: number, title: string }>) => {
+      const window = state.windows
+        .find(win => win.id === action.payload.windowId);
+
+      if (window) window.title = action.payload.title;
     }
   }
 });
 
-export const { createWindow, focusWindow, destroyWindow } = windowsSlice.actions;
+export const { createWindow, focusWindow, destroyWindow, setWindowTitle } = windowsSlice.actions;
 
 export default windowsSlice.reducer;
 
