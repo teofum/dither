@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../hooks';
+import Anchor from '../../utils/Anchor';
 import Clock from '../clock/Clock';
 import { Menu } from '../menu/Menu.props';
 
@@ -15,6 +16,7 @@ import { WindowTemplate } from '../window/Window.props';
 import { createWindow, focusWindow, selectActiveWindow, selectWindows } from '../windowManager/windowSlice';
 
 import './ApplicationBar.css';
+import gh_logo from '../../../assets/icon/github_16.png';
 
 const applications: { [key: string]: WindowTemplate } = {
   launcher: launcherWindow,
@@ -86,6 +88,10 @@ function ApplicationBar() {
       <span className='appbar-os-name'>DitherOS</span>
       <MenuBar menus={menus} onSelect={menuHandler}
         data={{ active: active?.id.toString() || '0' }} />
+
+      <Anchor href='https://github.com/teofum/dither'>
+        <img className='appbar-icon' src={gh_logo} alt='gh' />
+      </Anchor>
       <Clock />
     </div>
   );
