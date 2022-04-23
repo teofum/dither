@@ -264,7 +264,8 @@ function DitherLab(props: ProgramProps) {
           <CollapsablePanel title='Source Image'>
             <DitherLabImageOptions
               slice={state.options.image}
-              dispatch={dispatch} />
+              dispatch={dispatch}
+              windowId={props.windowId} />
           </CollapsablePanel>
 
           {/* Image resizing */}
