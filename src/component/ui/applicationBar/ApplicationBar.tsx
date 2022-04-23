@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../hooks';
+import Clock from '../clock/Clock';
 import { Menu } from '../menu/Menu.props';
 
 import MenuBar from '../menuBar/MenuBar';
@@ -83,9 +84,9 @@ function ApplicationBar() {
   return (
     <div className='appbar-root bevel'>
       <span className='appbar-os-name'>DitherOS</span>
-      <hr className='bevel divider vertical' />
       <MenuBar menus={menus} onSelect={menuHandler}
         data={{ active: active?.id.toString() || '0' }} />
+      <Clock />
     </div>
   );
 };

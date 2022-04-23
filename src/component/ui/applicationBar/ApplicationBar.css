@@ -7,8 +7,19 @@
   gap: 0.5rem;
 }
 
+.appbar-root.bevel {
+  padding-top: 0.125rem;
+  box-shadow:
+    inset 0 -0.0625rem 0 0 var(--ct-darker),
+    inset 0 -0.125rem 0 0 var(--ct-dark);
+}
+
 .appbar-os-name {
   color: var(--ct-title);
   text-shadow: 0.0625rem 0 var(--ct-title);
   letter-spacing: 0.0625rem;
+}
+
+.appbar-root .mbar-root {
+  flex-grow: 1;
 }
