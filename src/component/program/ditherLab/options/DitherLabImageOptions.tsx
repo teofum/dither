@@ -28,9 +28,13 @@ function DitherLabImageOptions(props: OptionsProps<ImageOptions> & { windowId: n
         ]
       }));
 
+      let shortname = file.name;
+      if (shortname.length > 20)
+        shortname = shortname.substring(0, 17) + '...';
+
       globalDispatch(setWindowTitle({
         windowId: props.windowId,
-        title: `${file.name} - DitherLab`
+        title: `${shortname} - DitherLab`
       }));
     }
   };
